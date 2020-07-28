@@ -2,6 +2,7 @@ export default {
   state: {
     avatar: '',
     username: '',
+    token: '',
   },
   mutations: {
     updateData(state, payload) {

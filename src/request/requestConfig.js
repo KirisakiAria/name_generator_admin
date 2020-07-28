@@ -2,14 +2,16 @@ import Vue from 'vue'
 import axios from 'axios'
 import router from '../router'
 import { Loading } from 'element-ui'
+import API from './API'
+
+axios.defaults.headers = API.headers
+axios.defaults.baseURL = process.env.VUE_APP_BASE_API
 
 if (localStorage.getItem('token')) {
   axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')
 }
 
-let loading = null
-
-axios.defaults.baseURL = process.env.VUE_APP_BASE_API
+let loading
 
 axios.interceptors.request.use(config => {
   loading = Loading.service({
