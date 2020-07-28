@@ -1,0 +1,58 @@
+@font-face {
+  font-family: 'iconfont'; /* project id 1969443 */
+  src: url('//at.alicdn.com/t/font_1969443_7836t90ztvf.eot');
+  src: url('//at.alicdn.com/t/font_1969443_7836t90ztvf.eot?#iefix')
+      format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_1969443_7836t90ztvf.woff2') format('woff2'),
+    url('//at.alicdn.com/t/font_1969443_7836t90ztvf.woff') format('woff'),
+    url('//at.alicdn.com/t/font_1969443_7836t90ztvf.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_1969443_7836t90ztvf.svg#iconfont') format('svg');
+}
+
+.iconfont {
+  font-family: 'iconfont' !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-edit:before {
+  content: '\e782';
+}
+
+.icon-chi:before {
+  content: '\e63e';
+}
+
+.icon-spring:before {
+  content: '\e607';
+}
+
+.icon-winter:before {
+  content: '\e608';
+}
+
+.icon-autumn:before {
+  content: '\e609';
+}
+
+.icon-summer:before {
+  content: '\e60a';
+}
+
+.icon-a:before {
+  content: '\e6b9';
+}
+
+.icon-ni:before {
+  content: '\e63d';
+}
+
+.icon-ha:before {
+  content: '\e63f';
+}
+
+.icon-loader:before {
+  content: '\e639';
+}

@@ -1,0 +1,265 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  background-position: center;
+  background-repeat: no-repeat;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: inherit;
+  -webkit-overflow-scrolling: auto;
+}
+
+html,
+body {
+  position: relative;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  color: #333;
+  font-size: 14px;
+  font-family: 'Arial', 'Microsoft YaHei', '微软雅黑';
+}
+
+a,
+a:hover,
+a:focus,
+a:active {
+  -webkit-tap-highlight-color: transparent;
+  color: inherit;
+  outline: none;
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol,
+li {
+  margin: 0;
+  list-style-type: none;
+}
+
+a,
+label,
+input,
+span,
+img,
+select,
+i {
+  vertical-align: middle;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  appearance: none;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+}
+
+h1 {
+  font-size: 36px;
+}
+
+h2 {
+  font-size: 30px;
+}
+
+h3 {
+  font-size: 24px;
+}
+
+h4 {
+  font-size: 18px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  font-size: 12px;
+}
+
+p {
+  font-weight: normal;
+}
+
+button {
+  cursor: pointer;
+}
+
+input,
+textarea {
+  border: none;
+  outline: none;
+  font-family: 'Arial', 'Microsoft YaHei', '微软雅黑';
+}
+
+/* 淡入淡出 */
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-leave,
+.fade-enter-to {
+  opacity: 1;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.3s;
+}
+
+/* x轴划入 */
+.x-enter-active,
+.x-leave-active {
+  transition: all 0.3s;
+}
+
+.x-enter,
+.x-leave-to {
+  opacity: 0;
+  transform: translateX(40px);
+}
+
+.x-leave,
+.x-enter-to {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* y轴划入 */
+.y-enter-active,
+.y-leave-active {
+  transition: all 0.3s;
+}
+
+.y-enter,
+.y-leave-to {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.y-leave,
+.y-enter-to {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.form-item {
+  display: flex;
+  align-items: center;
+  color: #666;
+  margin-top: 25px;
+}
+
+.form-item:first-of-type {
+  margin-top: 0;
+}
+
+.form-item label {
+  display: block;
+  flex-grow: 0;
+  flex-shrink: 0;
+  font-size: 16px;
+}
+
+.input {
+  flex-grow: 1;
+  margin-left: 8px;
+  border-bottom: 1px solid #ccc;
+}
+
+.input input {
+  display: block;
+  padding-bottom: 8px;
+  width: 100%;
+}
+.el-table {
+  .icon-edit {
+    color: #00b894;
+  }
+
+  .icon-delete {
+    color: #ff7675;
+  }
+}
+
+.table-page {
+  .top-area {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+
+    .form {
+      display: flex;
+      button {
+        margin-left: 20px;
+      }
+      .el-input {
+        width: 300px;
+      }
+    }
+  }
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+}
+
+.el-loading-mask {
+  background: transparent;
+}
+
+.iconfont.icon-loader {
+  font-size: 80px;
+  display: inline-block;
+  animation: rotating 1.5s ease-in-out infinite;
+  margin-bottom: 30px;
+}
+
+.el-loading-spinner .el-loading-text {
+  font-size: 24px;
+}
+
+@keyframes rotating {
+  0% {
+    transform: rotateZ(0);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
+.el-popconfirm__main {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.el-select + .el-select {
+  margin-left: 20px;
+}
+
+.submit {
+  display: block;
+  width: 200px;
+  margin: auto;
+}
