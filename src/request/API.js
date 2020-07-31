@@ -6,7 +6,13 @@ export default {
     appname: 'namegenerator',
     packagename: 'com.greatpond.namegenerator',
     secret: '0Q3prsna4TLry26Zmu2bPnpl6hM2fw',
+    common: {
+      Authorization: '',
+    },
   },
+  login: `${api_prefix}/admin/login`,
   upload: `${api_prefix}/upload`,
   addWord: `${api_prefix}/word/add`,
+  getWordList: `${api_prefix}/word`,
+  uploadWordList: `${api_prefix}/word/file`,
 }

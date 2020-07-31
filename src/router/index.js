@@ -6,7 +6,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    redirect: '/japanese_four_word',
+    redirect: '/WordList',
     component: () => import('@/views/Layout'),
     children: [
       {
@@ -20,13 +20,13 @@ const routes = [
         },
       },
       {
-        path: '/japanese_four_word',
-        component: () => import('@/views/JapaneseFourWord'),
-        name: 'japaneseFourWord',
+        path: '/words',
+        component: () => import('@/views/WordList'),
+        name: 'wordList',
         meta: {
           id: 2,
-          title: '四字日语',
-          icon: 'a',
+          title: '词语列表',
+          icon: 'list',
         },
       },
     ],

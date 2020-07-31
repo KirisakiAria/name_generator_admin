@@ -4,6 +4,9 @@
       <i class="iconfont icon-back"></i>
     </button>
     <div class="current">{{ currentRouteName }}</div>
+    <div class="avatar">
+      <img :src="avatar" />
+    </div>
   </header>
 </template>
 <script>
@@ -15,6 +18,9 @@
     computed: {
       currentRouteName() {
         return this.$route.meta.title
+      },
+      avatar() {
+        return this.$store.state.user.avatar
       },
     },
     methods: {

@@ -22,10 +22,13 @@
       </el-form-item>
       <el-form-item label="导入">
         <el-upload
+          ref="upload"
           drag
           :headers="API.headers"
           :action="url + API.upload"
+          :on-success="uploadSuccess"
           multiple
+          :before-upload="beforeUpload"
         >
           <i class="el-icon-upload"></i>
           <div class="el-upload__text">
@@ -42,12 +45,12 @@
   </section>
 </template>
 <script>
-  import API from '../request/API'
+  import mixin from '../mixin/mixin'
   export default {
     name: 'editWord',
+    mixins: [mixin],
     data() {
       return {
-        API: API,
         form: {
           type: '',
           number: '',
@@ -82,17 +85,34 @@
       },
     },
     methods: {
-      handleExceed(files, fileList) {
-        this.$message.warning(
-          `当前限制选择 1 个文件，本次选择了 ${
-            files.length
-          } 个文件，共选择了 ${files.length + fileList.length} 个文件`,
-        )
+      beforeUpload(file) {
+        if (file.type !== 'text/plain') {
+          return false
+        }
+        const typeCheckedResult = this.$refs.form.validateField('type')
+        const numberCheckedResult = this.$refs.form.validateField('number')
+        // if (!this.form.type || !this.form.number) {
+        //   return false
+        // }
+      },
+      async uploadSuccess(uploadRes) {
+        if (uploadRes.code == '1000') {
+          const res = await this.$post(this.API.uploadWordList, {
+            path: uploadRes.data.path,
+          })
+          if (res.code == '1000') {
+            this.$message({
+              showClose: true,
+              message: res.data.message,
+              type: 'success',
+            })
+          }
+        }
       },
       submit() {
         this.$refs.form.validate(async valid => {
           if (valid) {
-            const res = await this.$post(API.addWord, this.form)
+            const res = await this.$post(this.API.addWord, this.form)
             if (res.data.code == '1000') {
               this.$message({
                 showClose: true,

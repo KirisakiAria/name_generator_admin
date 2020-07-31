@@ -1,12 +1,12 @@
 @font-face {
   font-family: 'iconfont'; /* project id 1969443 */
-  src: url('//at.alicdn.com/t/font_1969443_7836t90ztvf.eot');
-  src: url('//at.alicdn.com/t/font_1969443_7836t90ztvf.eot?#iefix')
+  src: url('//at.alicdn.com/t/font_1969443_oxboe9i5aji.eot');
+  src: url('//at.alicdn.com/t/font_1969443_oxboe9i5aji.eot?#iefix')
       format('embedded-opentype'),
-    url('//at.alicdn.com/t/font_1969443_7836t90ztvf.woff2') format('woff2'),
-    url('//at.alicdn.com/t/font_1969443_7836t90ztvf.woff') format('woff'),
-    url('//at.alicdn.com/t/font_1969443_7836t90ztvf.ttf') format('truetype'),
-    url('//at.alicdn.com/t/font_1969443_7836t90ztvf.svg#iconfont') format('svg');
+    url('//at.alicdn.com/t/font_1969443_oxboe9i5aji.woff2') format('woff2'),
+    url('//at.alicdn.com/t/font_1969443_oxboe9i5aji.woff') format('woff'),
+    url('//at.alicdn.com/t/font_1969443_oxboe9i5aji.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_1969443_oxboe9i5aji.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -17,12 +17,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-edit:before {
-  content: '\e782';
+.icon-list:before {
+  content: '\e605';
 }
 
-.icon-chi:before {
-  content: '\e63e';
+.icon-edit:before {
+  content: '\e782';
 }
 
 .icon-spring:before {

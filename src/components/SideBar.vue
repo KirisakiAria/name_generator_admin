@@ -3,11 +3,6 @@
     <h4 class="title">
       <span>彼岸自在</span>
     </h4>
-    <div class="user">
-      <span class="username">
-        {{ username }}
-      </span>
-    </div>
     <nav class="nav">
       <ul>
         <li
@@ -72,22 +67,12 @@
     }
 
     .title {
-      padding: 25px 0;
-      height: 70px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.8);
-      text-align: center;
-    }
-
-    .user {
-      display: flex;
-      align-items: center;
+      font-size: 30px;
       padding: 20px 0;
       border-bottom: 1px solid rgba(255, 255, 255, 0.8);
-
-      .username {
-        margin-left: 15px;
-        font-size: 16px;
-      }
+      text-align: center;
+      font-family: 'NijimiMincho';
+      letter-spacing: 5px;
     }
 
     li {

@@ -17,8 +17,10 @@
   </section>
 </template>
 <script>
+  import mixin from '../mixin/mixin'
   export default {
     name: 'login',
+    mixins: [mixin],
     data() {
       return {
         formData: {
@@ -39,23 +41,21 @@
       login() {
         this.$refs.form.validate(valid => {
           if (valid) {
-            this.$post('/api/login', {
+            this.$post(this.API.login, {
               username: this.formData.username,
               password: this.formData.password,
             }).then(res => {
               if (res.data.code == '1000') {
                 localStorage.setItem('token', res.data.data.token)
+                localStorage.setItem('uid', res.data.data.uid)
                 localStorage.setItem('avatar', res.data.data.avatar)
                 localStorage.setItem('username', res.data.data.username)
                 this.$axios.defaults.headers.common['Authorization'] =
                   res.data.data.token
                 this.$store.commit('user/updateData', {
-                  key: 'avatar',
-                  value: res.data.data.avatar,
-                })
-                this.$store.commit('user/updateData', {
-                  key: 'username',
-                  value: res.data.data.username,
+                  uid: res.data.data.uid,
+                  avatar: res.data.data.avatar,
+                  username: res.data.data.username,
                 })
                 this.$router.replace('/')
               }

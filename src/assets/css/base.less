@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'NijimiMincho';
+  src: url('../fonts/NijimiMincho.ttf') format('truetype');
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -209,11 +214,14 @@ textarea {
 
     .form {
       display: flex;
-      button {
-        margin-left: 20px;
-      }
       .el-input {
         width: 300px;
+        margin-right: 25px;
+      }
+      .el-select {
+        .el-input {
+          width: 100px;
+        }
       }
     }
   }
@@ -252,10 +260,6 @@ textarea {
 .el-popconfirm__main {
   margin-top: 10px;
   margin-bottom: 20px;
-}
-
-.el-select + .el-select {
-  margin-left: 20px;
 }
 
 .submit {
