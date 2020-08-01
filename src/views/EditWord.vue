@@ -7,16 +7,6 @@
           <el-option label="日语" value="日语"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="字数" prop="number">
-        <el-select v-model="form.number" placeholder="请选择字数">
-          <el-option
-            :label="item"
-            :value="item"
-            v-for="(item, index) in 4"
-            :key="index"
-          ></el-option>
-        </el-select>
-      </el-form-item>
       <el-form-item label="词语" prop="word">
         <el-input v-model="form.word"></el-input>
       </el-form-item>
@@ -53,7 +43,6 @@
       return {
         form: {
           type: '',
-          number: '',
           word: '',
         },
         rules: {
@@ -61,12 +50,6 @@
             {
               required: true,
               message: '请选择类型',
-            },
-          ],
-          number: [
-            {
-              required: true,
-              message: '请选择字数',
             },
           ],
           word: [
@@ -89,9 +72,8 @@
         if (file.type !== 'text/plain') {
           return false
         }
-        const typeCheckedResult = this.$refs.form.validateField('type')
-        const numberCheckedResult = this.$refs.form.validateField('number')
-        // if (!this.form.type || !this.form.number) {
+        this.$refs.form.validateField('type')
+        // if (!this.form.type) {
         //   return false
         // }
       },
@@ -128,10 +110,8 @@
     },
     created() {
       const type = this.$route.query.type
-      const number = this.$route.query.number
-      if (type && number) {
+      if (type) {
         this.form.type = type
-        this.form.number = number
       }
     },
   }

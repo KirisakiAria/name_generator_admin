@@ -10,10 +10,12 @@
       const uid = localStorage.getItem('uid')
       const avatar = localStorage.getItem('avatar')
       const username = localStorage.getItem('username')
+      const token = localStorage.getItem('token')
       this.$store.commit('user/updateData', {
         uid,
         avatar,
         username,
+        token,
       })
     },
   }

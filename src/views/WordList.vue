@@ -35,6 +35,32 @@
     <el-table :data="tableData">
       <el-table-column prop="_id" label="ID"></el-table-column>
       <el-table-column prop="word" label="词语"></el-table-column>
+      <el-table-column fixed="right" label="操作">
+        <template slot-scope="scope">
+          <el-button
+            type="primary"
+            @click="editItem(scope.row)"
+            icon="el-icon-edit"
+            circle
+          ></el-button>
+          <el-popconfirm
+            class="pop-confirm"
+            confirmButtonText="好的"
+            cancelButtonText="不用了"
+            icon="el-icon-info"
+            iconColor="red"
+            title="确定删除吗？"
+            @onConfirm="deleteItem(scope.row)"
+          >
+            <el-button
+              type="danger"
+              icon="el-icon-delete"
+              circle
+              slot="reference"
+            ></el-button>
+          </el-popconfirm>
+        </template>
+      </el-table-column>
     </el-table>
     <section class="pagination">
       <el-pagination
@@ -68,10 +94,27 @@
     },
     methods: {
       add() {
-        this.$router.push(`/edit?type=${this.type}&number=${this.number}`)
+        this.$router.push(`/edit?type=${this.form.type}`)
+      },
+      editItem() {},
+      async deleteItem(item) {
+        const res = await this.$delete(`${this.API.word}/${item._id}`, {
+          params: {
+            type: this.form.type,
+            number: this.form.number,
+          },
+        })
+        if (res.data.code == '1000') {
+          this.$message({
+            showClose: true,
+            message: res.data.message,
+            type: 'success',
+          })
+          this.getData()
+        }
       },
       async getData() {
-        const res = await this.$get(this.API.getWordList, {
+        const res = await this.$get(this.API.word, {
           params: {
             type: this.form.type,
             number: this.form.number,

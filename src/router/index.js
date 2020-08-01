@@ -6,7 +6,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    redirect: '/WordList',
+    redirect: '/words',
     component: () => import('@/views/Layout'),
     children: [
       {

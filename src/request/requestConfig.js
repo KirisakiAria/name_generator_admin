@@ -26,7 +26,7 @@ axios.interceptors.request.use(config => {
 axios.interceptors.response.use(
   res => {
     loading.close()
-    if (res.data.code == '2000') {
+    if (res.data.code == '3007' || res.data.code == '3008') {
       router.push('/login')
     }
     if (res.data.code != '1000') {
