@@ -22,7 +22,7 @@
           <el-option
             :label="item"
             :value="item"
-            v-for="(item, index) in 4"
+            v-for="(item, index) in 5"
             :key="index"
           ></el-option>
         </el-select>

@@ -42,7 +42,7 @@
     data() {
       return {
         form: {
-          type: '',
+          type: '日语',
           word: '',
         },
         rules: {
@@ -73,16 +73,16 @@
           return false
         }
         this.$refs.form.validateField('type')
-        // if (!this.form.type) {
-        //   return false
-        // }
+        if (!this.form.type) {
+          return false
+        }
       },
       async uploadSuccess(uploadRes) {
         if (uploadRes.code == '1000') {
           const res = await this.$post(this.API.uploadWordList, {
             path: uploadRes.data.path,
           })
-          if (res.code == '1000') {
+          if (res.data.code == '1000') {
             this.$message({
               showClose: true,
               message: res.data.message,
@@ -94,7 +94,7 @@
       submit() {
         this.$refs.form.validate(async valid => {
           if (valid) {
-            const res = await this.$post(this.API.addWord, this.form)
+            const res = await this.$post(this.API.word, this.form)
             if (res.data.code == '1000') {
               this.$message({
                 showClose: true,

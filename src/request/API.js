@@ -12,7 +12,6 @@ export default {
   },
   login: `${api_prefix}/admin/login`,
   upload: `${api_prefix}/upload`,
-  addWord: `${api_prefix}/word/add`,
   word: `${api_prefix}/word`,
   uploadWordList: `${api_prefix}/word/file`,
 }
