@@ -10,7 +10,7 @@
       <el-form-item label="词语" prop="word">
         <el-input v-model="form.word"></el-input>
       </el-form-item>
-      <el-form-item label="导入">
+      <el-form-item label="导入" v-if="!this.id">
         <el-upload
           ref="upload"
           drag
@@ -62,6 +62,17 @@
         fileList: [],
       }
     },
+    props: {
+      id: {
+        type: String,
+      },
+      type: {
+        type: String,
+      },
+      word: {
+        type: String,
+      },
+    },
     computed: {
       url() {
         return process.env.VUE_APP_BASE_API
@@ -94,13 +105,28 @@
       submit() {
         this.$refs.form.validate(async valid => {
           if (valid) {
-            const res = await this.$post(this.API.word, this.form)
-            if (res.data.code == '1000') {
-              this.$message({
-                showClose: true,
-                message: res.data.message,
-                type: 'success',
-              })
+            if (this.id) {
+              const res = await this.$put(
+                `${this.API.word}/${this.id}`,
+                this.form,
+              )
+              if (res.data.code == '1000') {
+                this.$message({
+                  showClose: true,
+                  message: res.data.message,
+                  type: 'success',
+                })
+                this.$emit('close')
+              }
+            } else {
+              const res = await this.$post(this.API.word, this.form)
+              if (res.data.code == '1000') {
+                this.$message({
+                  showClose: true,
+                  message: res.data.message,
+                  type: 'success',
+                })
+              }
             }
           } else {
             return false
@@ -109,9 +135,14 @@
       },
     },
     created() {
-      const type = this.$route.query.type
-      if (type) {
-        this.form.type = type
+      if (this.id) {
+        this.form.type = this.type
+        this.form.word = this.word
+      } else {
+        const type = this.$route.query.type
+        if (type) {
+          this.form.type = type
+        }
       }
     },
   }

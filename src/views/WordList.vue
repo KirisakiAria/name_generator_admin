@@ -30,7 +30,9 @@
           搜索
         </el-button>
       </div>
-      <el-button type="success" @click="add">新增</el-button>
+      <div class="right">
+        <el-button type="success" @click="add">新增</el-button>
+      </div>
     </section>
     <el-table :data="tableData">
       <el-table-column prop="_id" label="ID"></el-table-column>
@@ -72,15 +74,32 @@
         @current-change="getData"
       ></el-pagination>
     </section>
+    <el-dialog
+      title="编辑"
+      v-if="dialogVisible"
+      :visible.sync="dialogVisible"
+      width="60%"
+    >
+      <EditWord
+        :id="selectedItemId"
+        :word="selectedItemWord"
+        :type="form.type"
+        @close="closeDialog"
+      />
+    </el-dialog>
   </section>
 </template>
 <script>
   import mixin from '../mixin/mixin'
+  import EditWord from './EditWord'
   export default {
     name: 'wordList',
     mixins: [mixin],
     data() {
       return {
+        dialogVisible: false,
+        selectedItemId: '',
+        selectedItemWord: '',
         form: {
           type: '日语',
           number: 4,
@@ -92,11 +111,18 @@
         tableData: [],
       }
     },
+    components: {
+      EditWord,
+    },
     methods: {
       add() {
         this.$router.push(`/edit?type=${this.form.type}`)
       },
-      editItem() {},
+      editItem(item) {
+        this.selectedItemId = item._id
+        this.selectedItemWord = item.word
+        this.dialogVisible = true
+      },
       async deleteItem(item) {
         const res = await this.$delete(`${this.API.word}/${item._id}`, {
           params: {
@@ -127,6 +153,10 @@
           this.tableData = res.data.data.list
           this.total = res.data.data.total
         }
+      },
+      closeDialog() {
+        this.dialogVisible = false
+        this.getData()
       },
     },
     created() {
