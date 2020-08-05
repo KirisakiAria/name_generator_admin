@@ -29,6 +29,26 @@ const routes = [
           icon: 'list',
         },
       },
+      {
+        path: '/app',
+        component: () => import('@/views/Application'),
+        name: 'application',
+        meta: {
+          id: 3,
+          title: 'APP信息',
+          icon: 'app',
+        },
+      },
+      {
+        path: '/users',
+        component: () => import('@/views/UserList'),
+        name: 'userList',
+        meta: {
+          id: 4,
+          title: '用户管理',
+          icon: 'user',
+        },
+      },
     ],
   },
   {

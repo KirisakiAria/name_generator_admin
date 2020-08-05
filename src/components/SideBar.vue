@@ -43,7 +43,9 @@
     },
     methods: {
       navigate(path) {
-        this.$router.push(path)
+        if (!this.$route.path.includes(path)) {
+          this.$router.push(path)
+        }
       },
     },
   }
