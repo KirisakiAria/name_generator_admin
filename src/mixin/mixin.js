@@ -18,20 +18,6 @@ const mixin = {
       next()
     }
   },
-  methods: {
-    openEditDialog() {
-      this.editDialogVisible = true
-    },
-    closeEditDialog() {
-      this.editDialogVisible = false
-    },
-    openDetailsDialog() {
-      this.DetailsDialogVisible = true
-    },
-    closeDetailsDialog() {
-      this.DetailsDialogVisible = false
-    },
-  },
 }
 
 export default mixin

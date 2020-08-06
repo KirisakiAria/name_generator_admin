@@ -2,7 +2,11 @@
   <section class="edit-page">
     <el-form ref="form" :model="form" :rules="rules" label-width="50px">
       <el-form-item label="类型" prop="type">
-        <el-select v-model="form.type" placeholder="请选择类型">
+        <el-select
+          v-model="form.type"
+          placeholder="请选择类型"
+          :disabled="!!id"
+        >
           <el-option label="中国风" value="中国风"></el-option>
           <el-option label="日语" value="日语"></el-option>
         </el-select>
@@ -10,9 +14,8 @@
       <el-form-item label="词语" prop="word">
         <el-input v-model="form.word"></el-input>
       </el-form-item>
-      <el-form-item label="导入" v-if="!this.id">
+      <el-form-item label="导入" v-if="!id">
         <el-upload
-          ref="upload"
           drag
           :headers="API.headers"
           :action="url + API.upload"
@@ -65,12 +68,15 @@
     props: {
       id: {
         type: String,
+        default: '',
       },
       type: {
         type: String,
+        default: '',
       },
       word: {
         type: String,
+        default: '',
       },
     },
     computed: {
@@ -91,6 +97,7 @@
       async uploadSuccess(uploadRes) {
         if (uploadRes.code == '1000') {
           const res = await this.$post(this.API.uploadWordList, {
+            type: this.form.type,
             path: uploadRes.data.path,
           })
           if (res.data.code == '1000') {
@@ -126,6 +133,7 @@
                   message: res.data.message,
                   type: 'success',
                 })
+                this.$emit('success')
               }
             }
           } else {

@@ -1,43 +1,36 @@
 <template>
   <section class="edit-page">
-    <el-form ref="form" :model="form" :rules="rules" label-width="50px">
-      <el-form-item label="头像" v-if="!this.id">
+    <el-form ref="form" :model="form" :rules="rules" label-width="120px">
+      <el-form-item label="头像">
         <el-upload
-          ref="upload"
-          drag
+          class="avatar-uploader"
+          :show-file-list="false"
           :headers="API.headers"
           :action="url + API.upload"
           :on-success="uploadSuccess"
-          multiple
           :before-upload="beforeUpload"
         >
-          <i class="el-icon-upload"></i>
-          <div class="el-upload__text">
-            将文件拖到此处，或
-            <em>点击上传</em>
-          </div>
-          <div class="el-upload__tip" slot="tip">
-            只能上传txt文件
-          </div>
+          <img v-if="form.avatar" :src="url + form.avatar" class="avatar" />
+          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
       </el-form-item>
-      <el-form-item label="手机号" prop="word">
-        <el-input v-model="form.word"></el-input>
+      <el-form-item label="手机号" prop="tel">
+        <el-input type="number" v-model="form.tel" maxlength="11"></el-input>
       </el-form-item>
-      <el-form-item label="用户名" prop="word">
-        <el-input v-model="form.word"></el-input>
+      <el-form-item label="用户名" prop="username">
+        <el-input v-model="form.username" maxlength="10"></el-input>
       </el-form-item>
-      <el-form-item label="是否VIP" prop="type">
-        <el-select v-model="form.type" placeholder="请选择是否VIP">
+      <el-form-item label="是否VIP" prop="vip">
+        <el-select v-model="form.vip" placeholder="请选择是否VIP">
           <el-option label="是" :value="true"></el-option>
           <el-option label="否" :value="false"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="VIP开始时间" prop="word">
-        <el-input v-model="form.word"></el-input>
+      <el-form-item label="VIP开始时间">
+        <el-input v-model="form.vip_start"></el-input>
       </el-form-item>
-      <el-form-item label="VIP过期时间" prop="word">
-        <el-input v-model="form.word"></el-input>
+      <el-form-item label="VIP过期时间">
+        <el-input v-model="form.vip_expiry"></el-input>
       </el-form-item>
       <el-button class="submit" type="primary" @click="submit">提交</el-button>
     </el-form>
@@ -51,35 +44,52 @@
     data() {
       return {
         form: {
-          type: '日语',
-          word: '',
+          avatar: '',
+          tel: '',
+          username: '',
+          vip: '',
+          vip_start: '',
+          vip_expiry: '',
         },
         rules: {
-          type: [
+          tel: [
             {
               required: true,
-              message: '请选择类型',
+              message: '请填写手机号',
             },
           ],
-          word: [
+          username: [
             {
               required: true,
-              message: '请填写词语',
+              message: '请填写用户名',
             },
           ],
+          vip: [
+            {
+              required: true,
+              message: '请选择是否是vip',
+            },
+          ],
+          // vip_start: [
+          //   {
+          //     required: true,
+          //     message: '请填写词语',
+          //   },
+          // ],
+          // vip_expiry: [
+          //   {
+          //     required: true,
+          //     message: '请填写词语',
+          //   },
+          // ],
         },
         fileList: [],
       }
     },
     props: {
-      id: {
-        type: String,
-      },
-      type: {
-        type: String,
-      },
-      word: {
-        type: String,
+      item: {
+        type: Object,
+        default: null,
       },
     },
     computed: {
@@ -89,34 +99,21 @@
     },
     methods: {
       beforeUpload(file) {
-        if (file.type !== 'text/plain') {
-          return false
-        }
-        this.$refs.form.validateField('type')
-        if (!this.form.type) {
+        if (!file.type.includes('image')) {
           return false
         }
       },
-      async uploadSuccess(uploadRes) {
-        if (uploadRes.code == '1000') {
-          const res = await this.$post(this.API.uploadWordList, {
-            path: uploadRes.data.path,
-          })
-          if (res.data.code == '1000') {
-            this.$message({
-              showClose: true,
-              message: res.data.message,
-              type: 'success',
-            })
-          }
+      uploadSuccess(res) {
+        if (res.code == '1000') {
+          this.form.avatar = res.data.path
         }
       },
       submit() {
         this.$refs.form.validate(async valid => {
           if (valid) {
-            if (this.id) {
+            if (this.item) {
               const res = await this.$put(
-                `${this.API.word}/${this.id}`,
+                `${this.API.user}/${this.id}`,
                 this.form,
               )
               if (res.data.code == '1000') {
@@ -128,13 +125,14 @@
                 this.$emit('close')
               }
             } else {
-              const res = await this.$post(this.API.word, this.form)
+              const res = await this.$post(this.API.user, this.form)
               if (res.data.code == '1000') {
                 this.$message({
                   showClose: true,
                   message: res.data.message,
                   type: 'success',
                 })
+                this.$emit('success')
               }
             }
           } else {
@@ -144,18 +142,43 @@
       },
     },
     created() {
-      if (this.id) {
-        this.form.type = this.type
-        this.form.word = this.word
-      } else {
-        const type = this.$route.query.type
-        if (type) {
-          this.form.type = type
-        }
+      if (this.item) {
+        this.form = this.item
       }
     },
   }
 </script>
-<style lang="less" scoped>
+<style lang="less">
   @import url('../assets/css/style.less');
+  .avatar-uploader {
+    width: 180px;
+    height: 180px;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .el-upload {
+      border: 1px dashed #d9d9d9;
+      border-radius: 6px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+
+      &:hover {
+        border-color: #409eff;
+      }
+    }
+    .avatar-uploader-icon {
+      font-size: 28px;
+      color: #8c939d;
+      width: 178px;
+      height: 178px;
+      line-height: 178px;
+      text-align: center;
+    }
+  }
 </style>

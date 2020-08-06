@@ -11,7 +11,7 @@
       const avatar = localStorage.getItem('avatar')
       const username = localStorage.getItem('username')
       const token = localStorage.getItem('token')
-      this.$store.commit('user/updateData', {
+      this.$store.commit('user/changeUserData', {
         uid,
         avatar,
         username,

@@ -73,12 +73,12 @@
       title="编辑"
       v-if="dialogVisible"
       :visible.sync="dialogVisible"
+      :close-on-click-modal="false"
       width="60%"
     >
-      <EditWord
-        :id="selectedItemId"
-        :word="selectedItemWord"
-        :type="form.type"
+      <EditUser
+        :selectedItem="selectedItem"
+        @success="getData"
         @close="closeDialog"
       />
     </el-dialog>
@@ -86,15 +86,14 @@
 </template>
 <script>
   import mixin from '../mixin/mixin'
-  import EditWord from './EditWord'
+  import EditUser from './EditUser'
   export default {
     name: 'userList',
     mixins: [mixin],
     data() {
       return {
         dialogVisible: false,
-        selectedItemId: '',
-        selectedItemWord: '',
+        selectedItem: null,
         form: {
           searchContent: '',
         },
@@ -105,7 +104,7 @@
       }
     },
     components: {
-      EditWord,
+      EditUser,
     },
     computed: {
       url() {
@@ -114,18 +113,17 @@
     },
     methods: {
       add() {
-        this.$router.push(`/edit?type=${this.form.type}`)
+        this.selectedItem = null
+        this.dialogVisible = true
       },
       editItem(item) {
-        this.selectedItemId = item._id
-        this.selectedItemWord = item.word
+        this.selectedItem = item.word
         this.dialogVisible = true
       },
       async deleteItem(item) {
         const res = await this.$delete(`${this.API.user}/${item._id}`, {
           params: {
-            type: this.form.type,
-            number: this.form.number,
+            tel: item.tel,
           },
         })
         if (res.data.code == '1000') {

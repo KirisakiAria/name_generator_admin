@@ -6,7 +6,7 @@ export default {
     token: '',
   },
   mutations: {
-    updateData(state, payload) {
+    changeUserData(state, payload) {
       state.uid = payload.uid
       state.avatar = payload.avatar
       state.username = payload.username

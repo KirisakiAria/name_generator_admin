@@ -23,13 +23,6 @@
   import { mapState } from 'vuex'
   export default {
     name: 'sideBar',
-    created() {
-      const username = localStorage.getItem('username') || ''
-      this.$store.commit('user/updateData', {
-        key: 'username',
-        value: username,
-      })
-    },
     computed: {
       routeList() {
         return this.$router.options.routes[0].children

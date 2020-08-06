@@ -1,15 +1,24 @@
 <template>
   <header class="header">
-    <button @click="back" title="后退">
-      <i class="iconfont icon-back"></i>
-    </button>
-    <div class="current">{{ currentRouteName }}</div>
-    <div class="avatar">
-      <img :src="avatar" />
+    <div class="left">
+      <button @click="back" class="back-btn" title="后退">
+        <i class="iconfont icon-back"></i>
+      </button>
+      <div class="current">{{ currentRouteName }}</div>
     </div>
+    <el-popover placement="top-start" width="150" trigger="hover">
+      <ul class="info-list">
+        <li>uid：{{ uid }}</li>
+        <li>用户名：{{ username }}</li>
+      </ul>
+      <div class="avatar" slot="reference">
+        <img :src="url + avatar" />
+      </div>
+    </el-popover>
   </header>
 </template>
 <script>
+  import { mapState } from 'vuex'
   export default {
     name: 'headerBar',
     data() {
@@ -19,9 +28,14 @@
       currentRouteName() {
         return this.$route.meta.title
       },
-      avatar() {
-        return this.$store.state.user.avatar
+      url() {
+        return process.env.VUE_APP_BASE_API
       },
+      ...mapState({
+        avatar: state => state.user.avatar,
+        username: state => state.user.username,
+        uid: state => state.user.uid,
+      }),
     },
     methods: {
       back() {
@@ -36,14 +50,19 @@
   @import url('../assets/css/style.less');
   .header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     position: relative;
-    padding: 20px;
+    padding: 10px 30px;
     background: #fff;
     box-shadow: -2px 0px 10px 0px rgba(0, 0, 0, 0.1);
     z-index: 5;
 
-    button {
+    .left {
+      display: flex;
+    }
+
+    .back-btn {
       margin-right: 10px;
       .iconfont {
         color: #666;
@@ -53,6 +72,17 @@
 
     .current {
       font-size: 18px;
+    }
+
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      overflow: hidden;
+      cursor: pointer;
+      img {
+        width: 100%;
+      }
     }
   }
 </style>

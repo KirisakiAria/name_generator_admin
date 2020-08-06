@@ -52,7 +52,7 @@
                 localStorage.setItem('username', res.data.data.username)
                 this.$axios.defaults.headers.common['Authorization'] =
                   res.data.data.token
-                this.$store.commit('user/updateData', {
+                this.$store.commit('user/changeUserData', {
                   uid: res.data.data.uid,
                   avatar: res.data.data.avatar,
                   username: res.data.data.username,

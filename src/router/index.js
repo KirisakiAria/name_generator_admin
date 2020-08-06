@@ -10,33 +10,13 @@ const routes = [
     component: () => import('@/views/Layout'),
     children: [
       {
-        path: '/edit',
-        component: () => import('@/views/EditWord'),
-        name: 'editWord',
-        meta: {
-          id: 1,
-          title: '编辑词语',
-          icon: 'edit',
-        },
-      },
-      {
         path: '/words',
         component: () => import('@/views/WordList'),
         name: 'wordList',
         meta: {
-          id: 2,
+          id: 1,
           title: '词语列表',
           icon: 'list',
-        },
-      },
-      {
-        path: '/app',
-        component: () => import('@/views/Application'),
-        name: 'application',
-        meta: {
-          id: 3,
-          title: 'APP信息',
-          icon: 'app',
         },
       },
       {
@@ -44,9 +24,19 @@ const routes = [
         component: () => import('@/views/UserList'),
         name: 'userList',
         meta: {
-          id: 4,
+          id: 3,
           title: '用户管理',
           icon: 'user',
+        },
+      },
+      {
+        path: '/app',
+        component: () => import('@/views/Application'),
+        name: 'application',
+        meta: {
+          id: 2,
+          title: 'APP信息',
+          icon: 'app',
         },
       },
     ],

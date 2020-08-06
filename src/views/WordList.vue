@@ -78,12 +78,14 @@
       title="编辑"
       v-if="dialogVisible"
       :visible.sync="dialogVisible"
+      :close-on-click-modal="false"
       width="60%"
     >
       <EditWord
         :id="selectedItemId"
         :word="selectedItemWord"
         :type="form.type"
+        @success="getData"
         @close="closeDialog"
       />
     </el-dialog>
@@ -116,7 +118,9 @@
     },
     methods: {
       add() {
-        this.$router.push(`/edit?type=${this.form.type}`)
+        this.selectedItemId = ''
+        this.selectedItemWord = ''
+        this.dialogVisible = true
       },
       editItem(item) {
         this.selectedItemId = item._id

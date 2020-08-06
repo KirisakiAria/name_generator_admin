@@ -2,6 +2,9 @@ const version = 'v1'
 const api_prefix = `/api/${version}`
 
 export default {
+  headers: {
+    authorization: localStorage.getItem('token'),
+  },
   login: `${api_prefix}/admin/login`,
   user: `${api_prefix}/user`,
   upload: `${api_prefix}/upload`,
