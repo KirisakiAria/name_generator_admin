@@ -15,12 +15,13 @@
       </div>
     </section>
     <el-table :data="tableData">
-      <el-table-column prop="avatare" label="头像">
+      <el-table-column prop="avatare" label="头像" width="80">
         <template slot-scope="scope">
           <img :src="`${url}${scope.row.avatar}`" />
         </template>
       </el-table-column>
-      <el-table-column prop="_id" label="ID"></el-table-column>
+      <el-table-column prop="_id" label="ID" width="220"></el-table-column>
+      <el-table-column prop="uid" label="UID" width="100"></el-table-column>
       <el-table-column prop="tel" label="手机号"></el-table-column>
       <el-table-column prop="username" label="用户名"></el-table-column>
       <el-table-column prop="date" label="注册日期"></el-table-column>

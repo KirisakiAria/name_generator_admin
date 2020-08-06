@@ -10,6 +10,9 @@
       <el-form-item label="包名" prop="packageName">
         <el-input v-model="form.packageName"></el-input>
       </el-form-item>
+      <el-form-item label="构建版本" prop="buildNumber">
+        <el-input v-model="form.buildNumber"></el-input>
+      </el-form-item>
       <el-form-item label="APP版本" prop="version">
         <el-input v-model="form.version"></el-input>
       </el-form-item>
@@ -29,6 +32,7 @@
           secret: '',
           appName: '',
           packageName: '',
+          buildNumber: '',
           apiVersion: '',
         },
         rules: {
@@ -50,7 +54,13 @@
               message: '请填写包名',
             },
           ],
-          apiVersion: [
+          buildNumber: [
+            {
+              required: true,
+              message: '请填写构建版本',
+            },
+          ],
+          version: [
             {
               required: true,
               message: '请填写APP版本',
