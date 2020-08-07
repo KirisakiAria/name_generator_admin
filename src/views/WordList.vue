@@ -95,7 +95,7 @@
   import mixin from '../mixin/mixin'
   import EditWord from './EditWord'
   export default {
-    name: 'wordList',
+    name: 'WordList',
     mixins: [mixin],
     data() {
       return {

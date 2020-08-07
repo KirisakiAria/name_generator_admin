@@ -23,7 +23,7 @@
 <script>
   import mixin from '../mixin/mixin'
   export default {
-    name: 'application',
+    name: 'Application',
     mixins: [mixin],
     data() {
       return {

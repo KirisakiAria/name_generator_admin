@@ -20,7 +20,7 @@
 <script>
   import { mapState } from 'vuex'
   export default {
-    name: 'headerBar',
+    name: 'HeaderBar',
     data() {
       return {}
     },

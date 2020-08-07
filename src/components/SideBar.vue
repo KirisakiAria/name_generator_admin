@@ -22,7 +22,7 @@
 <script>
   import { mapState } from 'vuex'
   export default {
-    name: 'sideBar',
+    name: 'SideBar',
     computed: {
       routeList() {
         return this.$router.options.routes[0].children

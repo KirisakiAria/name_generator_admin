@@ -39,7 +39,7 @@
 <script>
   import mixin from '../mixin/mixin'
   export default {
-    name: 'editWord',
+    name: 'EditWord',
     mixins: [mixin],
     data() {
       return {

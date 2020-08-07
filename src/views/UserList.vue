@@ -88,7 +88,7 @@
   import mixin from '../mixin/mixin'
   import EditUser from './EditUser'
   export default {
-    name: 'userList',
+    name: 'UserList',
     mixins: [mixin],
     data() {
       return {
