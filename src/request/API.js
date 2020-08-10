@@ -11,4 +11,5 @@ export default {
   word: `${api_prefix}/word`,
   uploadWordList: `${api_prefix}/word/file`,
   app: `${api_prefix}/app`,
+  service: `${api_prefix}/service`,
 }

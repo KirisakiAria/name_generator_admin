@@ -19,7 +19,7 @@
 <script>
   import mixin from '../mixin/mixin'
   export default {
-    name: 'login',
+    name: 'Login',
     mixins: [mixin],
     data() {
       return {
