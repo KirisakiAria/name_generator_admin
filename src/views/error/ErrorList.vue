@@ -4,45 +4,33 @@
       <div class="form">
         <el-input
           v-model="form.searchContent"
-          placeholder="请输入搜索内容"
+          placeholder="请输入厂商"
         ></el-input>
         <el-select
-          v-model="form.type"
-          placeholder="请选择类型"
+          v-model="form.system"
+          placeholder="请选择系统"
           @change="getData"
         >
-          <el-option label="中国风" value="中国风"></el-option>
-          <el-option label="日语" value="日语"></el-option>
-        </el-select>
-        <el-select
-          v-model="form.number"
-          placeholder="请选择字数"
-          @change="getData"
-        >
-          <el-option
-            :label="item"
-            :value="item"
-            v-for="(item, index) in 5"
-            :key="index"
-          ></el-option>
+          <el-option label="全部" value="all"></el-option>
+          <el-option label="android" value="android"></el-option>
+          <el-option label="ios" value="ios"></el-option>
         </el-select>
         <el-button type="primary" icon="el-icon-search" @click="getData">
           搜索
         </el-button>
       </div>
-      <div class="right">
-        <el-button type="success" @click="add">新增</el-button>
-      </div>
     </section>
     <el-table :data="tableData">
-      <el-table-column prop="_id" label="ID"></el-table-column>
-      <el-table-column prop="word" label="词语"></el-table-column>
+      <el-table-column prop="appVersion" label="app版本"></el-table-column>
+      <el-table-column prop="brand" label="厂商"></el-table-column>
+      <el-table-column prop="system" label="系统类型"></el-table-column>
+      <el-table-column prop="systemVersion" label="系统版本"></el-table-column>
       <el-table-column fixed="right" label="操作">
         <template slot-scope="scope">
           <el-button
             type="primary"
-            @click="editItem(scope.row)"
-            icon="el-icon-edit"
+            @click="checkItem(scope.row)"
+            icon="el-icon-document"
             circle
           ></el-button>
           <el-popconfirm
@@ -75,36 +63,28 @@
       ></el-pagination>
     </section>
     <el-dialog
-      title="编辑"
+      title="详情"
       v-if="dialogVisible"
       :visible.sync="dialogVisible"
       :close-on-click-modal="false"
       width="60%"
     >
-      <EditWord
-        :id="selectedItemId"
-        :word="selectedItemWord"
-        :type="form.type"
-        @success="getData"
-        @close="closeDialog"
-      />
+      <ErrorDetails :item="selectedItem" />
     </el-dialog>
   </section>
 </template>
 <script>
-  import mixin from '../mixin/mixin'
-  import EditWord from './EditWord'
+  import ErrorDetails from './ErrorDetails'
+  import mixin from '@/mixin/mixin'
   export default {
-    name: 'WordList',
+    name: 'ErrorList',
     mixins: [mixin],
     data() {
       return {
         dialogVisible: false,
-        selectedItemId: '',
-        selectedItemWord: '',
+        selectedItem: null,
         form: {
-          type: '日语',
-          number: 4,
+          system: 'all',
           searchContent: '',
         },
         pageSize: 15,
@@ -113,27 +93,14 @@
         tableData: [],
       }
     },
-    components: {
-      EditWord,
-    },
+    components: { ErrorDetails },
     methods: {
-      add() {
-        this.selectedItemId = ''
-        this.selectedItemWord = ''
+      checkItem(item) {
         this.dialogVisible = true
-      },
-      editItem(item) {
-        this.selectedItemId = item._id
-        this.selectedItemWord = item.word
-        this.dialogVisible = true
+        this.selectedItem = item
       },
       async deleteItem(item) {
-        const res = await this.$delete(`${this.API.word}/${item._id}`, {
-          params: {
-            type: this.form.type,
-            number: this.form.number,
-          },
-        })
+        const res = await this.$delete(`${this.API.error}/${item._id}`)
         if (res.data.code == '1000') {
           this.$message({
             showClose: true,
@@ -144,10 +111,9 @@
         }
       },
       async getData() {
-        const res = await this.$get(this.API.word, {
+        const res = await this.$get(this.API.error, {
           params: {
-            type: this.form.type,
-            number: this.form.number,
+            system: this.form.system,
             searchContent: this.form.searchContent,
             pageSize: this.pageSize,
             currentPage: this.currentPage - 1,
@@ -160,7 +126,6 @@
       },
       closeDialog() {
         this.dialogVisible = false
-        this.getData()
       },
     },
     created() {
@@ -168,6 +133,3 @@
     },
   }
 </script>
-<style lang="less" scoped>
-  @import url('../assets/css/style.less');
-</style>

@@ -12,7 +12,7 @@ const routes = [
     children: [
       {
         path: '/words',
-        component: () => import('@/views/WordList'),
+        component: () => import('@/views/word/WordList'),
         name: 'WordList',
         meta: {
           id: 1,
@@ -22,7 +22,7 @@ const routes = [
       },
       {
         path: '/users',
-        component: () => import('@/views/UserList'),
+        component: () => import('@/views/user/UserList'),
         name: 'UserList',
         meta: {
           id: 3,
@@ -48,6 +48,26 @@ const routes = [
           id: 5,
           title: '服务信息',
           icon: 'service',
+        },
+      },
+      {
+        path: '/error',
+        component: () => import('@/views/error/ErrorList'),
+        name: 'Error',
+        meta: {
+          id: 6,
+          title: '报错管理',
+          icon: 'error',
+        },
+      },
+      {
+        path: '/feedback',
+        component: () => import('@/views/feedback/FeedbackList'),
+        name: 'Feedback',
+        meta: {
+          id: 7,
+          title: '反馈管理',
+          icon: 'feedback',
         },
       },
     ],

@@ -4,8 +4,28 @@
       <div class="form">
         <el-input
           v-model="form.searchContent"
-          placeholder="请输入要搜索的手机号"
+          placeholder="请输入搜索内容"
         ></el-input>
+        <el-select
+          v-model="form.type"
+          placeholder="请选择类型"
+          @change="getData"
+        >
+          <el-option label="中国风" value="中国风"></el-option>
+          <el-option label="日语" value="日语"></el-option>
+        </el-select>
+        <el-select
+          v-model="form.number"
+          placeholder="请选择字数"
+          @change="getData"
+        >
+          <el-option
+            :label="item"
+            :value="item"
+            v-for="(item, index) in 5"
+            :key="index"
+          ></el-option>
+        </el-select>
         <el-button type="primary" icon="el-icon-search" @click="getData">
           搜索
         </el-button>
@@ -15,23 +35,8 @@
       </div>
     </section>
     <el-table :data="tableData">
-      <el-table-column prop="avatare" label="头像" width="80">
-        <template slot-scope="scope">
-          <img :src="`${url}${scope.row.avatar}`" />
-        </template>
-      </el-table-column>
-      <el-table-column prop="_id" label="ID" width="220"></el-table-column>
-      <el-table-column prop="uid" label="UID" width="100"></el-table-column>
-      <el-table-column prop="tel" label="手机号"></el-table-column>
-      <el-table-column prop="username" label="用户名"></el-table-column>
-      <el-table-column prop="date" label="注册日期"></el-table-column>
-      <el-table-column prop="vip_start" label="VIP开始时间"></el-table-column>
-      <el-table-column prop="vip_expiry" label="VIP过期时间"></el-table-column>
-      <el-table-column prop="vip" label="是否VIP">
-        <template slot-scope="scope">
-          {{ scope.row.vip ? '是' : '否' }}
-        </template>
-      </el-table-column>
+      <el-table-column prop="_id" label="ID"></el-table-column>
+      <el-table-column prop="word" label="词语"></el-table-column>
       <el-table-column fixed="right" label="操作">
         <template slot-scope="scope">
           <el-button
@@ -76,8 +81,10 @@
       :close-on-click-modal="false"
       width="60%"
     >
-      <EditUser
-        :selectedItem="selectedItem"
+      <EditWord
+        :id="selectedItemId"
+        :word="selectedItemWord"
+        :type="form.type"
         @success="getData"
         @close="closeDialog"
       />
@@ -85,16 +92,19 @@
   </section>
 </template>
 <script>
-  import mixin from '../mixin/mixin'
-  import EditUser from './EditUser'
+  import mixin from '@/mixin/mixin'
+  import EditWord from './EditWord'
   export default {
-    name: 'UserList',
+    name: 'WordList',
     mixins: [mixin],
     data() {
       return {
         dialogVisible: false,
-        selectedItem: null,
+        selectedItemId: '',
+        selectedItemWord: '',
         form: {
+          type: '日语',
+          number: 4,
           searchContent: '',
         },
         pageSize: 15,
@@ -104,26 +114,24 @@
       }
     },
     components: {
-      EditUser,
-    },
-    computed: {
-      url() {
-        return process.env.VUE_APP_BASE_API
-      },
+      EditWord,
     },
     methods: {
       add() {
-        this.selectedItem = null
+        this.selectedItemId = ''
+        this.selectedItemWord = ''
         this.dialogVisible = true
       },
       editItem(item) {
-        this.selectedItem = item.word
+        this.selectedItemId = item._id
+        this.selectedItemWord = item.word
         this.dialogVisible = true
       },
       async deleteItem(item) {
-        const res = await this.$delete(`${this.API.user}/${item._id}`, {
+        const res = await this.$delete(`${this.API.word}/${item._id}`, {
           params: {
-            tel: item.tel,
+            type: this.form.type,
+            number: this.form.number,
           },
         })
         if (res.data.code == '1000') {
@@ -136,8 +144,10 @@
         }
       },
       async getData() {
-        const res = await this.$get(this.API.user, {
+        const res = await this.$get(this.API.word, {
           params: {
+            type: this.form.type,
+            number: this.form.number,
             searchContent: this.form.searchContent,
             pageSize: this.pageSize,
             currentPage: this.currentPage - 1,
@@ -158,9 +168,3 @@
     },
   }
 </script>
-<style lang="less" scoped>
-  @import url('../assets/css/style.less');
-  td img {
-    width: 40px;
-  }
-</style>

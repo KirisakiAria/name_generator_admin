@@ -28,7 +28,7 @@
 </template>
 <script>
   import Editor from '@tinymce/tinymce-vue'
-  import mixin from '../mixin/mixin'
+  import mixin from '@/mixin/mixin'
   export default {
     name: 'Service',
     mixins: [mixin],
@@ -87,7 +87,6 @@
   }
 </script>
 <style lang="less" scoped>
-  @import url('../assets/css/style.less');
   .editor-wrapper {
     margin-top: 20px;
   }

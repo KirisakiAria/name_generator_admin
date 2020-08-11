@@ -38,7 +38,7 @@
   </section>
 </template>
 <script>
-  import mixin from '../mixin/mixin'
+  import mixin from '@/mixin/mixin'
   export default {
     name: 'EditWord',
     mixins: [mixin],
@@ -155,6 +155,3 @@
     },
   }
 </script>
-<style lang="less" scoped>
-  @import url('../assets/css/style.less');
-</style>

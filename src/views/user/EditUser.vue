@@ -37,7 +37,7 @@
   </section>
 </template>
 <script>
-  import mixin from '../mixin/mixin'
+  import mixin from '@/mixin/mixin'
   export default {
     name: 'EditUser',
     mixins: [mixin],
@@ -149,7 +149,6 @@
   }
 </script>
 <style lang="less">
-  @import url('../assets/css/style.less');
   .avatar-uploader {
     width: 180px;
     height: 180px;
