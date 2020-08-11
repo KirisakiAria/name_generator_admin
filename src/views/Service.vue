@@ -44,17 +44,12 @@
         activeName: 'privacyPolicy',
         editorOptions: {
           height: 1000,
-          menubar: false,
+          menubar: true,
           plugins: [
-            'advlist autolink lists link image charmap',
-            'searchreplace visualblocks code fullscreen',
-            'print preview anchor insertdatetime media',
-            'paste code help wordcount table',
+            'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
           ],
           toolbar: [
-            'undo redo | formatselect fontselect fontsizeselect | bold italic underline strikethrough | \
-            blockquote | alignleft aligncenter alignright alignjustify | \
-            bullist numlist outdent indent | cut copy paste | removeformat | ',
+            'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
           ],
         },
       }
