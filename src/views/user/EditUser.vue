@@ -20,6 +20,9 @@
       <el-form-item label="用户名" prop="username">
         <el-input v-model="form.username" maxlength="10"></el-input>
       </el-form-item>
+      <el-form-item label="密码" prop="password">
+        <el-input v-model="form.password" maxlength="10"></el-input>
+      </el-form-item>
       <el-form-item label="是否VIP" prop="vip">
         <el-select v-model="form.vip" placeholder="请选择是否VIP">
           <el-option label="是" :value="true"></el-option>
@@ -47,6 +50,7 @@
           avatar: '',
           tel: '',
           username: '',
+          password: '',
           vip: '',
           vip_start: '',
           vip_expiry: '',
@@ -62,6 +66,12 @@
             {
               required: true,
               message: '请填写用户名',
+            },
+          ],
+          password: [
+            {
+              required: true,
+              message: '请填写密码',
             },
           ],
           vip: [

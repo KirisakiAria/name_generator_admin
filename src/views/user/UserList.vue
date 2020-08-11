@@ -76,11 +76,7 @@
       :close-on-click-modal="false"
       width="60%"
     >
-      <EditUser
-        :selectedItem="selectedItem"
-        @success="getData"
-        @close="closeDialog"
-      />
+      <EditUser :item="selectedItem" @success="getData" @close="closeDialog" />
     </el-dialog>
   </section>
 </template>
@@ -117,7 +113,7 @@
         this.dialogVisible = true
       },
       editItem(item) {
-        this.selectedItem = item.word
+        this.selectedItem = item
         this.dialogVisible = true
       },
       async deleteItem(item) {

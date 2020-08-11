@@ -43,7 +43,7 @@
         },
         activeName: 'privacyPolicy',
         editorOptions: {
-          height: 500,
+          height: 1000,
           menubar: false,
           plugins: [
             'advlist autolink lists link image charmap',
