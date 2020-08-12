@@ -12,5 +12,6 @@ export default {
   uploadWordList: `${api_prefix}/word/file`,
   app: `${api_prefix}/app`,
   service: `${api_prefix}/service`,
+  feedback: `${api_prefix}/service/feedback`,
   error: `${api_prefix}/information/error`,
 }

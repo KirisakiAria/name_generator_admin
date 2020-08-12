@@ -4,45 +4,38 @@
       <div class="form">
         <el-input
           v-model="form.searchContent"
-          placeholder="请输入搜索内容"
+          placeholder="请输入要搜索的手机号"
         ></el-input>
-        <el-select
-          v-model="form.type"
-          placeholder="请选择类型"
-          @change="getData"
-        >
-          <el-option label="中国风" value="中国风"></el-option>
-          <el-option label="日语" value="日语"></el-option>
-        </el-select>
-        <el-select
-          v-model="form.number"
-          placeholder="请选择字数"
-          @change="getData"
-        >
-          <el-option
-            :label="item"
-            :value="item"
-            v-for="(item, index) in 5"
-            :key="index"
-          ></el-option>
-        </el-select>
+        <el-date-picker
+          v-model="form.date"
+          type="daterange"
+          align="right"
+          unlink-panels
+          range-separator="至"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+          :picker-options="pickerOptions"
+        ></el-date-picker>
         <el-button type="primary" icon="el-icon-search" @click="getData">
           搜索
         </el-button>
       </div>
-      <div class="right">
-        <el-button type="success" @click="add">新增</el-button>
-      </div>
     </section>
     <el-table :data="tableData">
-      <el-table-column prop="_id" label="ID"></el-table-column>
-      <el-table-column prop="word" label="词语"></el-table-column>
+      <el-table-column prop="tel" label="手机号"></el-table-column>
+      <el-table-column prop="username" label="用户名"></el-table-column>
+      <el-table-column prop="email" label="联系邮箱"></el-table-column>
+      <el-table-column prop="time" label="反馈时间">
+        <template slot-scope="scope">
+          {{ time(scope.row.time) }}
+        </template>
+      </el-table-column>
       <el-table-column fixed="right" label="操作">
         <template slot-scope="scope">
           <el-button
             type="primary"
-            @click="editItem(scope.row)"
-            icon="el-icon-edit"
+            @click="checkItem(scope.row)"
+            icon="el-icon-document"
             circle
           ></el-button>
           <el-popconfirm
@@ -80,10 +73,13 @@
       :visible.sync="dialogVisible"
       :close-on-click-modal="false"
       width="60%"
-    ></el-dialog>
+    >
+      <FeedbackDetails :item="selectedItem" />
+    </el-dialog>
   </section>
 </template>
 <script>
+  import FeedbackDetails from './FeedbackDetails'
   import mixin from '@/mixin/mixin'
   export default {
     name: 'FeedbackList',
@@ -91,11 +87,9 @@
     data() {
       return {
         dialogVisible: false,
-        selectedItemId: '',
-        selectedItemWord: '',
+        selectedItem: null,
         form: {
-          type: '日语',
-          number: 4,
+          date: '',
           searchContent: '',
         },
         pageSize: 15,
@@ -104,24 +98,49 @@
         tableData: [],
       }
     },
-    methods: {
-      add() {
-        this.selectedItemId = ''
-        this.selectedItemWord = ''
-        this.dialogVisible = true
+    components: { FeedbackDetails },
+    computed: {
+      pickerOptions() {
+        return {
+          shortcuts: [
+            {
+              text: '最近一周',
+              onClick(picker) {
+                const end = new Date()
+                const start = new Date()
+                start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
+                picker.$emit('pick', [start, end])
+              },
+            },
+            {
+              text: '最近一个月',
+              onClick(picker) {
+                const end = new Date()
+                const start = new Date()
+                start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
+                picker.$emit('pick', [start, end])
+              },
+            },
+            {
+              text: '最近三个月',
+              onClick(picker) {
+                const end = new Date()
+                const start = new Date()
+                start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
+                picker.$emit('pick', [start, end])
+              },
+            },
+          ],
+        }
       },
-      editItem(item) {
-        this.selectedItemId = item._id
-        this.selectedItemWord = item.word
+    },
+    methods: {
+      checkItem(item) {
         this.dialogVisible = true
+        this.selectedItem = item
       },
       async deleteItem(item) {
-        const res = await this.$delete(`${this.API.word}/${item._id}`, {
-          params: {
-            type: this.form.type,
-            number: this.form.number,
-          },
-        })
+        const res = await this.$delete(`${this.API.error}/${item._id}`)
         if (res.data.code == '1000') {
           this.$message({
             showClose: true,
@@ -132,10 +151,10 @@
         }
       },
       async getData() {
-        const res = await this.$get(this.API.word, {
+        const res = await this.$get(this.API.feedback, {
           params: {
-            type: this.form.type,
-            number: this.form.number,
+            startTime: this.form.date[0],
+            endTime: this.form.date[1],
             searchContent: this.form.searchContent,
             pageSize: this.pageSize,
             currentPage: this.currentPage - 1,
@@ -148,7 +167,6 @@
       },
       closeDialog() {
         this.dialogVisible = false
-        this.getData()
       },
     },
     created() {

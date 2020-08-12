@@ -18,6 +18,22 @@ const mixin = {
       next()
     }
   },
+  methods: {
+    time(value) {
+      const dateObj = new Date(value)
+      const year = this.padZero(dateObj.getFullYear())
+      const month = this.padZero(dateObj.getMonth() + 1)
+      const date = this.padZero(dateObj.getDate())
+      return `${year}-${month}-${date}`
+    },
+    padZero(value) {
+      let newVal = value
+      if (value < 10) {
+        newVal = `0${value}`
+      }
+      return newVal
+    },
+  },
 }
 
 export default mixin
