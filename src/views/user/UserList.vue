@@ -76,7 +76,7 @@
       :close-on-click-modal="false"
       width="60%"
     >
-      <EditUser :item="selectedItem" @success="getData" @close="closeDialog" />
+      <EditUser :item="selectedItem" @close="closeDialog" />
     </el-dialog>
   </section>
 </template>

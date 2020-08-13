@@ -123,7 +123,7 @@
           if (valid) {
             if (this.item) {
               const res = await this.$put(
-                `${this.API.user}/${this.id}`,
+                `${this.API.user}/${this.item._id}`,
                 this.form,
               )
               if (res.data.code == '1000') {
@@ -142,7 +142,7 @@
                   message: res.data.message,
                   type: 'success',
                 })
-                this.$emit('success')
+                this.$emit('close')
               }
             }
           } else {
