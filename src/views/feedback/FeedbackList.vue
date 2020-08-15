@@ -140,7 +140,7 @@
         this.selectedItem = item
       },
       async deleteItem(item) {
-        const res = await this.$delete(`${this.API.error}/${item._id}`)
+        const res = await this.$delete(`${this.API.feedback}/${item._id}`)
         if (res.data.code == '1000') {
           this.$message({
             showClose: true,
