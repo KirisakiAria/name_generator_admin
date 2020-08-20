@@ -36,7 +36,7 @@
           </div>
         </el-upload>
       </el-form-item>
-      <el-button class="submit" type="primary" @click="submit">提交</el-button>
+      <el-button class="save" type="primary" @click="save">保存</el-button>
     </el-form>
   </section>
 </template>
@@ -115,7 +115,7 @@
           }
         }
       },
-      submit() {
+      save() {
         this.$refs.form.validate(async valid => {
           if (valid) {
             if (this.id) {

@@ -16,7 +16,7 @@
       <el-form-item label="APP版本" prop="version">
         <el-input v-model="form.version"></el-input>
       </el-form-item>
-      <el-button class="submit" type="primary" @click="submit">提交</el-button>
+      <el-button class="save" type="primary" @click="save">保存</el-button>
     </el-form>
   </section>
 </template>
@@ -76,7 +76,7 @@
           this.form = res.data.data.app
         }
       },
-      submit() {
+      save() {
         this.$refs.form.validate(async valid => {
           if (valid) {
             const res = await this.$put(

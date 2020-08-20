@@ -21,8 +21,8 @@
         </section>
       </el-tab-pane>
     </el-tabs>
-    <el-button @click="submit" class="submit-btn" type="success">
-      提交
+    <el-button @click="save" class="save-btn" type="success">
+      保存
     </el-button>
   </section>
 </template>
@@ -62,7 +62,7 @@
           this.form = res.data.data
         }
       },
-      async submit() {
+      async save() {
         const res = await this.$put(
           `${this.API.service}/${this.form._id}`,
           this.form,
@@ -85,7 +85,7 @@
   .editor-wrapper {
     margin-top: 20px;
   }
-  .submit-btn {
+  .save-btn {
     display: block;
     width: 300px;
     margin: auto;
