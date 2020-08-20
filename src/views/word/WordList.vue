@@ -15,14 +15,14 @@
           <el-option label="日语" value="日语"></el-option>
         </el-select>
         <el-select
-          v-model="form.number"
+          v-model="form.length"
           placeholder="请选择字数"
           @change="getData"
         >
           <el-option
             :label="item"
             :value="item"
-            v-for="(item, index) in 5"
+            v-for="(item, index) in 9"
             :key="index"
           ></el-option>
         </el-select>
@@ -104,7 +104,7 @@
         selectedItemWord: '',
         form: {
           type: '日语',
-          number: 4,
+          length: 4,
           searchContent: '',
         },
         pageSize: 15,
@@ -129,10 +129,7 @@
       },
       async deleteItem(item) {
         const res = await this.$delete(`${this.API.word}/${item._id}`, {
-          params: {
-            type: this.form.type,
-            number: this.form.number,
-          },
+          params: { type: this.form.type },
         })
         if (res.data.code == '1000') {
           this.$message({
@@ -147,7 +144,7 @@
         const res = await this.$get(this.API.word, {
           params: {
             type: this.form.type,
-            number: this.form.number,
+            length: this.form.length,
             searchContent: this.form.searchContent,
             pageSize: this.pageSize,
             currentPage: this.currentPage - 1,
