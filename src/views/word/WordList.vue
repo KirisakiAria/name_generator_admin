@@ -31,10 +31,22 @@
         </el-button>
       </div>
       <div class="right">
+        <el-popconfirm
+          class="pop-confirm"
+          confirmButtonText="好的"
+          cancelButtonText="不用了"
+          icon="el-icon-info"
+          iconColor="red"
+          title="确定删除吗？"
+          @onConfirm="deleteBatch"
+        >
+          <el-button type="danger" slot="reference">批量删除</el-button>
+        </el-popconfirm>
         <el-button type="success" @click="add">新增</el-button>
       </div>
     </section>
-    <el-table :data="tableData">
+    <el-table :data="tableData" @selection-change="handleSelectionChange">
+      <el-table-column type="selection" width="55"></el-table-column>
       <el-table-column prop="_id" label="ID"></el-table-column>
       <el-table-column prop="word" label="词语"></el-table-column>
       <el-table-column fixed="right" label="操作">
@@ -52,7 +64,7 @@
             icon="el-icon-info"
             iconColor="red"
             title="确定删除吗？"
-            @onConfirm="deleteItem(scope.row)"
+            @onConfirm="deleteSingle(scope.row._id)"
           >
             <el-button
               type="danger"
@@ -82,8 +94,7 @@
       width="60%"
     >
       <EditWord
-        :id="selectedItemId"
-        :word="selectedItemWord"
+        :selectedItem="selectedItem"
         :type="form.type"
         @success="getData"
         @close="closeDialog"
@@ -100,11 +111,11 @@
     data() {
       return {
         dialogVisible: false,
-        selectedItemId: '',
-        selectedItemWord: '',
+        selectedItem: null,
+        deletedItems: [],
         form: {
-          type: '日语',
-          length: 4,
+          type: '中国风',
+          length: 2,
           searchContent: '',
         },
         pageSize: 15,
@@ -118,18 +129,30 @@
     },
     methods: {
       add() {
-        this.selectedItemId = ''
-        this.selectedItemWord = ''
+        this.selectedItem = null
         this.dialogVisible = true
       },
       editItem(item) {
-        this.selectedItemId = item._id
-        this.selectedItemWord = item.word
+        this.selectedItem = item
         this.dialogVisible = true
       },
-      async deleteItem(item) {
-        const res = await this.$delete(`${this.API.word}/${item._id}`, {
-          params: { type: this.form.type },
+      deleteBatch() {
+        if (!this.deletedItems.length) {
+          return this.$message({
+            showClose: true,
+            message: '请至少选择一项',
+            type: 'error',
+          })
+        }
+        this.deleteItems(this.deletedItems)
+      },
+      deleteSingle(id) {
+        this.deleteItems([id])
+      },
+      async deleteItems(ids) {
+        const res = await this.$post(`${this.API.word}/delete`, {
+          ids,
+          type: this.form.type,
         })
         if (res.data.code == '1000') {
           this.$message({
@@ -158,6 +181,9 @@
       closeDialog() {
         this.dialogVisible = false
         this.getData()
+      },
+      handleSelectionChange(val) {
+        this.deletedItems = val
       },
     },
     created() {

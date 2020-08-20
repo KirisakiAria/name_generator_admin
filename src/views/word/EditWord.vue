@@ -5,7 +5,7 @@
         <el-select
           v-model="form.type"
           placeholder="请选择类型"
-          :disabled="!!id"
+          :disabled="!!this.form._id"
         >
           <el-option label="中国风" value="中国风"></el-option>
           <el-option label="日语" value="日语"></el-option>
@@ -14,7 +14,10 @@
       <el-form-item label="词语" prop="word">
         <el-input v-model="form.word"></el-input>
       </el-form-item>
-      <el-form-item label="导入" v-if="!id">
+      <el-form-item label="分类" prop="classify">
+        <el-input v-model="form.classify"></el-input>
+      </el-form-item>
+      <el-form-item label="导入" v-if="!this.form._id">
         <el-upload
           drag
           :headers="API.headers"
@@ -45,8 +48,9 @@
     data() {
       return {
         form: {
-          type: '日语',
+          type: '中国风',
           word: '',
+          classify: '默认',
         },
         rules: {
           type: [
@@ -61,20 +65,22 @@
               message: '请填写词语',
             },
           ],
+          classify: [
+            {
+              required: true,
+              message: '请填写分类',
+            },
+          ],
         },
         fileList: [],
       }
     },
     props: {
-      id: {
-        type: String,
-        default: '',
+      selectedItem: {
+        type: Object,
+        default: null,
       },
       type: {
-        type: String,
-        default: '',
-      },
-      word: {
         type: String,
         default: '',
       },
@@ -114,7 +120,7 @@
           if (valid) {
             if (this.id) {
               const res = await this.$put(
-                `${this.API.word}/${this.id}`,
+                `${this.API.word}/${this.form._id}`,
                 this.form,
               )
               if (res.data.code == '1000') {
@@ -143,14 +149,10 @@
       },
     },
     created() {
-      if (this.id) {
-        this.form.type = this.type
-        this.form.word = this.word
-      } else {
-        const type = this.$route.query.type
-        if (type) {
-          this.form.type = type
-        }
+      if (this.selectedItem) {
+        this.form = Object.assign(this.selectedItem, {
+          type: this.type,
+        })
       }
     },
   }

@@ -20,8 +20,22 @@
           搜索
         </el-button>
       </div>
+      <div class="right">
+        <el-popconfirm
+          class="pop-confirm"
+          confirmButtonText="好的"
+          cancelButtonText="不用了"
+          icon="el-icon-info"
+          iconColor="red"
+          title="确定删除吗？"
+          @onConfirm="deleteBatch"
+        >
+          <el-button type="danger" slot="reference">批量删除</el-button>
+        </el-popconfirm>
+      </div>
     </section>
-    <el-table :data="tableData">
+    <el-table :data="tableData" @selection-change="handleSelectionChange">
+      <el-table-column type="selection" width="55"></el-table-column>
       <el-table-column prop="tel" label="手机号"></el-table-column>
       <el-table-column prop="username" label="用户名"></el-table-column>
       <el-table-column prop="email" label="联系邮箱"></el-table-column>
@@ -45,7 +59,7 @@
             icon="el-icon-info"
             iconColor="red"
             title="确定删除吗？"
-            @onConfirm="deleteItem(scope.row)"
+            @onConfirm="deleteSingle(scope.row._id)"
           >
             <el-button
               type="danger"
@@ -88,6 +102,7 @@
       return {
         dialogVisible: false,
         selectedItem: null,
+        deletedItems: [],
         form: {
           date: '',
           searchContent: '',
@@ -139,8 +154,24 @@
         this.dialogVisible = true
         this.selectedItem = item
       },
-      async deleteItem(item) {
-        const res = await this.$delete(`${this.API.feedback}/${item._id}`)
+      deleteBatch() {
+        if (!this.deletedItems.length) {
+          return this.$message({
+            showClose: true,
+            message: '请至少选择一项',
+            type: 'error',
+          })
+        }
+        this.deleteItems(this.deletedItems)
+      },
+      deleteSingle(id) {
+        this.deleteItems([id])
+      },
+      async deleteItems(ids) {
+        const res = await this.$post(`${this.API.feedback}/delete`, {
+          ids,
+          type: this.form.type,
+        })
         if (res.data.code == '1000') {
           this.$message({
             showClose: true,
@@ -167,6 +198,9 @@
       },
       closeDialog() {
         this.dialogVisible = false
+      },
+      handleSelectionChange(val) {
+        this.deletedItems = val
       },
     },
     created() {
