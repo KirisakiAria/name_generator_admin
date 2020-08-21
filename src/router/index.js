@@ -21,6 +21,16 @@ const routes = [
         },
       },
       {
+        path: '/couples',
+        component: () => import('@/views/word/CouplesList'),
+        name: 'CouplesList',
+        meta: {
+          id: 2,
+          title: '情侣词语',
+          icon: 'couples',
+        },
+      },
+      {
         path: '/users',
         component: () => import('@/views/user/UserList'),
         name: 'UserList',
@@ -35,7 +45,7 @@ const routes = [
         component: () => import('@/views/Application'),
         name: 'Application',
         meta: {
-          id: 2,
+          id: 4,
           title: 'APP信息',
           icon: 'app',
         },

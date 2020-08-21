@@ -10,6 +10,7 @@ export default {
   upload: `${api_prefix}/upload`,
   word: `${api_prefix}/word`,
   uploadWordList: `${api_prefix}/word/file`,
+  couples: `${api_prefix}/word/couples`,
   app: `${api_prefix}/app`,
   service: `${api_prefix}/service`,
   feedback: `${api_prefix}/service/feedback`,

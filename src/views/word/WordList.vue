@@ -29,6 +29,9 @@
         <el-button type="primary" icon="el-icon-search" @click="getData">
           搜索
         </el-button>
+        <el-button type="primary" icon="el-icon-lollipop" @click="addCouples">
+          添加情侣词
+        </el-button>
       </div>
       <div class="right">
         <el-popconfirm
@@ -112,7 +115,7 @@
       return {
         dialogVisible: false,
         selectedItem: null,
-        deletedItems: [],
+        checkedItems: [],
         form: {
           type: '中国风',
           length: 2,
@@ -137,14 +140,14 @@
         this.dialogVisible = true
       },
       deleteBatch() {
-        if (!this.deletedItems.length) {
+        if (!this.checkedItems.length) {
           return this.$message({
             showClose: true,
             message: '请至少选择一项',
             type: 'error',
           })
         }
-        this.deleteItems(this.deletedItems)
+        this.deleteItems(this.checkedItems)
       },
       deleteSingle(id) {
         this.deleteItems([id])
@@ -183,7 +186,27 @@
         this.getData()
       },
       handleSelectionChange(val) {
-        this.deletedItems = val
+        this.checkedItems = val
+      },
+      async addCouples() {
+        if (this.checkedItems.length != 2) {
+          return this.$message({
+            showClose: true,
+            message: '选择词语数量有误',
+            type: 'error',
+          })
+        }
+        const res = await this.$post(this.API.couples, {
+          type: this.form.type,
+          words: this.checkedItems,
+        })
+        if (res.data.code == '1000') {
+          this.$message({
+            showClose: true,
+            message: res.data.message,
+            type: 'success',
+          })
+        }
       },
     },
     created() {

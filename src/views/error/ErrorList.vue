@@ -115,14 +115,14 @@
         this.selectedItem = item
       },
       deleteBatch() {
-        if (!this.deletedItems.length) {
+        if (!this.checkedItems.length) {
           return this.$message({
             showClose: true,
             message: '请至少选择一项',
             type: 'error',
           })
         }
-        this.deleteItems(this.deletedItems)
+        this.deleteItems(this.checkedItems)
       },
       deleteSingle(id) {
         this.deleteItems([id])
@@ -159,7 +159,7 @@
         this.dialogVisible = false
       },
       handleSelectionChange(val) {
-        this.deletedItems = val
+        this.checkedItems = val
       },
     },
     created() {
