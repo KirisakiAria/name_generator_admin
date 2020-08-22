@@ -29,9 +29,6 @@
         <el-button type="primary" icon="el-icon-search" @click="getData">
           搜索
         </el-button>
-        <el-button type="primary" icon="el-icon-lollipop" @click="addCouples">
-          添加情侣词
-        </el-button>
       </div>
       <div class="right">
         <el-popconfirm
@@ -45,13 +42,17 @@
         >
           <el-button type="danger" slot="reference">批量删除</el-button>
         </el-popconfirm>
-        <el-button type="success" @click="add">新增</el-button>
       </div>
     </section>
     <el-table :data="tableData" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55"></el-table-column>
       <el-table-column prop="_id" label="ID"></el-table-column>
-      <el-table-column prop="word" label="词语"></el-table-column>
+      <el-table-column prop="word" label="词语">
+        <template slot-scope="scope">
+          <span>{{ scope.row.words[0] }}</span>
+          <span>{{ scope.row.words[1] }}</span>
+        </template>
+      </el-table-column>
       <el-table-column fixed="right" label="操作">
         <template slot-scope="scope">
           <el-button
@@ -96,7 +97,7 @@
       :close-on-click-modal="false"
       width="60%"
     >
-      <EditWord
+      <EditCouples
         :selectedItem="selectedItem"
         :type="form.type"
         @success="getData"
@@ -107,7 +108,7 @@
 </template>
 <script>
   import mixin from '@/mixin/mixin'
-  import EditWord from './EditWord'
+  import EditCouples from './EditCouples'
   export default {
     name: 'WordList',
     mixins: [mixin],
@@ -128,13 +129,9 @@
       }
     },
     components: {
-      EditWord,
+      EditCouples,
     },
     methods: {
-      add() {
-        this.selectedItem = null
-        this.dialogVisible = true
-      },
       editItem(item) {
         this.selectedItem = item
         this.dialogVisible = true
@@ -155,7 +152,6 @@
       async deleteItems(ids) {
         const res = await this.$post(`${this.API.couples}/delete`, {
           ids,
-          type: this.form.type,
         })
         if (res.data.code == '1000') {
           this.$message({
@@ -194,3 +190,13 @@
     },
   }
 </script>
+<style lang="less" scoped>
+  .cell {
+    span {
+      vertical-align: baseline;
+      &:first-child {
+        margin-right: 20px;
+      }
+    }
+  }
+</style>
