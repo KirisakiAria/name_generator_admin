@@ -42,6 +42,7 @@
         >
           <el-button type="danger" slot="reference">批量删除</el-button>
         </el-popconfirm>
+        <el-button type="success" @click="add">新增</el-button>
       </div>
     </section>
     <el-table :data="tableData" @selection-change="handleSelectionChange">
@@ -132,6 +133,10 @@
       EditCouples,
     },
     methods: {
+      add() {
+        this.selectedItem = null
+        this.dialogVisible = true
+      },
       editItem(item) {
         this.selectedItem = item
         this.dialogVisible = true

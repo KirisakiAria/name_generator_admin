@@ -199,6 +199,7 @@
         const res = await this.$post(this.API.couples, {
           type: this.form.type,
           words: this.checkedItems,
+          checked: true,
         })
         if (res.data.code == '1000') {
           this.$message({

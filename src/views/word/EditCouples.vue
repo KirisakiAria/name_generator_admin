@@ -2,7 +2,11 @@
   <section class="edit-page">
     <el-form ref="form" :model="form" :rules="rules" label-width="50px">
       <el-form-item label="类型" prop="type">
-        <el-select v-model="form.type" placeholder="请选择类型" disabled>
+        <el-select
+          v-model="form.type"
+          placeholder="请选择类型"
+          :disabled="selectedItem"
+        >
           <el-option label="中国风" value="中国风"></el-option>
           <el-option label="日语" value="日语"></el-option>
         </el-select>
@@ -57,17 +61,29 @@
             type: 'error',
           })
         }
-        const res = await this.$put(
-          `${this.API.couples}/${this.form._id}`,
-          this.form,
-        )
-        if (res.data.code == '1000') {
-          this.$message({
-            showClose: true,
-            message: res.data.message,
-            type: 'success',
-          })
-          this.$emit('close')
+        if (this.selectedItem) {
+          const res = await this.$put(
+            `${this.API.couples}/${this.form._id}`,
+            Object.assign(this.form, { checked: false }),
+          )
+          if (res.data.code == '1000') {
+            this.$message({
+              showClose: true,
+              message: res.data.message,
+              type: 'success',
+            })
+            this.$emit('close')
+          }
+        } else {
+          const res = await this.$post(this.API.couples, this.form)
+          if (res.data.code == '1000') {
+            this.$message({
+              showClose: true,
+              message: res.data.message,
+              type: 'success',
+            })
+            this.$emit('success')
+          }
         }
       },
     },
