@@ -68,7 +68,6 @@
           {{ scope.row.showable | showable }}
         </template>
       </el-table-column>
-
       <el-table-column prop="word" label="词语"></el-table-column>
       <el-table-column fixed="right" label="操作">
         <template slot-scope="scope">

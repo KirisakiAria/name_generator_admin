@@ -1,6 +1,6 @@
 <template>
   <section class="edit-page">
-    <el-form ref="form" :model="form" :rules="rules" label-width="50px">
+    <el-form ref="form" :model="form" :rules="rules" label-width="80px">
       <el-form-item label="类型" prop="type">
         <el-select
           v-model="form.type"
@@ -11,7 +11,7 @@
           <el-option label="日语" value="日语"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="类型">
+      <el-form-item label="是否展示">
         <el-select v-model="form.showable" placeholder="是否展示">
           <el-option label="是" :value="true"></el-option>
           <el-option label="否" :value="false"></el-option>
@@ -119,6 +119,7 @@
               message: res.data.message,
               type: 'success',
             })
+            this.$emit('success')
           }
         }
       },
