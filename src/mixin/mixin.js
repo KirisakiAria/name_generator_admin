@@ -18,6 +18,15 @@ const mixin = {
       next()
     }
   },
+  filters: {
+    showable(value) {
+      if (value) {
+        return '是'
+      } else {
+        return '否'
+      }
+    },
+  },
   methods: {
     time(value) {
       const dateObj = new Date(value)

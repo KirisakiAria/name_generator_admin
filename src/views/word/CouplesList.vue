@@ -15,6 +15,15 @@
           <el-option label="日语" value="日语"></el-option>
         </el-select>
         <el-select
+          v-model="form.showable"
+          placeholder="是否展示"
+          @change="getData"
+        >
+          <el-option label="全部" value="all"></el-option>
+          <el-option label="是" :value="true"></el-option>
+          <el-option label="否" :value="false"></el-option>
+        </el-select>
+        <el-select
           v-model="form.length"
           placeholder="请选择字数"
           @change="getData"
@@ -31,6 +40,9 @@
         </el-button>
       </div>
       <div class="right">
+        <el-button type="primary" @click="toggleShowable">
+          批量显示/隐藏
+        </el-button>
         <el-popconfirm
           class="pop-confirm"
           confirmButtonText="好的"
@@ -48,6 +60,11 @@
     <el-table :data="tableData" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55"></el-table-column>
       <el-table-column prop="_id" label="ID"></el-table-column>
+      <el-table-column label="展示">
+        <template slot-scope="scope">
+          {{ scope.row.showable | showable }}
+        </template>
+      </el-table-column>
       <el-table-column prop="word" label="词语">
         <template slot-scope="scope">
           <span>{{ scope.row.words[0] }}</span>
@@ -122,6 +139,7 @@
           type: '中国风',
           length: 2,
           searchContent: '',
+          showable: 'all',
         },
         pageSize: 15,
         currentPage: 1,
@@ -154,9 +172,9 @@
       deleteSingle(id) {
         this.deleteItems([id])
       },
-      async deleteItems(ids) {
+      async deleteItems(items) {
         const res = await this.$post(`${this.API.couples}/delete`, {
-          ids,
+          items,
         })
         if (res.data.code == '1000') {
           this.$message({
@@ -172,6 +190,7 @@
           params: {
             type: this.form.type,
             length: this.form.length,
+            showable: this.form.showable,
             searchContent: this.form.searchContent,
             pageSize: this.pageSize,
             currentPage: this.currentPage - 1,
@@ -188,6 +207,31 @@
       },
       handleSelectionChange(val) {
         this.checkedItems = val
+      },
+      async toggleShowable() {
+        if (this.form.showable === 'all') {
+          return this.$message({
+            showClose: true,
+            message: '修改显示时请不要选择“全部”',
+            type: 'error',
+          })
+        }
+        const res = await this.$post(
+          `${this.API.word}/couples/toggleshowable`,
+          {
+            type: this.form.type,
+            items: this.checkedItems,
+            showable: !this.form.showable,
+          },
+        )
+        if (res.data.code == '1000') {
+          this.$message({
+            showClose: true,
+            message: res.data.message,
+            type: 'success',
+          })
+          this.getData()
+        }
       },
     },
     created() {
