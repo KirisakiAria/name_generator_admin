@@ -120,6 +120,7 @@
       <EditWord
         :selectedItem="selectedItem"
         :type="form.type"
+        :classifyList="classifyList"
         @success="getData"
         @close="closeEditDialog"
       />
@@ -152,6 +153,7 @@
         editDialogVisible: false,
         selectedItem: null,
         checkedItems: [],
+        classifyList: [],
         form: {
           type: '中国风',
           length: 2,
@@ -220,6 +222,19 @@
           this.total = res.data.data.total
         }
       },
+      async getClassifyData() {
+        const res = await this.$get(this.API.classify, {
+          params: {
+            all: 1,
+            searchContent: this.form.searchContent,
+            pageSize: this.pageSize,
+            currentPage: this.currentPage - 1,
+          },
+        })
+        if (res.data.code == '1000') {
+          this.classifyList = res.data.data.list
+        }
+      },
       closeEditDialog() {
         this.editDialogVisible = false
         this.getData()
@@ -277,6 +292,7 @@
     },
     created() {
       this.getData()
+      this.getClassifyData()
     },
   }
 </script>

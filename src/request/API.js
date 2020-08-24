@@ -15,4 +15,5 @@ export default {
   service: `${api_prefix}/service`,
   feedback: `${api_prefix}/service/feedback`,
   error: `${api_prefix}/information/error`,
+  classify: `${api_prefix}/dictionary/classify`,
 }

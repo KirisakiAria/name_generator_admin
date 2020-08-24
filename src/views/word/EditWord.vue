@@ -21,7 +21,14 @@
         <el-input v-model="form.word"></el-input>
       </el-form-item>
       <el-form-item label="分类" prop="classify">
-        <el-input v-model="form.classify"></el-input>
+        <el-select v-model="form.classify">
+          <el-option
+            v-for="(item, index) in classifyList"
+            :key="index"
+            :label="item.name"
+            :value="item.name"
+          ></el-option>
+        </el-select>
       </el-form-item>
       <el-form-item label="导入" v-if="!this.form._id">
         <el-upload
@@ -90,6 +97,12 @@
       type: {
         type: String,
         default: '',
+      },
+      classifyList: {
+        type: Array,
+        default() {
+          return []
+        },
       },
     },
     computed: {
