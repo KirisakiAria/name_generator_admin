@@ -38,11 +38,14 @@
         <el-button type="primary" icon="el-icon-search" @click="getData">
           搜索
         </el-button>
-        <el-button type="primary" icon="el-icon-lollipop" @click="addCouples">
+        <el-button type="primary" @click="addCouples">
           添加情侣词
         </el-button>
       </div>
       <div class="right">
+        <el-button type="primary" @click="outputDialogVisible = true">
+          导出
+        </el-button>
         <el-button type="primary" @click="toggleShowable">
           批量显示/隐藏
         </el-button>
@@ -68,6 +71,7 @@
           {{ scope.row.showable | showable }}
         </template>
       </el-table-column>
+      <el-table-column prop="classify" label="分类"></el-table-column>
       <el-table-column prop="word" label="词语"></el-table-column>
       <el-table-column fixed="right" label="操作">
         <template slot-scope="scope">
@@ -108,8 +112,8 @@
     </section>
     <el-dialog
       title="编辑"
-      v-if="dialogVisible"
-      :visible.sync="dialogVisible"
+      v-if="editDialogVisible"
+      :visible.sync="editDialogVisible"
       :close-on-click-modal="false"
       width="60%"
     >
@@ -117,7 +121,20 @@
         :selectedItem="selectedItem"
         :type="form.type"
         @success="getData"
-        @close="closeDialog"
+        @close="closeEditDialog"
+      />
+    </el-dialog>
+    <el-dialog
+      title="导出"
+      v-if="outputDialogVisible"
+      :visible.sync="outputDialogVisible"
+      :close-on-click-modal="false"
+      width="60%"
+    >
+      <OutputFile
+        :selectedItem="selectedItem"
+        :type="form.type"
+        @close="closeOutputDialog"
       />
     </el-dialog>
   </section>
@@ -125,12 +142,14 @@
 <script>
   import mixin from '@/mixin/mixin'
   import EditWord from './EditWord'
+  import OutputFile from './OutputFile'
   export default {
     name: 'WordList',
     mixins: [mixin],
     data() {
       return {
-        dialogVisible: false,
+        outputDialogVisible: false,
+        editDialogVisible: false,
         selectedItem: null,
         checkedItems: [],
         form: {
@@ -147,15 +166,16 @@
     },
     components: {
       EditWord,
+      OutputFile,
     },
     methods: {
       add() {
         this.selectedItem = null
-        this.dialogVisible = true
+        this.editDialogVisible = true
       },
       editItem(item) {
         this.selectedItem = item
-        this.dialogVisible = true
+        this.editDialogVisible = true
       },
       deleteBatch() {
         if (!this.checkedItems.length) {
@@ -200,9 +220,12 @@
           this.total = res.data.data.total
         }
       },
-      closeDialog() {
-        this.dialogVisible = false
+      closeEditDialog() {
+        this.editDialogVisible = false
         this.getData()
+      },
+      closeOutputDialog() {
+        this.outputDialogVisible = false
       },
       handleSelectionChange(val) {
         this.checkedItems = val

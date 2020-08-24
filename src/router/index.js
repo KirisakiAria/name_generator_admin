@@ -80,6 +80,16 @@ const routes = [
           icon: 'feedback',
         },
       },
+      {
+        path: '/dictionary',
+        component: () => import('@/views/dictionary/Dictionary'),
+        name: 'Dictionary',
+        meta: {
+          id: 8,
+          title: '数据字典',
+          icon: 'dictionary',
+        },
+      },
     ],
   },
   {

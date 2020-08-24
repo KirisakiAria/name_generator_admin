@@ -128,7 +128,7 @@
   import mixin from '@/mixin/mixin'
   import EditCouples from './EditCouples'
   export default {
-    name: 'WordList',
+    name: 'CouplesList',
     mixins: [mixin],
     data() {
       return {

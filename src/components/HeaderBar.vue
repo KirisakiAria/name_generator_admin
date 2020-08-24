@@ -63,7 +63,7 @@
     }
 
     .back-btn {
-      margin-right: 10px;
+      margin-right: 15px;
       .iconfont {
         color: #666;
         font-size: 20px;
