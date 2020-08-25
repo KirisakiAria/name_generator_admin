@@ -6,16 +6,26 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    redirect: '/words',
+    redirect: '/system',
     name: 'Layout',
     component: () => import('@/views/Layout'),
     children: [
+      {
+        path: '/system',
+        component: () => import('@/views/System'),
+        name: 'System',
+        meta: {
+          id: 1,
+          title: '系统信息',
+          icon: 'system',
+        },
+      },
       {
         path: '/words',
         component: () => import('@/views/word/WordList'),
         name: 'WordList',
         meta: {
-          id: 1,
+          id: 2,
           title: '词语列表',
           icon: 'list',
         },
@@ -25,7 +35,7 @@ const routes = [
         component: () => import('@/views/word/CouplesList'),
         name: 'CouplesList',
         meta: {
-          id: 2,
+          id: 3,
           title: '情侣词语',
           icon: 'couples',
         },
@@ -35,7 +45,7 @@ const routes = [
         component: () => import('@/views/user/UserList'),
         name: 'UserList',
         meta: {
-          id: 3,
+          id: 4,
           title: '用户管理',
           icon: 'user',
         },
@@ -45,7 +55,7 @@ const routes = [
         component: () => import('@/views/Application'),
         name: 'Application',
         meta: {
-          id: 4,
+          id: 5,
           title: 'APP信息',
           icon: 'app',
         },
@@ -55,7 +65,7 @@ const routes = [
         component: () => import('@/views/Service'),
         name: 'Service',
         meta: {
-          id: 5,
+          id: 6,
           title: '服务信息',
           icon: 'service',
         },
@@ -65,7 +75,7 @@ const routes = [
         component: () => import('@/views/error/ErrorList'),
         name: 'Error',
         meta: {
-          id: 6,
+          id: 7,
           title: '报错管理',
           icon: 'error',
         },
@@ -75,7 +85,7 @@ const routes = [
         component: () => import('@/views/feedback/FeedbackList'),
         name: 'Feedback',
         meta: {
-          id: 7,
+          id: 8,
           title: '反馈管理',
           icon: 'feedback',
         },
@@ -85,7 +95,7 @@ const routes = [
         component: () => import('@/views/dictionary/Dictionary'),
         name: 'Dictionary',
         meta: {
-          id: 8,
+          id: 9,
           title: '数据字典',
           icon: 'dictionary',
         },
