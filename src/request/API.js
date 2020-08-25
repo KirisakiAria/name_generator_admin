@@ -5,6 +5,7 @@ export default {
   headers: {
     authorization: localStorage.getItem('token'),
   },
+  system: `${prefix}/system`,
   login: `${prefix}/admin/login`,
   user: `${prefix}/user`,
   upload: `${prefix}/upload`,
