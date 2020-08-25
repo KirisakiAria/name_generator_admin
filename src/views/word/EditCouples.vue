@@ -1,11 +1,11 @@
 <template>
-  <section class="edit-page">
-    <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+  <section class="edit-page" @keyup.enter="save">
+    <el-form ref="form" :model="form" label-width="80px">
       <el-form-item label="类型" prop="type">
         <el-select
           v-model="form.type"
           placeholder="请选择类型"
-          :disabled="selectedItem"
+          :disabled="!!selectedItem"
         >
           <el-option label="中国风" value="中国风"></el-option>
           <el-option label="日语" value="日语"></el-option>
@@ -17,10 +17,10 @@
           <el-option label="否" :value="false"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="词语">
+      <el-form-item label="词语1">
         <el-input v-model="form.words[0]"></el-input>
       </el-form-item>
-      <el-form-item label="词语">
+      <el-form-item label="词语2">
         <el-input v-model="form.words[1]"></el-input>
       </el-form-item>
       <el-button class="save" type="primary" @click="save">保存</el-button>
@@ -36,7 +36,7 @@
       return {
         form: {
           type: '中国风',
-          words: [],
+          words: ['', ''],
           classify: '默认',
           showable: true,
         },

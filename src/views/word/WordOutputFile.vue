@@ -86,7 +86,7 @@
         a.remove()
       },
       async output() {
-        const res = await this.$post(this.API.output, this.form)
+        const res = await this.$post(this.API.wordOutput, this.form)
         if (res.data.code == '1000') {
           this.createAHtml(
             `${this.form.type}-${this.form.classify}-${this.form.showable}-${this.form.length}`,

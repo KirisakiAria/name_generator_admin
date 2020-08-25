@@ -1,5 +1,5 @@
 <template>
-  <section class="edit-page">
+  <section class="edit-page" @keyup.enter="save">
     <el-form ref="form" :model="form" :rules="rules" label-width="80px">
       <el-form-item label="类型" prop="type">
         <el-select

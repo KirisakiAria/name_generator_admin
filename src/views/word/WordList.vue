@@ -63,7 +63,11 @@
         <el-button type="success" @click="add">新增</el-button>
       </div>
     </section>
-    <el-table :data="tableData" @selection-change="handleSelectionChange">
+    <el-table
+      ref="datatable"
+      :data="tableData"
+      @selection-change="handleSelectionChange"
+    >
       <el-table-column type="selection" width="55"></el-table-column>
       <el-table-column prop="_id" label="ID"></el-table-column>
       <el-table-column label="展示">
@@ -132,18 +136,14 @@
       :close-on-click-modal="false"
       width="60%"
     >
-      <OutputFile
-        :selectedItem="selectedItem"
-        :classifyList="classifyList"
-        @close="closeOutputDialog"
-      />
+      <WordOutputFile :classifyList="classifyList" @close="closeOutputDialog" />
     </el-dialog>
   </section>
 </template>
 <script>
   import mixin from '@/mixin/mixin'
   import EditWord from './EditWord'
-  import OutputFile from './OutputFile'
+  import WordOutputFile from './WordOutputFile'
   export default {
     name: 'WordList',
     mixins: [mixin],
@@ -168,7 +168,7 @@
     },
     components: {
       EditWord,
-      OutputFile,
+      WordOutputFile,
     },
     methods: {
       add() {
@@ -265,6 +265,8 @@
             message: res.data.message,
             type: 'success',
           })
+          this.$refs.datatable.clearSelection()
+          this.checkedItems = []
         }
       },
       async toggleShowable() {
