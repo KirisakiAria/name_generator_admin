@@ -173,7 +173,7 @@
         this.deleteItems([id])
       },
       async deleteItems(items) {
-        const res = await this.$post(`${this.API.couples}/delete`, {
+        const res = await this.$post(this.API.deleteCouples, {
           items,
         })
         if (res.data.code == '1000') {
@@ -216,14 +216,11 @@
             type: 'error',
           })
         }
-        const res = await this.$post(
-          `${this.API.word}/couples/toggleshowable`,
-          {
-            type: this.form.type,
-            items: this.checkedItems,
-            showable: !this.form.showable,
-          },
-        )
+        const res = await this.$post(this.API.toggleshowable, {
+          type: this.form.type,
+          items: this.checkedItems,
+          showable: !this.form.showable,
+        })
         if (res.data.code == '1000') {
           this.$message({
             showClose: true,

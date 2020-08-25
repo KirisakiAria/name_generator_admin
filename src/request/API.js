@@ -1,19 +1,23 @@
 const version = 'v1'
-const api_prefix = `/api/${version}`
+const prefix = `/api/${version}`
 
 export default {
   headers: {
     authorization: localStorage.getItem('token'),
   },
-  login: `${api_prefix}/admin/login`,
-  user: `${api_prefix}/user`,
-  upload: `${api_prefix}/upload`,
-  word: `${api_prefix}/word`,
-  uploadWordList: `${api_prefix}/word/file`,
-  couples: `${api_prefix}/word/couples`,
-  app: `${api_prefix}/app`,
-  service: `${api_prefix}/service`,
-  feedback: `${api_prefix}/service/feedback`,
-  error: `${api_prefix}/information/error`,
-  classify: `${api_prefix}/dictionary/classify`,
+  login: `${prefix}/admin/login`,
+  user: `${prefix}/user`,
+  upload: `${prefix}/upload`,
+  word: `${prefix}/word`,
+  deleteWord: `${prefix}/word/delete`,
+  uploadWordList: `${prefix}/word/file`,
+  couples: `${prefix}/word/couples`,
+  deleteCouples: `${prefix}/word/couples/delete`,
+  toggleshowable: `${prefix}/word/couples/toggleshowable`,
+  output: `${prefix}/word/output`,
+  app: `${prefix}/app`,
+  service: `${prefix}/service`,
+  feedback: `${prefix}/service/feedback`,
+  error: `${prefix}/information/error`,
+  classify: `${prefix}/dictionary/classify`,
 }

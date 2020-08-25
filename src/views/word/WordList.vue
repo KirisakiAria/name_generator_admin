@@ -134,7 +134,7 @@
     >
       <OutputFile
         :selectedItem="selectedItem"
-        :type="form.type"
+        :classifyList="classifyList"
         @close="closeOutputDialog"
       />
     </el-dialog>
@@ -193,7 +193,7 @@
         this.deleteItems([id])
       },
       async deleteItems(items) {
-        const res = await this.$post(`${this.API.word}/delete`, {
+        const res = await this.$post(this.API.deleteWord, {
           items,
           type: this.form.type,
         })
