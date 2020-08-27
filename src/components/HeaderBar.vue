@@ -11,6 +11,14 @@
         <li>uid：{{ uid }}</li>
         <li>用户名：{{ username }}</li>
       </ul>
+      <el-button
+        @click="logout"
+        class="logout"
+        icon="el-icon-switch-button"
+        type="danger"
+      >
+        注销
+      </el-button>
       <div class="avatar" slot="reference">
         <img :src="url + avatar" />
       </div>
@@ -42,6 +50,10 @@
         if (!this.$route.meta.show) {
           this.$router.go(-1)
         }
+      },
+      logout() {
+        localStorage.clear()
+        this.$router.replace('login')
       },
     },
   }

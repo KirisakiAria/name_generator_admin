@@ -9,6 +9,9 @@
         <el-form-item label="密码" prop="password">
           <el-input type="password" v-model="formData.password"></el-input>
         </el-form-item>
+        <el-form-item label="暗号" prop="authCode">
+          <el-input type="password" v-model="formData.authCode"></el-input>
+        </el-form-item>
         <el-form-item label-width="0">
           <el-button type="primary" class="btn" @click="login">登录</el-button>
         </el-form-item>
@@ -26,6 +29,7 @@
         formData: {
           username: '',
           password: '',
+          authCode: '',
         },
         rules: {
           username: [
@@ -33,6 +37,9 @@
           ],
           password: [
             { required: true, message: '请输入密码', trigger: 'blur' },
+          ],
+          authCode: [
+            { required: true, message: '请输入暗号', trigger: 'blur' },
           ],
         },
       }
@@ -44,6 +51,7 @@
             this.$post(this.API.login, {
               username: this.formData.username,
               password: this.formData.password,
+              authCode: this.formData.authCode,
             }).then(res => {
               if (res.data.code == '1000') {
                 localStorage.setItem('token', res.data.data.token)
