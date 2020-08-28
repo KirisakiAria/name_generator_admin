@@ -36,7 +36,7 @@
       </el-row>
       <el-row>
         <el-col :span="12">2级缓存：{{ systemData.cpu.cache.l2 }}</el-col>
-        <el-col :span="12">3级缓存：{{ systemData.cpu.cache.l2 }}</el-col>
+        <el-col :span="12">3级缓存：{{ systemData.cpu.cache.l3 }}</el-col>
       </el-row>
     </section>
     <section>
@@ -82,7 +82,7 @@
         return {
           ...this.baseOptions,
           title: {
-            text: '内存使用情况',
+            text: '内存使用情况(G)',
             left: 'center',
             top: 20,
             textStyle: {
@@ -94,12 +94,12 @@
             min: 0,
             max: 64,
             inRange: {
-              colorLightness: [0.1, 1],
+              colorLightness: [0.5, 1],
             },
           },
           series: [
             {
-              name: '内存使用情况',
+              name: '内存使用情况(G)',
               type: 'pie',
               radius: '60%',
               center: ['50%', '50%'],
@@ -128,7 +128,7 @@
                 length2: 20,
               },
               itemStyle: {
-                color: '#ff7f50',
+                color: '#ff6b81',
               },
               animationType: 'scale',
               animationEasing: 'elasticOut',
@@ -143,7 +143,7 @@
         return {
           ...this.baseOptions,
           title: {
-            text: 'CPU使用情况',
+            text: 'CPU使用情况(%)',
             left: 'center',
             top: 20,
             textStyle: {
@@ -155,12 +155,12 @@
             min: 0,
             max: 100,
             inRange: {
-              colorLightness: [0.1, 1],
+              colorLightness: [0.5, 1],
             },
           },
           series: [
             {
-              name: 'cpu使用情况',
+              name: 'cpu使用情况(%)',
               type: 'pie',
               radius: '60%',
               center: ['50%', '50%'],
@@ -204,7 +204,7 @@
         return {
           ...this.baseOptions,
           title: {
-            text: '磁盘使用情况',
+            text: '磁盘使用情况(G)',
             left: 'center',
             top: 20,
             textStyle: {
@@ -216,12 +216,12 @@
             min: 0,
             max: this.disk.total / 1073741824,
             inRange: {
-              colorLightness: [0.1, 1],
+              colorLightness: [0.5, 1],
             },
           },
           series: [
             {
-              name: '磁盘使用情况',
+              name: '磁盘使用情况(G)',
               type: 'pie',
               radius: '60%',
               center: ['50%', '50%'],
@@ -253,7 +253,7 @@
                 length2: 20,
               },
               itemStyle: {
-                color: '#5352ed',
+                color: '#ffa502',
               },
               animationType: 'scale',
               animationEasing: 'elasticOut',
