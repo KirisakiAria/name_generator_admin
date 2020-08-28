@@ -38,9 +38,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="danger" @click="close">取消</el-button>
-        <el-button type="success" @click="output">
-          导出
-        </el-button>
+        <el-button type="success" @click="output">导出</el-button>
       </el-form-item>
     </el-form>
   </section>

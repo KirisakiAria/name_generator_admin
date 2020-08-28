@@ -44,6 +44,7 @@
       <div class="chart-group">
         <div ref="memChart" class="chart"></div>
         <div ref="cpuChart" class="chart"></div>
+        <div ref="diskChart" class="chart"></div>
       </div>
     </section>
   </section>
@@ -62,6 +63,10 @@
           mem: {},
           os: {},
           time: {},
+        },
+        disk: {
+          total: 0,
+          used: 0,
         },
         baseOptions: {
           backgroundColor: '#fff',
@@ -96,15 +101,15 @@
             {
               name: '内存使用情况',
               type: 'pie',
-              radius: '65%',
+              radius: '60%',
               center: ['50%', '50%'],
               data: [
                 {
-                  value: (this.systemData.mem.free / 1073741824).toFixed(6),
+                  value: (this.systemData.mem.free / 1073741824).toFixed(2),
                   name: '空闲',
                 },
                 {
-                  value: (this.systemData.mem.active / 1073741824).toFixed(6),
+                  value: (this.systemData.mem.active / 1073741824).toFixed(2),
                   name: '已使用',
                 },
               ].sort(function (a, b) {
@@ -157,15 +162,79 @@
             {
               name: 'cpu使用情况',
               type: 'pie',
-              radius: '65%',
+              radius: '60%',
               center: ['50%', '50%'],
               data: [
                 {
-                  value: 100 - this.systemData.load.currentload,
+                  value: (100 - this.systemData.load.currentload).toFixed(2),
                   name: '空闲',
                 },
                 {
-                  value: this.systemData.load.currentload,
+                  value: this.systemData.load.currentload.toFixed(2),
+                  name: '已使用',
+                },
+              ].sort(function (a, b) {
+                return a.value - b.value
+              }),
+              roseType: 'radius',
+              label: {
+                color: '#666',
+              },
+              labelLine: {
+                lineStyle: {
+                  color: '#666',
+                },
+                smooth: 0.2,
+                length: 10,
+                length2: 20,
+              },
+              itemStyle: {
+                color: '#5352ed',
+              },
+              animationType: 'scale',
+              animationEasing: 'elasticOut',
+              animationDelay: function (idx) {
+                return Math.random() * 200
+              },
+            },
+          ],
+        }
+      },
+      diskChartOptions() {
+        return {
+          ...this.baseOptions,
+          title: {
+            text: '磁盘使用情况',
+            left: 'center',
+            top: 20,
+            textStyle: {
+              color: '#666',
+            },
+          },
+          visualMap: {
+            show: false,
+            min: 0,
+            max: this.disk.total / 1073741824,
+            inRange: {
+              colorLightness: [0.1, 1],
+            },
+          },
+          series: [
+            {
+              name: '磁盘使用情况',
+              type: 'pie',
+              radius: '60%',
+              center: ['50%', '50%'],
+              data: [
+                {
+                  value: (
+                    (this.disk.total - this.disk.used) /
+                    1073741824
+                  ).toFixed(2),
+                  name: '空闲',
+                },
+                {
+                  value: (this.disk.used / 1073741824).toFixed(2),
                   name: '已使用',
                 },
               ].sort(function (a, b) {
@@ -201,10 +270,17 @@
         const res = await this.$get(this.API.system)
         if (res.data.code == '1000') {
           this.systemData = res.data.data
+          this.setDiskData()
           this.$nextTick(function () {
             this.draw()
           })
         }
+      },
+      setDiskData() {
+        this.systemData.fsSize.forEach(e => {
+          this.disk.total += e.size
+          this.disk.used += e.used
+        })
       },
       draw() {
         const memChart = echarts.init(this.$refs.memChart)
@@ -212,6 +288,9 @@
 
         const cpuChart = echarts.init(this.$refs.cpuChart)
         cpuChart.setOption(this.cpuChartOptions)
+
+        const diskChart = echarts.init(this.$refs.diskChart)
+        diskChart.setOption(this.diskChartOptions)
       },
     },
     mounted() {
@@ -236,8 +315,8 @@
       align-items: center;
       .chart {
         margin: auto;
-        width: 600px;
-        height: 600px;
+        width: 400px;
+        height: 400px;
       }
     }
   }

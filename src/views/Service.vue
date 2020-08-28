@@ -21,9 +21,7 @@
         </section>
       </el-tab-pane>
     </el-tabs>
-    <el-button @click="save" class="save-btn" type="success">
-      保存
-    </el-button>
+    <el-button @click="save" class="save-btn" type="success">保存</el-button>
   </section>
 </template>
 <script>

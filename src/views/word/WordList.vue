@@ -38,9 +38,7 @@
         <el-button type="primary" icon="el-icon-search" @click="getData">
           搜索
         </el-button>
-        <el-button type="primary" @click="addCouples">
-          添加情侣词
-        </el-button>
+        <el-button type="primary" @click="addCouples">添加情侣词</el-button>
       </div>
       <div class="right">
         <el-button type="primary" @click="outputDialogVisible = true">
