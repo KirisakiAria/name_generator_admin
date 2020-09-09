@@ -13,6 +13,7 @@ export default {
   deleteWord: `${prefix}/word/delete`,
   uploadWordList: `${prefix}/word/file`,
   couples: `${prefix}/word/couples`,
+  addToWordList: `${prefix}/word/couples/addToWordList`,
   deleteCouples: `${prefix}/word/couples/delete`,
   toggleshowable: `${prefix}/word/couples/toggleshowable`,
   wordOutput: `${prefix}/word/output`,

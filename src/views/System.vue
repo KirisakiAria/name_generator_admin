@@ -94,7 +94,7 @@
             min: 0,
             max: 64,
             inRange: {
-              colorLightness: [0.5, 1],
+              colorLightness: [0.3, 1],
             },
           },
           series: [

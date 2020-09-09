@@ -54,6 +54,8 @@
     },
     methods: {
       async save() {
+        this.form.words[0] = this.form.words[0].trim()
+        this.form.words[1] = this.form.words[1].trim()
         if (this.form.words[0].length < 1) {
           return this.$message({
             showClose: true,

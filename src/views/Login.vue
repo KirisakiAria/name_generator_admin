@@ -1,5 +1,5 @@
 <template>
-  <section class="login">
+  <section class="login" @keyup.enter="login">
     <section class="form">
       <h4>用户登录</h4>
       <el-form ref="form" label-width="65px" :model="formData" :rules="rules">

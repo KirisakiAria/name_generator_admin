@@ -137,6 +137,7 @@
       save() {
         this.$refs.form.validate(async valid => {
           if (valid) {
+            this.form.word = this.form.word.trim()
             if (this.selectedItem) {
               const res = await this.$put(
                 `${this.API.word}/${this.form._id}`,

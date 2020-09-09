@@ -38,6 +38,7 @@
         <el-button type="primary" icon="el-icon-search" @click="getData">
           搜索
         </el-button>
+        <el-button type="primary" @click="addToWordBatch">添加到词库</el-button>
       </div>
       <div class="right">
         <el-button type="primary" @click="outputDialogVisible = true">
@@ -63,6 +64,7 @@
     <el-table :data="tableData" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55"></el-table-column>
       <el-table-column prop="_id" label="ID"></el-table-column>
+      <el-table-column prop="type" label="类型"></el-table-column>
       <el-table-column label="展示">
         <template slot-scope="scope">
           {{ scope.row.showable | showable }}
@@ -76,6 +78,9 @@
       </el-table-column>
       <el-table-column fixed="right" label="操作">
         <template slot-scope="scope">
+          <el-button type="success" @click="addToWordSingle(scope.row)" circle>
+            <i class="iconfont icon-lexicon"></i>
+          </el-button>
           <el-button
             type="primary"
             @click="editItem(scope.row)"
@@ -166,6 +171,31 @@
       CouplesOutputFile,
     },
     methods: {
+      addToWordBatch() {
+        if (!this.checkedItems.length) {
+          return this.$message({
+            showClose: true,
+            message: '请至少选择一项',
+            type: 'error',
+          })
+        }
+        this.addToWordList(this.checkedItems)
+      },
+      addToWordSingle(id) {
+        this.addToWordList([id])
+      },
+      async addToWordList(items) {
+        const res = await this.$post(this.API.addToWordList, {
+          wordList: items,
+        })
+        if (res.data.code == '1000') {
+          this.$message({
+            showClose: true,
+            message: res.data.message,
+            type: 'success',
+          })
+        }
+      },
       add() {
         this.selectedItem = null
         this.editDialogVisible = true
@@ -262,5 +292,8 @@
         margin-right: 20px;
       }
     }
+  }
+  .icon-lexicon {
+    font-size: 14px;
   }
 </style>
