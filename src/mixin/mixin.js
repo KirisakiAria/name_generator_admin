@@ -27,6 +27,11 @@ const mixin = {
       }
     },
   },
+  computed: {
+    url() {
+      return process.env.VUE_APP_BASE_API
+    },
+  },
   methods: {
     time(value) {
       const dateObj = new Date(value)

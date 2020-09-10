@@ -102,11 +102,6 @@
     components: {
       EditUser,
     },
-    computed: {
-      url() {
-        return process.env.VUE_APP_BASE_API
-      },
-    },
     methods: {
       add() {
         this.selectedItem = null

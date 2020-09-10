@@ -102,11 +102,6 @@
         default: null,
       },
     },
-    computed: {
-      url() {
-        return process.env.VUE_APP_BASE_API
-      },
-    },
     methods: {
       beforeUpload(file) {
         if (!file.type.includes('image')) {

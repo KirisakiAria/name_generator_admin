@@ -66,11 +66,6 @@
         },
       },
     },
-    computed: {
-      url() {
-        return process.env.VUE_APP_BASE_API
-      },
-    },
     methods: {
       close() {
         this.$emit('close')

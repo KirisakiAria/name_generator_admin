@@ -27,17 +27,16 @@
 </template>
 <script>
   import { mapState } from 'vuex'
+  import mixin from '@/mixin/mixin'
   export default {
     name: 'HeaderBar',
+    mixins: [mixin],
     data() {
       return {}
     },
     computed: {
       currentRouteName() {
         return this.$route.meta.title
-      },
-      url() {
-        return process.env.VUE_APP_BASE_API
       },
       ...mapState({
         avatar: state => state.user.avatar,

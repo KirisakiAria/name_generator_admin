@@ -103,11 +103,6 @@
         },
       },
     },
-    computed: {
-      url() {
-        return process.env.VUE_APP_BASE_API
-      },
-    },
     methods: {
       beforeUpload(file) {
         if (file.type !== 'text/plain') {
@@ -123,6 +118,7 @@
           const res = await this.$post(this.API.uploadWordList, {
             type: this.form.type,
             path: uploadRes.data.path,
+            showable: this.form.showable,
           })
           if (res.data.code == '1000') {
             this.$message({
