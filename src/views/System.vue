@@ -50,7 +50,7 @@
   </section>
 </template>
 <script>
-  import echarts from 'echarts'
+  const echarts = require('echarts')
   import mixin from '@/mixin/mixin'
   export default {
     name: 'System',
