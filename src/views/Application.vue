@@ -1,6 +1,6 @@
 <template>
   <section class="edit-page">
-    <el-form ref="form" :model="form" :rules="rules" label-width="100px">
+    <el-form ref="form" :model="form" :rules="rules" label-width="130px">
       <el-form-item label="密钥" prop="secret">
         <el-input v-model="form.secret"></el-input>
       </el-form-item>
@@ -15,6 +15,9 @@
       </el-form-item>
       <el-form-item label="APP版本" prop="version">
         <el-input v-model="form.version"></el-input>
+      </el-form-item>
+      <el-form-item label="APP下载链接" prop="downloadLink">
+        <el-input v-model="form.downloadLink"></el-input>
       </el-form-item>
       <el-button class="save" type="primary" @click="save">保存</el-button>
     </el-form>
@@ -34,6 +37,7 @@
           packageName: '',
           buildNumber: '',
           apiVersion: '',
+          downloadLink: '',
         },
         rules: {
           secret: [
@@ -64,6 +68,12 @@
             {
               required: true,
               message: '请填写APP版本',
+            },
+          ],
+          downloadLink: [
+            {
+              required: true,
+              message: '请填写APP下载链接',
             },
           ],
         },
