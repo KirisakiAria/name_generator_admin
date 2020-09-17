@@ -29,7 +29,14 @@ const mixin = {
   },
   computed: {
     url() {
-      return process.env.VUE_APP_BASE_API
+      if (process.env.NODE_ENV == 'development') {
+        return process.env.VUE_APP_BASE_API
+      } else {
+        return location.origin
+      }
+    },
+    serverUrl() {
+      return 'https://api.bianzizai.com'
     },
   },
   methods: {

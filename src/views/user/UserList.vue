@@ -17,7 +17,7 @@
     <el-table :data="tableData">
       <el-table-column prop="avatare" label="头像" width="80">
         <template slot-scope="scope">
-          <img :src="`${url}${scope.row.avatar}`" />
+          <img :src="serverUrl + scope.row.avatar" />
         </template>
       </el-table-column>
       <el-table-column prop="_id" label="ID" width="220"></el-table-column>

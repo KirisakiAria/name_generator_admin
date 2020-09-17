@@ -10,7 +10,11 @@
           :on-success="uploadSuccess"
           :before-upload="beforeUpload"
         >
-          <img v-if="form.avatar" :src="url + form.avatar" class="avatar" />
+          <img
+            v-if="form.avatar"
+            :src="serverUrl + form.avatar"
+            class="avatar"
+          />
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
       </el-form-item>

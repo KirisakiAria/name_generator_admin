@@ -20,7 +20,7 @@
         注销
       </el-button>
       <div class="avatar" slot="reference">
-        <img :src="url + avatar" />
+        <img :src="serverUrl + avatar" />
       </div>
     </el-popover>
   </header>
