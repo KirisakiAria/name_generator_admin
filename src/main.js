@@ -5,6 +5,7 @@ import store from './store'
 //公共组件
 import SideBar from './components/SideBar.vue'
 import HeaderBar from './components/HeaderBar.vue'
+import FooterBar from './components/FooterBar.vue'
 //axios配置
 import './request/requestConfig'
 //elui
@@ -18,6 +19,7 @@ Vue.use(ElementUI)
 
 Vue.component('SideBar', SideBar)
 Vue.component('HeaderBar', HeaderBar)
+Vue.component('FooterBar', FooterBar)
 
 Vue.config.productionTip = false
 

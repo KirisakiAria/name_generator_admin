@@ -17,6 +17,7 @@
         </el-form-item>
       </el-form>
     </section>
+    <footer-bar white="true" />
   </section>
 </template>
 <script>
