@@ -94,7 +94,7 @@
             min: 0,
             max: 64,
             inRange: {
-              colorLightness: [0.3, 1],
+              colorLightness: [0.3, 0.7],
             },
           },
           series: [
@@ -155,7 +155,7 @@
             min: 0,
             max: 100,
             inRange: {
-              colorLightness: [0.5, 1],
+              colorLightness: [0.3, 0.7],
             },
           },
           series: [
@@ -216,7 +216,7 @@
             min: 0,
             max: this.disk.total / 1073741824,
             inRange: {
-              colorLightness: [0.5, 1],
+              colorLightness: [0.3, 0.7],
             },
           },
           series: [
