@@ -94,7 +94,7 @@
             min: 0,
             max: 64,
             inRange: {
-              colorLightness: [0.3, 0.7],
+              colorLightness: [0.4, 0.8],
             },
           },
           series: [
@@ -128,7 +128,7 @@
                 length2: 20,
               },
               itemStyle: {
-                color: '#ff6b81',
+                color: '#fab1a0',
               },
               animationType: 'scale',
               animationEasing: 'elasticOut',
@@ -155,7 +155,7 @@
             min: 0,
             max: 100,
             inRange: {
-              colorLightness: [0.3, 0.7],
+              colorLightness: [0.4, 0.8],
             },
           },
           series: [
@@ -189,7 +189,7 @@
                 length2: 20,
               },
               itemStyle: {
-                color: '#5352ed',
+                color: '#74b9ff',
               },
               animationType: 'scale',
               animationEasing: 'elasticOut',
@@ -216,7 +216,7 @@
             min: 0,
             max: this.disk.total / 1073741824,
             inRange: {
-              colorLightness: [0.3, 0.7],
+              colorLightness: [0.4, 0.8],
             },
           },
           series: [
@@ -253,7 +253,7 @@
                 length2: 20,
               },
               itemStyle: {
-                color: '#ffa502',
+                color: '#fdcb6e',
               },
               animationType: 'scale',
               animationEasing: 'elasticOut',

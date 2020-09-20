@@ -1,6 +1,21 @@
 <template>
-  <section class="edit-page">
-    <el-form ref="form" :model="form" :rules="rules" label-width="130px">
+  <section class="edit-page application">
+    <h3>下载信息</h3>
+    <el-row>
+      <el-col :span="24">
+        <span>下载次数：{{ form.downloadTimes }}</span>
+        <el-button
+          class="refresh"
+          type="success"
+          title="刷新"
+          circle
+          icon="el-icon-refresh"
+          @click="getData"
+        ></el-button>
+      </el-col>
+    </el-row>
+    <h3>编辑信息</h3>
+    <el-form ref="form" :model="form" :rules="rules" label-width="106px">
       <el-form-item label="密钥" prop="secret">
         <el-input v-model="form.secret"></el-input>
       </el-form-item>
@@ -38,6 +53,7 @@
           buildNumber: '',
           apiVersion: '',
           downloadLink: '',
+          downloadTimes: 0,
         },
         rules: {
           secret: [
@@ -112,3 +128,20 @@
     },
   }
 </script>
+
+<style lang="less">
+  .application {
+    h3 {
+      margin: 25px 0;
+      font-weight: bold;
+    }
+    .refresh.el-button.is-circle {
+      margin-left: 20px;
+      height: 34px;
+      width: 34px;
+      i {
+        font-size: 16px;
+      }
+    }
+  }
+</style>
