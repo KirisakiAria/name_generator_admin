@@ -20,6 +20,15 @@
           <Editor v-model="form.usage" :apiKey="apiKey" :init="editorOptions" />
         </section>
       </el-tab-pane>
+      <el-tab-pane label="更新日志" name="update">
+        <section class="editor-wrapper">
+          <Editor
+            v-model="form.update"
+            :apiKey="apiKey"
+            :init="editorOptions"
+          />
+        </section>
+      </el-tab-pane>
     </el-tabs>
     <el-button @click="save" class="save-btn" type="success">保存</el-button>
   </section>
@@ -38,6 +47,7 @@
           privacyPolicy: '',
           terms: '',
           usage: '',
+          update: '',
         },
         activeName: 'privacyPolicy',
         editorOptions: {
