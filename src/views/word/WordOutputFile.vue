@@ -73,7 +73,7 @@
       createAHtml(name, href) {
         var a = document.createElement('a')
         a.download = name
-        a.href = this.url + href
+        a.href = this.serverUrl + href
         document.body.appendChild(a)
         a.click()
         a.remove()
