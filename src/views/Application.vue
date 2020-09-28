@@ -34,7 +34,9 @@
       <el-form-item label="APP下载链接" prop="downloadLink">
         <el-input v-model="form.downloadLink"></el-input>
       </el-form-item>
-      <el-button class="save" type="primary" @click="save">保存</el-button>
+      <el-form-item>
+        <el-button class="save" type="primary" @click="save">保存</el-button>
+      </el-form-item>
     </el-form>
   </section>
 </template>

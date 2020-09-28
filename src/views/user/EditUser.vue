@@ -39,7 +39,9 @@
       <el-form-item label="VIP过期时间">
         <el-input v-model="form.vip_expiry"></el-input>
       </el-form-item>
-      <el-button class="save" type="primary" @click="save">保存</el-button>
+      <el-form-item>
+        <el-button class="save" type="primary" @click="save">保存</el-button>
+      </el-form-item>
     </el-form>
   </section>
 </template>

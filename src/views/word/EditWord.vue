@@ -18,7 +18,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="词语" prop="word">
-        <el-input v-model="form.word"></el-input>
+        <el-input v-model="form.word" type="textarea"></el-input>
       </el-form-item>
       <el-form-item label="分类" prop="classify">
         <el-select v-model="form.classify">
@@ -47,7 +47,9 @@
           <div class="el-upload__tip" slot="tip">只能上传txt文件</div>
         </el-upload>
       </el-form-item>
-      <el-button class="save" type="primary" @click="save">保存</el-button>
+      <el-form-item>
+        <el-button class="save" type="primary" @click="save">保存</el-button>
+      </el-form-item>
     </el-form>
   </section>
 </template>
