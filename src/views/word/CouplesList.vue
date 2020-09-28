@@ -9,7 +9,7 @@
         <el-select
           v-model="form.type"
           placeholder="请选择类型"
-          @change="getData"
+          @change="getData(true)"
         >
           <el-option label="中国风" value="中国风"></el-option>
           <el-option label="日语" value="日语"></el-option>
@@ -17,7 +17,7 @@
         <el-select
           v-model="form.showable"
           placeholder="是否展示"
-          @change="getData"
+          @change="getData(true)"
         >
           <el-option label="全部" value="all"></el-option>
           <el-option label="是" :value="true"></el-option>
@@ -26,7 +26,7 @@
         <el-select
           v-model="form.length"
           placeholder="请选择字数"
-          @change="getData"
+          @change="getData(true)"
         >
           <el-option
             :label="item"
@@ -35,7 +35,7 @@
             :key="index"
           ></el-option>
         </el-select>
-        <el-button type="primary" icon="el-icon-search" @click="getData">
+        <el-button type="primary" icon="el-icon-search" @click="getData(true)">
           搜索
         </el-button>
         <el-button type="primary" @click="addToWordBatch">添加到词库</el-button>
@@ -230,7 +230,10 @@
           this.getData()
         }
       },
-      async getData() {
+      async getData(search = false) {
+        if (search === true) {
+          this.currentPage = 1
+        }
         const res = await this.$get(this.API.couples, {
           params: {
             type: this.form.type,

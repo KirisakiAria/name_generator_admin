@@ -9,13 +9,13 @@
         <el-select
           v-model="form.system"
           placeholder="请选择系统"
-          @change="getData"
+          @change="getData(true)"
         >
           <el-option label="全部" value="all"></el-option>
           <el-option label="android" value="android"></el-option>
           <el-option label="ios" value="ios"></el-option>
         </el-select>
-        <el-button type="primary" icon="el-icon-search" @click="getData">
+        <el-button type="primary" icon="el-icon-search" @click="getData(true)">
           搜索
         </el-button>
       </div>
@@ -141,7 +141,10 @@
           this.getData()
         }
       },
-      async getData() {
+      async getData(search = false) {
+        if (search === true) {
+          this.currentPage = 1
+        }
         const res = await this.$get(this.API.error, {
           params: {
             system: this.form.system,
