@@ -41,7 +41,7 @@
       <el-table-column prop="email" label="联系邮箱"></el-table-column>
       <el-table-column prop="date" label="反馈时间">
         <template slot-scope="scope">
-          {{ time(scope.row.time) }}
+          {{ time(scope.row.date) }}
         </template>
       </el-table-column>
       <el-table-column fixed="right" label="操作">
