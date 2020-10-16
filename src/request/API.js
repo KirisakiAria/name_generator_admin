@@ -24,4 +24,6 @@ export default {
   feedback: `${prefix}/service/feedback`,
   error: `${prefix}/information/error`,
   classify: `${prefix}/dictionary/classify`,
+  inspiration: `${prefix}/inspiration`,
+  deleteInspiration: `${prefix}/inspiration/delete`,
 }

@@ -6,7 +6,7 @@
     </el-row>
     <el-row>
       <el-col :span="12">邮箱：{{ item.email }}</el-col>
-      <el-col :span="12">反馈时间：{{ time(item.time) }}</el-col>
+      <el-col :span="12">反馈时间：{{ time(item.date) }}</el-col>
     </el-row>
     <el-row>
       <el-col :span="24">反馈信息：{{ item.content }}</el-col>
