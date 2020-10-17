@@ -1,22 +1,22 @@
 <template>
   <section class="edit-page">
-    <el-form ref="form" :model="form" :rules="rules" label-width="120px">
-      <el-form-item label="中国风标题">
+    <el-form ref="form" :model="form" :rules="rules" label-width="100px">
+      <el-form-item label="中国风标题" prop="chinese.title">
         <el-input v-model="form.chinese.title"></el-input>
       </el-form-item>
-      <el-form-item label="中国风作者">
-        <el-input type="textarea" v-model="form.chinese.author"></el-input>
+      <el-form-item label="中国风作者" prop="chinese.author">
+        <el-input v-model="form.chinese.author"></el-input>
       </el-form-item>
-      <el-form-item label="中国风内容">
+      <el-form-item label="中国风内容" prop="chinese.content">
         <el-input type="textarea" v-model="form.chinese.content"></el-input>
       </el-form-item>
-      <el-form-item label="日式标题">
+      <el-form-item label="日式标题" prop="japanese.title">
         <el-input v-model="form.japanese.title"></el-input>
       </el-form-item>
-      <el-form-item label="日式作者">
-        <el-input type="textarea" v-model="form.japanese.author"></el-input>
+      <el-form-item label="日式作者" prop="japanese.author">
+        <el-input v-model="form.japanese.author"></el-input>
       </el-form-item>
-      <el-form-item label="日式内容">
+      <el-form-item label="日式内容" prop="japanese.content">
         <el-input type="textarea" v-model="form.japanese.content"></el-input>
       </el-form-item>
       <el-form-item>
@@ -43,10 +43,40 @@
           },
         },
         rules: {
-          content: [
+          'chinese.title': [
             {
               required: true,
-              message: '请填写内容',
+              message: '请填写中文标题',
+            },
+          ],
+          'chinese.author': [
+            {
+              required: true,
+              message: '请填写中文作者',
+            },
+          ],
+          'chinese.content': [
+            {
+              required: true,
+              message: '请填写中文内容',
+            },
+          ],
+          'japanese.title': [
+            {
+              required: true,
+              message: '请填写日文标题',
+            },
+          ],
+          'japanese.author': [
+            {
+              required: true,
+              message: '请填写日文作者',
+            },
+          ],
+          'japanese.content': [
+            {
+              required: true,
+              message: '请填写日文内容',
             },
           ],
         },
