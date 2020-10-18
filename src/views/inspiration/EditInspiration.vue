@@ -106,10 +106,7 @@
                 this.$emit('close')
               }
             } else {
-              const res = await this.$post(
-                this.API.inspiration,
-                Object.assign(this.form, { date: new Date() }),
-              )
+              const res = await this.$post(this.API.inspiration, this.form)
               if (res.data.code == '1000') {
                 this.$message({
                   showClose: true,
