@@ -249,8 +249,3 @@
     },
   }
 </script>
-<style lang="less" scoped>
-  .user-list {
-    display: flex;
-  }
-</style>

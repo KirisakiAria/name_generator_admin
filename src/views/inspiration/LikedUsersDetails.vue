@@ -30,6 +30,11 @@
     }
     ul {
       display: flex;
+      flex-wrap: wrap;
+
+      li {
+        margin: 10px 0;
+      }
     }
   }
 </style>
