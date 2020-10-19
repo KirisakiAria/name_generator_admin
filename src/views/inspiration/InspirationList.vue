@@ -46,10 +46,18 @@
       <el-table-column fixed="right" label="操作">
         <template slot-scope="scope">
           <el-button
+            type="success"
+            @click="checkItem(scope.row)"
+            icon="el-icon-user"
+            circle
+            title="查看点赞用户"
+          ></el-button>
+          <el-button
             type="primary"
             @click="editItem(scope.row)"
             icon="el-icon-edit"
             circle
+            title="编辑"
           ></el-button>
           <el-popconfirm
             class="pop-confirm"
@@ -64,6 +72,7 @@
               type="danger"
               icon="el-icon-delete"
               circle
+              title="删除"
               slot="reference"
             ></el-button>
           </el-popconfirm>
@@ -93,11 +102,21 @@
         @close="closeEditDialog"
       />
     </el-dialog>
+    <el-dialog
+      title="点赞用户"
+      v-if="likedUserDialogVisible"
+      :visible.sync="likedUserDialogVisible"
+      :close-on-click-modal="false"
+      width="60%"
+    >
+      <LikedUsersDetails :likedUsers="likedUsers" />
+    </el-dialog>
   </section>
 </template>
 <script>
   import mixin from '@/mixin/mixin'
   import EditInspiration from './EditInspiration'
+  import LikedUsersDetails from './LikedUsersDetails'
   export default {
     name: 'InspirationList',
     mixins: [mixin],
@@ -116,10 +135,13 @@
         currentPage: 1,
         total: 0,
         tableData: [],
+        likedUserDialogVisible: false,
+        likedUsers: [],
       }
     },
     components: {
       EditInspiration,
+      LikedUsersDetails,
     },
     computed: {
       pickerOptions() {
@@ -210,6 +232,10 @@
           this.total = res.data.data.total
         }
       },
+      checkItem(item) {
+        this.likedUsers = item.likedUsers
+        this.likedUserDialogVisible = true
+      },
       closeEditDialog() {
         this.editDialogVisible = false
         this.getData()
@@ -223,3 +249,8 @@
     },
   }
 </script>
+<style lang="less" scoped>
+  .user-list {
+    display: flex;
+  }
+</style>

@@ -78,7 +78,12 @@
       </el-table-column>
       <el-table-column fixed="right" label="操作">
         <template slot-scope="scope">
-          <el-button type="success" @click="addToWordSingle(scope.row)" circle>
+          <el-button
+            type="success"
+            @click="addToWordSingle(scope.row)"
+            circle
+            title="添加到词语列表"
+          >
             <i class="iconfont icon-lexicon"></i>
           </el-button>
           <el-button
@@ -86,6 +91,7 @@
             @click="editItem(scope.row)"
             icon="el-icon-edit"
             circle
+            title="编辑"
           ></el-button>
           <el-popconfirm
             class="pop-confirm"
@@ -100,6 +106,7 @@
               type="danger"
               icon="el-icon-delete"
               circle
+              title="删除"
               slot="reference"
             ></el-button>
           </el-popconfirm>

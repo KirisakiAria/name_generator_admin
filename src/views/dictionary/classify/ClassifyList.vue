@@ -40,6 +40,7 @@
             @click="editItem(scope.row)"
             icon="el-icon-edit"
             circle
+            title="编辑"
           ></el-button>
           <el-popconfirm
             class="pop-confirm"
@@ -54,6 +55,7 @@
               type="danger"
               icon="el-icon-delete"
               circle
+              title="删除"
               slot="reference"
             ></el-button>
           </el-popconfirm>
