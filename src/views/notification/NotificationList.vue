@@ -32,26 +32,26 @@
         >
           <el-button type="danger" slot="reference">批量删除</el-button>
         </el-popconfirm>
+        <el-button type="success" @click="add">新增</el-button>
       </div>
     </section>
-    <el-table :data="tableData" @selection-change="handleSelectionChange">
+    <el-table
+      ref="datatable"
+      :data="tableData"
+      @selection-change="handleSelectionChange"
+    >
       <el-table-column type="selection" width="55"></el-table-column>
-      <el-table-column prop="tel" label="手机号"></el-table-column>
-      <el-table-column prop="username" label="用户名"></el-table-column>
-      <el-table-column prop="email" label="联系邮箱"></el-table-column>
-      <el-table-column prop="date" label="反馈时间">
-        <template slot-scope="scope">
-          {{ time(scope.row.date) }}
-        </template>
-      </el-table-column>
+      <el-table-column prop="title" label="标题"></el-table-column>
+      <el-table-column prop="content" label="内容"></el-table-column>
+      <el-table-column prop="date" label="时间"></el-table-column>
       <el-table-column fixed="right" label="操作">
         <template slot-scope="scope">
           <el-button
             type="primary"
-            @click="checkItem(scope.row)"
-            icon="el-icon-document"
+            @click="editItem(scope.row)"
+            icon="el-icon-edit"
             circle
-            title="查看详情"
+            title="编辑"
           ></el-button>
           <el-popconfirm
             class="pop-confirm"
@@ -84,30 +84,35 @@
       ></el-pagination>
     </section>
     <el-dialog
-      title="详情"
-      v-if="dialogVisible"
-      :visible.sync="dialogVisible"
+      title="编辑"
+      v-if="editDialogVisible"
+      :visible.sync="editDialogVisible"
       :close-on-click-modal="false"
       width="60%"
     >
-      <FeedbackDetails :item="selectedItem" />
+      <EditNotification
+        :item="selectedItem"
+        @success="getData"
+        @close="closeEditDialog"
+      />
     </el-dialog>
   </section>
 </template>
 <script>
-  import FeedbackDetails from './FeedbackDetails'
   import mixin from '@/mixin/mixin'
+  import EditNotification from './EditNotification'
   export default {
-    name: 'FeedbackList',
+    name: 'NotificationList',
     mixins: [mixin],
     data() {
       return {
-        dialogVisible: false,
+        outputDialogVisible: false,
+        editDialogVisible: false,
         selectedItem: null,
         checkedItems: [],
         form: {
-          date: '',
           searchContent: '',
+          date: '',
         },
         pageSize: 15,
         currentPage: 1,
@@ -115,7 +120,9 @@
         tableData: [],
       }
     },
-    components: { FeedbackDetails },
+    components: {
+      EditNotification,
+    },
     computed: {
       pickerOptions() {
         return {
@@ -152,9 +159,13 @@
       },
     },
     methods: {
-      checkItem(item) {
-        this.dialogVisible = true
+      add() {
+        this.selectedItem = null
+        this.editDialogVisible = true
+      },
+      editItem(item) {
         this.selectedItem = item
+        this.editDialogVisible = true
       },
       deleteBatch() {
         if (!this.checkedItems.length) {
@@ -169,9 +180,9 @@
       deleteSingle(id) {
         this.deleteItems([id])
       },
-      async deleteItems(ids) {
-        const res = await this.$post(`${this.API.feedback}/delete`, {
-          ids,
+      async deleteItems(items) {
+        const res = await this.$post(this.API.deleteNotification, {
+          items,
           type: this.form.type,
         })
         if (res.data.code == '1000') {
@@ -187,7 +198,7 @@
         if (search === true) {
           this.currentPage = 1
         }
-        const res = await this.$get(this.API.feedback, {
+        const res = await this.$get(this.API.notification, {
           params: {
             startTime: this.form.date[0],
             endTime: this.form.date[1],
@@ -201,8 +212,9 @@
           this.total = res.data.data.total
         }
       },
-      closeDialog() {
-        this.dialogVisible = false
+      closeEditDialog() {
+        this.editDialogVisible = false
+        this.getData()
       },
       handleSelectionChange(val) {
         this.checkedItems = val

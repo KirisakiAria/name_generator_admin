@@ -26,4 +26,6 @@ export default {
   classify: `${prefix}/dictionary/classify`,
   inspiration: `${prefix}/inspiration`,
   deleteInspiration: `${prefix}/inspiration/delete`,
+  notification: `${prefix}/notification`,
+  deleteNotification: `${prefix}/notification/delete`,
 }

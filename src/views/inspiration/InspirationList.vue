@@ -126,7 +126,6 @@
         editDialogVisible: false,
         selectedItem: null,
         checkedItems: [],
-        classifyList: [],
         form: {
           searchContent: '',
           date: '',

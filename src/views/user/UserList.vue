@@ -4,7 +4,7 @@
       <div class="form">
         <el-input
           v-model="form.searchContent"
-          placeholder="请输入要搜索的手机号"
+          placeholder="请输入搜索内容"
         ></el-input>
         <el-button type="primary" icon="el-icon-search" @click="getData(true)">
           搜索

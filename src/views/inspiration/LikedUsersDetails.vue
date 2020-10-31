@@ -28,7 +28,9 @@
     .el-row {
       display: flex;
       span {
-        display: inline-block;
+        display: block;
+        flex-shrink: 0;
+        flex-grow: 0;
         padding-top: 10px;
       }
     }
