@@ -19,6 +19,9 @@
       <el-form-item label="日式内容" prop="japanese.content">
         <el-input type="textarea" v-model="form.japanese.content"></el-input>
       </el-form-item>
+      <el-form-item label="点赞人员">
+        <el-input type="textarea" v-model="rawLikedUsers"></el-input>
+      </el-form-item>
       <el-form-item>
         <el-button class="save" type="primary" @click="save">保存</el-button>
       </el-form-item>
@@ -42,6 +45,7 @@
             content: '',
           },
         },
+        rawLikedUsers: '',
         rules: {
           'chinese.title': [
             {
@@ -88,14 +92,20 @@
         default: null,
       },
     },
+    computed: {
+      likedUsers() {
+        return this.rawLikedUsers.split(',')
+      },
+    },
     methods: {
       save() {
         this.$refs.form.validate(async valid => {
           if (valid) {
             if (this.item) {
+              this.form.likedUsers = this.likedUsers
               const res = await this.$put(
                 `${this.API.inspiration}/${this.item._id}`,
-                this.form,
+                Object.assign(this.form),
               )
               if (res.data.code == '1000') {
                 this.$message({
@@ -106,7 +116,10 @@
                 this.$emit('close')
               }
             } else {
-              const res = await this.$post(this.API.inspiration, this.form)
+              const res = await this.$post(
+                this.API.inspiration,
+                Object.assign(this.form, { likedUsers: this.likedUsers }),
+              )
               if (res.data.code == '1000') {
                 this.$message({
                   showClose: true,
@@ -125,6 +138,7 @@
     created() {
       if (this.item) {
         this.form = this.item
+        this.rawLikedUsers = this.form.likedUsers.join()
       }
     },
   }

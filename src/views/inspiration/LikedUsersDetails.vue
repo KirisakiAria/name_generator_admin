@@ -27,6 +27,10 @@
   .liked-users {
     .el-row {
       display: flex;
+      span {
+        display: inline-block;
+        padding-top: 10px;
+      }
     }
     ul {
       display: flex;
