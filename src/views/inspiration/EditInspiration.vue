@@ -19,6 +19,15 @@
       <el-form-item label="日式内容" prop="japanese.content">
         <el-input type="textarea" v-model="form.japanese.content"></el-input>
       </el-form-item>
+      <el-form-item label="标题翻译" prop="japanese.titleTranslation">
+        <el-input v-model="form.japanese.titleTranslation"></el-input>
+      </el-form-item>
+      <el-form-item label="内容翻译" prop="japanese.contentTranslation">
+        <el-input
+          type="textarea"
+          v-model="form.japanese.contentTranslation"
+        ></el-input>
+      </el-form-item>
       <el-form-item label="点赞人员">
         <el-input type="textarea" v-model="rawLikedUsers"></el-input>
       </el-form-item>
@@ -43,6 +52,8 @@
           japanese: {
             title: '',
             content: '',
+            titleTranslation: '',
+            contentTranslation: '',
           },
         },
         rawLikedUsers: '',
@@ -81,6 +92,18 @@
             {
               required: true,
               message: '请填写日文内容',
+            },
+          ],
+          'japanese.titleTranslation': [
+            {
+              required: true,
+              message: '请填写日文标题翻译',
+            },
+          ],
+          'japanese.contentTranslation': [
+            {
+              required: true,
+              message: '请填写日文内容翻译',
             },
           ],
         },

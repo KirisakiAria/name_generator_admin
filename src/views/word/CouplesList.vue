@@ -84,7 +84,7 @@
             circle
             title="添加到词语列表"
           >
-            <i class="iconfont icon-lexicon"></i>
+            <i class="iconfont icon-word-dictionary"></i>
           </el-button>
           <el-button
             type="primary"
@@ -303,7 +303,7 @@
       }
     }
   }
-  .icon-lexicon {
+  .icon-word-dictionary {
     font-size: 14px;
   }
 </style>

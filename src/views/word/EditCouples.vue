@@ -75,6 +75,11 @@
     methods: {
       beforeUpload(file) {
         if (file.type !== 'text/plain') {
+          this.$message({
+            showClose: true,
+            message: '只能上传txt文件',
+            type: 'error',
+          })
           return false
         }
         this.$refs.form.validateField('type')

@@ -41,11 +41,21 @@ const routes = [
         },
       },
       {
+        path: '/word_dictionary',
+        component: () => import('@/views/word_dictionary/WordDictionaryList'),
+        name: 'WordDictionary',
+        meta: {
+          id: 4,
+          title: '词典管理',
+          icon: 'word-dictionary',
+        },
+      },
+      {
         path: '/inspiration',
         component: () => import('@/views/inspiration/InspirationList'),
         name: 'InspirationList',
         meta: {
-          id: 4,
+          id: 5,
           title: '灵感管理',
           icon: 'inspiration',
         },
@@ -55,7 +65,7 @@ const routes = [
         component: () => import('@/views/user/UserList'),
         name: 'UserList',
         meta: {
-          id: 5,
+          id: 6,
           title: '用户管理',
           icon: 'user',
         },
@@ -65,7 +75,7 @@ const routes = [
         component: () => import('@/views/notification/NotificationList'),
         name: 'Notification',
         meta: {
-          id: 6,
+          id: 7,
           title: '通知信息',
           icon: 'notification',
         },
@@ -75,7 +85,7 @@ const routes = [
         component: () => import('@/views/Application'),
         name: 'Application',
         meta: {
-          id: 7,
+          id: 8,
           title: 'APP信息',
           icon: 'app',
         },
@@ -85,7 +95,7 @@ const routes = [
         component: () => import('@/views/Service'),
         name: 'Service',
         meta: {
-          id: 8,
+          id: 9,
           title: '服务信息',
           icon: 'service',
         },
@@ -95,7 +105,7 @@ const routes = [
         component: () => import('@/views/error/ErrorList'),
         name: 'Error',
         meta: {
-          id: 9,
+          id: 10,
           title: '报错管理',
           icon: 'error',
         },
@@ -105,19 +115,19 @@ const routes = [
         component: () => import('@/views/feedback/FeedbackList'),
         name: 'Feedback',
         meta: {
-          id: 10,
+          id: 11,
           title: '反馈管理',
           icon: 'feedback',
         },
       },
       {
         path: '/dictionary',
-        component: () => import('@/views/dictionary/Dictionary'),
+        component: () => import('@/views/data_dictionary/DataDictionary'),
         name: 'Dictionary',
         meta: {
-          id: 11,
+          id: 12,
           title: '数据字典',
-          icon: 'dictionary',
+          icon: 'data-dictionary',
         },
       },
     ],
