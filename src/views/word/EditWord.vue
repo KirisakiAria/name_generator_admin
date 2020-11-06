@@ -30,7 +30,7 @@
           ></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="导入" v-if="!this.form._id">
+      <el-form-item label="导入" v-if="!this.selectedItem">
         <el-upload
           drag
           :headers="API.headers"

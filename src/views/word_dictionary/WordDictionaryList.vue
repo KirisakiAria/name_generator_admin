@@ -31,8 +31,9 @@
       @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" width="55"></el-table-column>
-      <el-table-column prop="word" label="词语"></el-table-column>
-      <el-table-column prop="length" label="字数"></el-table-column>
+      <el-table-column prop="word" label="词语" width="200"></el-table-column>
+      <el-table-column prop="length" label="字数" width="200"></el-table-column>
+      <el-table-column prop="explanation" label="解释"></el-table-column>
       <el-table-column fixed="right" label="操作">
         <template slot-scope="scope">
           <el-button
@@ -80,7 +81,7 @@
       width="60%"
     >
       <EditWordDictionary
-        :item="selectedItem"
+        :selectedItem="selectedItem"
         @success="getData"
         @close="closeEditDialog"
       />
@@ -118,6 +119,7 @@
         this.editDialogVisible = true
       },
       editItem(item) {
+        console.log(item)
         this.selectedItem = item
         this.editDialogVisible = true
       },

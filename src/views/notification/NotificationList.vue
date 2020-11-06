@@ -91,7 +91,7 @@
       width="60%"
     >
       <EditNotification
-        :item="selectedItem"
+        :selectedItem="selectedItem"
         @success="getData"
         @close="closeEditDialog"
       />

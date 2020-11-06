@@ -20,7 +20,7 @@
   export default {
     name: 'ErrorDetails',
     props: {
-      item: {
+      selectedItem: {
         type: Object,
       },
     },

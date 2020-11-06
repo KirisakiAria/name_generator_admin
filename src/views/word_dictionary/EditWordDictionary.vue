@@ -14,7 +14,7 @@
         <el-input v-model="form.explanation" type="textarea"></el-input>
       </el-form-item>
       <el-form-item label="部首">
-        <el-input v-model="form.radicals" type="textarea"></el-input>
+        <el-input v-model="form.radicals"></el-input>
       </el-form-item>
       <el-form-item label="笔划">
         <el-input v-model="form.strokes"></el-input>
@@ -22,7 +22,7 @@
       <el-form-item label="更多">
         <el-input v-model="form.more" type="textarea"></el-input>
       </el-form-item>
-      <el-form-item label="导入" v-if="!this.form._id">
+      <el-form-item label="导入" v-if="!this.selectedItem">
         <el-upload
           drag
           :headers="API.headers"
@@ -147,9 +147,7 @@
     },
     created() {
       if (this.selectedItem) {
-        this.form = Object.assign(this.selectedItem, {
-          type: this.type,
-        })
+        this.form = this.selectedItem
       }
     },
   }

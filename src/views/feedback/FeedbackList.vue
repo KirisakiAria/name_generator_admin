@@ -90,7 +90,7 @@
       :close-on-click-modal="false"
       width="60%"
     >
-      <FeedbackDetails :item="selectedItem" />
+      <FeedbackDetails :selectedItem="selectedItem" />
     </el-dialog>
   </section>
 </template>

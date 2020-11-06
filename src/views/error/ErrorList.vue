@@ -86,7 +86,7 @@
       :close-on-click-modal="false"
       width="60%"
     >
-      <ErrorDetails :item="selectedItem" />
+      <ErrorDetails :selectedItem="selectedItem" />
     </el-dialog>
   </section>
 </template>

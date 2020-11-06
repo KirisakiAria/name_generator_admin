@@ -97,7 +97,7 @@
       width="60%"
     >
       <EditInspiration
-        :item="selectedItem"
+        :selectedItem="selectedItem"
         @success="getData"
         @close="closeEditDialog"
       />

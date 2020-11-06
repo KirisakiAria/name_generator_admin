@@ -103,7 +103,7 @@
       }
     },
     props: {
-      item: {
+      selectedItem: {
         type: Object,
         default: null,
       },

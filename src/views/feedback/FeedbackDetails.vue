@@ -19,7 +19,7 @@
     name: 'FeedbackDetails',
     mixins: [mixin],
     props: {
-      item: {
+      selectedItem: {
         type: Object,
       },
     },
