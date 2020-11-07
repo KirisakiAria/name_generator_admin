@@ -2,9 +2,10 @@
   <section class="table-page">
     <section class="top-area">
       <div class="form">
+        <el-input v-model="form.word" placeholder="请输入搜索词"></el-input>
         <el-input
-          v-model="form.searchContent"
-          placeholder="请输入搜索内容"
+          v-model="form.explanation"
+          placeholder="请输入搜索词义"
         ></el-input>
         <el-button type="primary" icon="el-icon-search" @click="getData(true)">
           搜索
@@ -32,9 +33,9 @@
     >
       <el-table-column type="selection" width="55"></el-table-column>
       <el-table-column prop="word" label="词语" width="200"></el-table-column>
-      <el-table-column prop="length" label="字数" width="200"></el-table-column>
+      <el-table-column prop="length" label="字数" width="150"></el-table-column>
       <el-table-column prop="explanation" label="解释"></el-table-column>
-      <el-table-column fixed="right" label="操作">
+      <el-table-column fixed="right" label="操作" width="250">
         <template slot-scope="scope">
           <el-button
             type="primary"
@@ -101,7 +102,8 @@
         selectedItem: null,
         checkedItems: [],
         form: {
-          searchContent: '',
+          word: '',
+          explanation: '',
           date: '',
         },
         pageSize: 15,
@@ -156,9 +158,8 @@
         }
         const res = await this.$get(this.API.wordDictionary, {
           params: {
-            startTime: this.form.date[0],
-            endTime: this.form.date[1],
-            searchContent: this.form.searchContent,
+            word: this.form.word,
+            explanation: this.form.explanation,
             pageSize: this.pageSize,
             currentPage: this.currentPage - 1,
           },
