@@ -50,9 +50,9 @@
       save() {
         this.$refs.form.validate(async valid => {
           if (valid) {
-            if (this.item) {
+            if (this.selectedItem) {
               const res = await this.$put(
-                `${this.API.notification}/${this.item._id}`,
+                `${this.API.notification}/${this.selectedItem._id}`,
                 Object.assign(this.form),
               )
               if (res.data.code == '1000') {
@@ -84,8 +84,8 @@
       },
     },
     created() {
-      if (this.item) {
-        this.form = this.item
+      if (this.selectedItem) {
+        this.form = this.selectedItem
       }
     },
   }

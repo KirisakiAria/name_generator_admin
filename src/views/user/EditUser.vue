@@ -122,9 +122,9 @@
       save() {
         this.$refs.form.validate(async valid => {
           if (valid) {
-            if (this.item) {
+            if (this.selectedItem) {
               const res = await this.$put(
-                `${this.API.user}/${this.item._id}`,
+                `${this.API.user}/${this.selectedItem._id}`,
                 this.form,
               )
               if (res.data.code == '1000') {
@@ -153,8 +153,8 @@
       },
     },
     created() {
-      if (this.item) {
-        this.form = this.item
+      if (this.selectedItem) {
+        this.form = this.selectedItem
       }
     },
   }
