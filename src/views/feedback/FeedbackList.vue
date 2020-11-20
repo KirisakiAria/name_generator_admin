@@ -6,16 +6,6 @@
           v-model="form.searchContent"
           placeholder="请输入搜索内容"
         ></el-input>
-        <el-date-picker
-          v-model="form.date"
-          type="daterange"
-          align="right"
-          unlink-panels
-          range-separator="至"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-          :picker-options="pickerOptions"
-        ></el-date-picker>
         <el-button type="primary" icon="el-icon-search" @click="getData(true)">
           搜索
         </el-button>
@@ -39,11 +29,7 @@
       <el-table-column prop="tel" label="手机号"></el-table-column>
       <el-table-column prop="username" label="用户名"></el-table-column>
       <el-table-column prop="email" label="联系邮箱"></el-table-column>
-      <el-table-column prop="date" label="反馈时间">
-        <template slot-scope="scope">
-          {{ time(scope.row.date) }}
-        </template>
-      </el-table-column>
+      <el-table-column prop="date" label="反馈时间"></el-table-column>
       <el-table-column fixed="right" label="操作">
         <template slot-scope="scope">
           <el-button
@@ -106,7 +92,6 @@
         selectedItem: null,
         checkedItems: [],
         form: {
-          date: '',
           searchContent: '',
         },
         pageSize: 15,
@@ -116,41 +101,6 @@
       }
     },
     components: { FeedbackDetails },
-    computed: {
-      pickerOptions() {
-        return {
-          shortcuts: [
-            {
-              text: '最近一周',
-              onClick(picker) {
-                const end = new Date()
-                const start = new Date()
-                start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
-                picker.$emit('pick', [start, end])
-              },
-            },
-            {
-              text: '最近一个月',
-              onClick(picker) {
-                const end = new Date()
-                const start = new Date()
-                start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
-                picker.$emit('pick', [start, end])
-              },
-            },
-            {
-              text: '最近三个月',
-              onClick(picker) {
-                const end = new Date()
-                const start = new Date()
-                start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
-                picker.$emit('pick', [start, end])
-              },
-            },
-          ],
-        }
-      },
-    },
     methods: {
       checkItem(item) {
         this.dialogVisible = true
@@ -189,8 +139,6 @@
         }
         const res = await this.$get(this.API.feedback, {
           params: {
-            startTime: this.form.date[0],
-            endTime: this.form.date[1],
             searchContent: this.form.searchContent,
             pageSize: this.pageSize,
             currentPage: this.currentPage - 1,
