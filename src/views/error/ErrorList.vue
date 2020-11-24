@@ -113,8 +113,8 @@
     components: { ErrorDetails },
     methods: {
       checkItem(item) {
-        this.dialogVisible = true
         this.selectedItem = item
+        this.dialogVisible = true
       },
       deleteBatch() {
         if (!this.checkedItems.length) {
