@@ -29,6 +29,11 @@
           />
         </section>
       </el-tab-pane>
+      <el-tab-pane label="VIP会员政策" name="vip">
+        <section class="editor-wrapper">
+          <Editor v-model="form.vip" :apiKey="apiKey" :init="editorOptions" />
+        </section>
+      </el-tab-pane>
     </el-tabs>
     <el-button @click="save" class="save-btn" type="success">保存</el-button>
   </section>
@@ -48,6 +53,7 @@
           terms: '',
           usage: '',
           update: '',
+          vip: '',
         },
         activeName: 'privacyPolicy',
         editorOptions: {
