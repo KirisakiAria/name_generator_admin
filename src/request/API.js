@@ -31,4 +31,6 @@ export default {
   deleteInspiration: `${prefix}/inspiration/delete`,
   notification: `${prefix}/notification`,
   deleteNotification: `${prefix}/notification/delete`,
+  plan: `${prefix}/plan`,
+  deletePlan: `${prefix}/plan/delete`,
 }

@@ -1,15 +1,7 @@
 <template>
   <section class="table-page">
     <section class="top-area">
-      <div class="form">
-        <el-input
-          v-model="form.searchContent"
-          placeholder="请输入搜索内容"
-        ></el-input>
-        <el-button type="primary" icon="el-icon-search" @click="getData(true)">
-          搜索
-        </el-button>
-      </div>
+      <div class="form"></div>
       <div class="right">
         <el-popconfirm
           class="pop-confirm"
@@ -26,13 +18,15 @@
       </div>
     </section>
     <el-table
+      ref="datatable"
       :data="tableData"
       @selection-change="handleSelectionChange"
-      :height="350"
     >
       <el-table-column type="selection" width="55"></el-table-column>
-      <el-table-column prop="_id" label="ID"></el-table-column>
-      <el-table-column prop="name" label="名称"></el-table-column>
+      <el-table-column prop="planId" label="id"></el-table-column>
+      <el-table-column prop="title" label="标题"></el-table-column>
+      <el-table-column prop="originalPrice" label="原价"></el-table-column>
+      <el-table-column prop="currentPrice" label="现价"></el-table-column>
       <el-table-column fixed="right" label="操作">
         <template slot-scope="scope">
           <el-button
@@ -74,34 +68,30 @@
     </section>
     <el-dialog
       title="编辑"
-      v-if="dialogVisible"
-      :visible.sync="dialogVisible"
+      v-if="editDialogVisible"
+      :visible.sync="editDialogVisible"
       :close-on-click-modal="false"
       width="60%"
     >
-      <EditClassify
+      <EditPlan
         :selectedItem="selectedItem"
-        :type="form.type"
         @success="getData"
-        @close="closeDialog"
+        @close="closeEditDialog"
       />
     </el-dialog>
   </section>
 </template>
 <script>
   import mixin from '@/mixin/mixin'
-  import EditClassify from './EditClassify'
+  import EditPlan from './EditPlan'
   export default {
-    name: 'ClassifyList',
+    name: 'PlanList',
     mixins: [mixin],
     data() {
       return {
-        dialogVisible: false,
+        editDialogVisible: false,
         selectedItem: null,
         checkedItems: [],
-        form: {
-          searchContent: '',
-        },
         pageSize: 15,
         currentPage: 1,
         total: 0,
@@ -109,16 +99,16 @@
       }
     },
     components: {
-      EditClassify,
+      EditPlan,
     },
     methods: {
       add() {
         this.selectedItem = null
-        this.dialogVisible = true
+        this.editDialogVisible = true
       },
       editItem(item) {
         this.selectedItem = item
-        this.dialogVisible = true
+        this.editDialogVisible = true
       },
       deleteBatch() {
         if (!this.checkedItems.length) {
@@ -134,7 +124,7 @@
         this.deleteItems([id])
       },
       async deleteItems(items) {
-        const res = await this.$post(`${this.API.classify}/delete`, {
+        const res = await this.$post(this.API.deletePlan, {
           items,
         })
         if (res.data.code == '1000') {
@@ -147,12 +137,8 @@
         }
       },
       async getData(search = false) {
-        if (search === true) {
-          this.currentPage = 1
-        }
-        const res = await this.$get(this.API.classify, {
+        const res = await this.$get(this.API.plan, {
           params: {
-            searchContent: this.form.searchContent,
             pageSize: this.pageSize,
             currentPage: this.currentPage - 1,
           },
@@ -162,8 +148,8 @@
           this.total = res.data.data.total
         }
       },
-      closeDialog() {
-        this.dialogVisible = false
+      closeEditDialog() {
+        this.editDialogVisible = false
         this.getData()
       },
       handleSelectionChange(val) {

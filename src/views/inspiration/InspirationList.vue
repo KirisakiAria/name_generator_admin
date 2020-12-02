@@ -18,7 +18,7 @@
           icon="el-icon-info"
           iconColor="red"
           title="确定删除吗？"
-          @onConfirm="deleteBatch"
+          @confirm="deleteBatch"
         >
           <el-button type="danger" slot="reference">批量删除</el-button>
         </el-popconfirm>
@@ -57,7 +57,7 @@
             icon="el-icon-info"
             iconColor="red"
             title="确定删除吗？"
-            @onConfirm="deleteSingle(scope.row._id)"
+            @confirm="deleteSingle(scope.row._id)"
           >
             <el-button
               type="danger"
@@ -157,7 +157,6 @@
       async deleteItems(items) {
         const res = await this.$post(this.API.deleteInspiration, {
           items,
-          type: this.form.type,
         })
         if (res.data.code == '1000') {
           this.$message({

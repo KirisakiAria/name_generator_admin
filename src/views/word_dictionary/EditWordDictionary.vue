@@ -86,7 +86,6 @@
     },
     methods: {
       beforeUpload(file) {
-        console.log(file.type)
         if (file.type !== 'application/json') {
           this.$message({
             showClose: true,

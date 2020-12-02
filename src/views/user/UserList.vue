@@ -48,7 +48,7 @@
             icon="el-icon-info"
             iconColor="red"
             title="确定删除吗？"
-            @onConfirm="deleteItem(scope.row)"
+            @confirm="deleteItem(scope.row)"
           >
             <el-button
               type="danger"
