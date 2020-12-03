@@ -34,10 +34,10 @@
         </el-select>
       </el-form-item>
       <el-form-item label="VIP开始时间">
-        <el-input v-model="form.vip_start"></el-input>
+        <el-input v-model="form.vipStartTime"></el-input>
       </el-form-item>
       <el-form-item label="VIP过期时间">
-        <el-input v-model="form.vip_expiry"></el-input>
+        <el-input v-model="form.vipEndTime"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button class="save" type="primary" @click="save">保存</el-button>

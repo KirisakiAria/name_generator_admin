@@ -25,8 +25,16 @@
       <el-table-column prop="tel" label="手机号"></el-table-column>
       <el-table-column prop="username" label="用户名"></el-table-column>
       <el-table-column prop="date" label="注册日期"></el-table-column>
-      <el-table-column prop="vip_start" label="VIP开始时间"></el-table-column>
-      <el-table-column prop="vip_expiry" label="VIP过期时间"></el-table-column>
+      <el-table-column label="VIP开始时间">
+        <template slot-scope="scope">
+          {{ scope.row.vipStartTime | startTime }}
+        </template>
+      </el-table-column>
+      <el-table-column label="VIP过期时间">
+        <template slot-scope="scope">
+          {{ scope.row.vipEndTime | endTime }}
+        </template>
+      </el-table-column>
       <el-table-column prop="vip" label="是否VIP">
         <template slot-scope="scope">
           {{ scope.row.vip ? '是' : '否' }}
@@ -85,6 +93,7 @@
 <script>
   import mixin from '@/mixin/mixin'
   import EditUser from './EditUser'
+  import moment from 'moment'
   export default {
     name: 'UserList',
     mixins: [mixin],
@@ -103,6 +112,24 @@
     },
     components: {
       EditUser,
+    },
+    filters: {
+      startTime(value) {
+        if (!value) {
+          return '无'
+        } else {
+          return moment(value).format('YYYY-MM-DD hh:mm:ss')
+        }
+      },
+      endTime(value) {
+        if (!value) {
+          return '无'
+        } else if (value > 0) {
+          return moment(value).format('YYYY-MM-DD hh:mm:ss')
+        } else {
+          return '永久'
+        }
+      },
     },
     methods: {
       add() {
