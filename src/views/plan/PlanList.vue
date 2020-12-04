@@ -56,16 +56,6 @@
         </template>
       </el-table-column>
     </el-table>
-    <section class="pagination">
-      <el-pagination
-        background
-        layout="prev, pager, next"
-        :page-size="pageSize"
-        :current-page.sync="currentPage"
-        :total="total"
-        @current-change="getData"
-      ></el-pagination>
-    </section>
     <el-dialog
       title="编辑"
       v-if="editDialogVisible"
@@ -92,9 +82,6 @@
         editDialogVisible: false,
         selectedItem: null,
         checkedItems: [],
-        pageSize: 15,
-        currentPage: 1,
-        total: 0,
         tableData: [],
       }
     },
@@ -137,12 +124,7 @@
         }
       },
       async getData(search = false) {
-        const res = await this.$get(this.API.plan, {
-          params: {
-            pageSize: this.pageSize,
-            currentPage: this.currentPage - 1,
-          },
-        })
+        const res = await this.$get(this.API.plan)
         if (res.data.code == '1000') {
           this.tableData = res.data.data.list
           this.total = res.data.data.total
