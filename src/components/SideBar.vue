@@ -46,7 +46,7 @@
 <style lang="less" scoped>
   @import url('../assets/css/style.less');
   .side-bar {
-    width: 270px;
+    width: 250px;
     height: 100vh;
     position: relative;
     padding: 0 15px;
@@ -66,7 +66,6 @@
       padding: 20px 0;
       border-bottom: 1px solid rgba(255, 255, 255, 0.8);
       text-align: center;
-      font-family: 'NijimiMincho';
       letter-spacing: 5px;
     }
 

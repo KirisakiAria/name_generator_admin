@@ -34,10 +34,25 @@
         </el-select>
       </el-form-item>
       <el-form-item label="VIP开始时间">
-        <el-input v-model="form.vipStartTime"></el-input>
+        <el-date-picker
+          v-model="form.vipStartTime"
+          type="date"
+          placeholder="选择日期"
+          format="yyyy-MM-dd hh:mm:ss"
+          value-format="timestamp"
+        ></el-date-picker>
       </el-form-item>
       <el-form-item label="VIP过期时间">
-        <el-input v-model="form.vipEndTime"></el-input>
+        <el-date-picker
+          :disabled="permanent"
+          v-model="form.vipEndTime"
+          type="date"
+          placeholder="选择日期"
+          value-format="timestamp"
+        ></el-date-picker>
+      </el-form-item>
+      <el-form-item label="永久会员">
+        <el-checkbox v-model="permanent"></el-checkbox>
       </el-form-item>
       <el-form-item>
         <el-button class="save" type="primary" @click="save">保存</el-button>
@@ -58,9 +73,12 @@
           username: '',
           password: '',
           vip: '',
-          vip_start: '',
-          vip_expiry: '',
+          vipStartTime: 0,
+          vipEndTime: 0,
         },
+        vipStartTime: 0,
+        vipEndTime: 0,
+        permanent: false,
         rules: {
           tel: [
             {
@@ -86,18 +104,6 @@
               message: '请选择是否是vip',
             },
           ],
-          // vip_start: [
-          //   {
-          //     required: true,
-          //     message: '请填写词语',
-          //   },
-          // ],
-          // vip_expiry: [
-          //   {
-          //     required: true,
-          //     message: '请填写词语',
-          //   },
-          // ],
         },
         fileList: [],
       }
@@ -120,6 +126,9 @@
         }
       },
       save() {
+        if (this.permanent) {
+          this.form.vipEndTime = -1
+        }
         this.$refs.form.validate(async valid => {
           if (valid) {
             if (this.selectedItem) {
@@ -155,6 +164,9 @@
     created() {
       if (this.selectedItem) {
         this.form = this.selectedItem
+        if (this.form.vipEndTime == -1) {
+          this.permanent = true
+        }
       }
     },
   }

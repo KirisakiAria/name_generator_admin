@@ -20,7 +20,6 @@
           <img :src="serverUrl + scope.row.avatar" />
         </template>
       </el-table-column>
-      <el-table-column prop="_id" label="ID" width="220"></el-table-column>
       <el-table-column prop="uid" label="UID" width="100"></el-table-column>
       <el-table-column prop="tel" label="手机号"></el-table-column>
       <el-table-column prop="username" label="用户名"></el-table-column>
@@ -42,6 +41,13 @@
       </el-table-column>
       <el-table-column fixed="right" label="操作">
         <template slot-scope="scope">
+          <el-button
+            type="success"
+            @click="checkOrder(scope.row)"
+            icon="el-icon-s-order"
+            circle
+            title="用户订单"
+          ></el-button>
           <el-button
             type="primary"
             @click="editItem(scope.row)"
@@ -170,6 +176,9 @@
           this.tableData = res.data.data.list
           this.total = res.data.data.total
         }
+      },
+      checkOrder(item) {
+        this.$router.push(`order?tel=${item.tel}`)
       },
       closeDialog() {
         this.dialogVisible = false

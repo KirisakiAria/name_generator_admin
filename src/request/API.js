@@ -33,4 +33,6 @@ export default {
   deleteNotification: `${prefix}/notification/delete`,
   plan: `${prefix}/plan`,
   deletePlan: `${prefix}/plan/delete`,
+  order: `${prefix}/order`,
+  deleteOrder: `${prefix}/order/delete`,
 }
