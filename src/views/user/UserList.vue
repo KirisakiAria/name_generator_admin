@@ -24,6 +24,10 @@
       <el-table-column prop="tel" label="手机号"></el-table-column>
       <el-table-column prop="username" label="用户名"></el-table-column>
       <el-table-column prop="date" label="注册日期"></el-table-column>
+      <el-table-column
+        prop="lastLoginTime"
+        label="最后登录时间"
+      ></el-table-column>
       <el-table-column label="VIP开始时间">
         <template slot-scope="scope">
           {{ scope.row.vipStartTime | startTime }}
