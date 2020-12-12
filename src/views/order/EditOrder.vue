@@ -4,6 +4,9 @@
       <el-form-item label="订单Id">
         <el-input v-model="form.orderNo" readonly></el-input>
       </el-form-item>
+      <el-form-item label="订单描述" prop="body">
+        <el-input v-model="form.body"></el-input>
+      </el-form-item>
       <el-form-item label="手机号" prop="tel">
         <el-input v-model="form.tel"></el-input>
       </el-form-item>
@@ -15,7 +18,7 @@
           v-model="form.time"
           type="date"
           placeholder="选择日期"
-          format="yyyy-MM-dd hh:mm:ss"
+          format="yyyy-MM-dd HH:mm:ss"
           value-format="timestamp"
           :picker-options="pickerOptions"
         ></el-date-picker>
@@ -24,6 +27,12 @@
         <el-select v-model="form.paymentMethod" placeholder="请选择支付方式">
           <el-option label="支付宝" value="1"></el-option>
           <el-option label="微信" value="2"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="支付方式" prop="status">
+        <el-select v-model="form.status" placeholder="请选择订单状态">
+          <el-option label="已完成" :value="true"></el-option>
+          <el-option label="未完成" :value="false"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item>
@@ -41,10 +50,12 @@
       return {
         form: {
           orderNo: '',
+          body: '',
           userId: '',
           price: '',
           time: '',
           paymentMethod: '',
+          status: '',
         },
         pickerOptions: {
           disabledDate(time) {
@@ -76,6 +87,12 @@
           ],
         },
         rules: {
+          body: [
+            {
+              required: true,
+              message: '请填写订单描述',
+            },
+          ],
           tel: [
             {
               required: true,
@@ -98,6 +115,12 @@
             {
               required: true,
               message: '请选择支付方式',
+            },
+          ],
+          status: [
+            {
+              required: true,
+              message: '请选择订单状态',
             },
           ],
         },

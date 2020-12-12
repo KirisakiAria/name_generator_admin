@@ -43,16 +43,22 @@
     >
       <el-table-column type="selection" width="55"></el-table-column>
       <el-table-column prop="orderNo" label="订单ID"></el-table-column>
+      <el-table-column prop="body" label="订单描述"></el-table-column>
       <el-table-column prop="tel" label="手机号"></el-table-column>
       <el-table-column prop="price" label="价格"></el-table-column>
       <el-table-column label="时间">
         <template slot-scope="scope">
-          {{ moment(scope.row.time).format('YYYY-MM-DD hh:mm:ss') }}
+          {{ moment(scope.row.time).format('YYYY-MM-DD HH:mm:ss') }}
         </template>
       </el-table-column>
       <el-table-column label="支付方式">
         <template slot-scope="scope">
           {{ scope.row.paymentMethod == 1 ? '支付宝' : '微信' }}
+        </template>
+      </el-table-column>
+      <el-table-column prop="status" label="状态">
+        <template slot-scope="scope">
+          {{ scope.row.status ? '已完成' : '未完成' }}
         </template>
       </el-table-column>
       <el-table-column fixed="right" label="操作">

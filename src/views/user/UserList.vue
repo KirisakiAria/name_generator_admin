@@ -14,19 +14,25 @@
         <el-button type="success" @click="add">新增</el-button>
       </div>
     </section>
-    <el-table :data="tableData">
+    <el-table :data="tableData" @sort-change="sortChange">
       <el-table-column prop="avatare" label="头像" width="80">
         <template slot-scope="scope">
           <img :src="serverUrl + scope.row.avatar" />
         </template>
       </el-table-column>
-      <el-table-column prop="uid" label="UID" width="100"></el-table-column>
+      <el-table-column
+        prop="uid"
+        label="UID"
+        width="100"
+        sortable="custom"
+      ></el-table-column>
       <el-table-column prop="tel" label="手机号"></el-table-column>
       <el-table-column prop="username" label="用户名"></el-table-column>
       <el-table-column prop="date" label="注册日期"></el-table-column>
       <el-table-column
         prop="lastLoginTime"
         label="最后登录时间"
+        sortable="custom"
       ></el-table-column>
       <el-table-column label="VIP开始时间">
         <template slot-scope="scope">
@@ -118,6 +124,7 @@
         currentPage: 1,
         total: 0,
         tableData: [],
+        sort: { order: '', prop: '' },
       }
     },
     components: {
@@ -128,14 +135,14 @@
         if (!value) {
           return '无'
         } else {
-          return moment(value).format('YYYY-MM-DD hh:mm:ss')
+          return moment(value).format('YYYY-MM-DD HH:mm:ss')
         }
       },
       endTime(value) {
         if (!value) {
           return '无'
         } else if (value > 0) {
-          return moment(value).format('YYYY-MM-DD hh:mm:ss')
+          return moment(value).format('YYYY-MM-DD HH:mm:ss')
         } else {
           return '永久'
         }
@@ -174,6 +181,7 @@
             searchContent: this.form.searchContent,
             pageSize: this.pageSize,
             currentPage: this.currentPage - 1,
+            sort: this.sort,
           },
         })
         if (res.data.code == '1000') {
@@ -186,6 +194,13 @@
       },
       closeDialog() {
         this.dialogVisible = false
+        this.getData()
+      },
+      sortChange(item) {
+        this.sort = {
+          order: item.order,
+          prop: item.prop,
+        }
         this.getData()
       },
     },

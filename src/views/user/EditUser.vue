@@ -38,7 +38,7 @@
           v-model="form.vipStartTime"
           type="date"
           placeholder="选择日期"
-          format="yyyy-MM-dd hh:mm:ss"
+          format="yyyy-MM-dd HH:mm:ss"
           value-format="timestamp"
         ></el-date-picker>
       </el-form-item>
@@ -48,7 +48,7 @@
           v-model="form.vipEndTime"
           type="date"
           placeholder="选择日期"
-          format="yyyy-MM-dd hh:mm:ss"
+          format="yyyy-MM-dd HH:mm:ss"
           value-format="timestamp"
         ></el-date-picker>
       </el-form-item>
