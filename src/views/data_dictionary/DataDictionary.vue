@@ -1,13 +1,23 @@
 <template>
   <section class="dictionary">
-    <el-row type="flex">
-      <el-col :span="12" v-for="(item, index) in cardList" :key="index">
+    <el-row type="flex" justify="space-around">
+      <el-col :span="11">
         <el-card class="box-card">
           <div slot="header" class="clearfix">
-            <span>分类</span>
+            <span>词语分类</span>
           </div>
           <section class="card-body">
             <ClassifyList />
+          </section>
+        </el-card>
+      </el-col>
+      <el-col :span="11">
+        <el-card class="box-card">
+          <div slot="header" class="clearfix">
+            <span>支付方式</span>
+          </div>
+          <section class="card-body">
+            <PaymentMethodList />
           </section>
         </el-card>
       </el-col>
@@ -17,28 +27,22 @@
 <script>
   import mixin from '@/mixin/mixin'
   import ClassifyList from './classify/ClassifyList'
+  import PaymentMethodList from './payment_method/PaymentMethodList'
   export default {
     name: 'Dictionary',
     mixins: [mixin],
     data() {
-      return {
-        cardList: [
-          {
-            title: '词语分类',
-            api: 'classify',
-          },
-        ],
-      }
+      return {}
     },
     components: {
       ClassifyList,
+      PaymentMethodList,
     },
   }
 </script>
 <style lang="less" scoped>
   .dictionary {
     .card-body {
-      text-align: center;
       button {
         width: 200px;
       }

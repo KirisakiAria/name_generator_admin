@@ -14,7 +14,7 @@
 <script>
   import mixin from '@/mixin/mixin'
   export default {
-    name: 'likedUsersDetails',
+    name: 'LikedUsersDetails',
     mixins: [mixin],
     props: {
       likedUsers: {

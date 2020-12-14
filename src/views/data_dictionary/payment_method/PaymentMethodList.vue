@@ -31,8 +31,13 @@
       :height="350"
     >
       <el-table-column type="selection" width="55"></el-table-column>
-      <el-table-column prop="_id" label="ID"></el-table-column>
       <el-table-column prop="name" label="名称"></el-table-column>
+      <el-table-column prop="paymentId" label="支付方式ID"></el-table-column>
+      <el-table-column label="是否可用">
+        <template slot-scope="scope">
+          {{ scope.row.available ? '可用' : '不可用' }}
+        </template>
+      </el-table-column>
       <el-table-column fixed="right" label="操作">
         <template slot-scope="scope">
           <el-button
@@ -79,7 +84,7 @@
       :close-on-click-modal="false"
       width="60%"
     >
-      <EditClassify
+      <EditPaymentMethod
         :selectedItem="selectedItem"
         :type="form.type"
         @success="getData"
@@ -90,9 +95,9 @@
 </template>
 <script>
   import mixin from '@/mixin/mixin'
-  import EditClassify from './EditClassify'
+  import EditPaymentMethod from './EditPaymentMethod'
   export default {
-    name: 'ClassifyList',
+    name: 'PaymentMethodList',
     mixins: [mixin],
     data() {
       return {
@@ -109,7 +114,7 @@
       }
     },
     components: {
-      EditClassify,
+      EditPaymentMethod,
     },
     methods: {
       add() {
@@ -134,7 +139,7 @@
         this.deleteItems([id])
       },
       async deleteItems(items) {
-        const res = await this.$post(this.API.deleteClassify, {
+        const res = await this.$post(this.API.deletePaymentMethod, {
           items,
         })
         if (res.data.code == '1000') {
@@ -150,7 +155,7 @@
         if (search === true) {
           this.currentPage = 1
         }
-        const res = await this.$get(this.API.classify, {
+        const res = await this.$get(this.API.paymentMethod, {
           params: {
             searchContent: this.form.searchContent,
             pageSize: this.pageSize,
