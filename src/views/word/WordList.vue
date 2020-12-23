@@ -11,8 +11,12 @@
           placeholder="请选择类型"
           @change="getData(true)"
         >
-          <el-option label="中国风" value="中国风"></el-option>
-          <el-option label="日语" value="日语"></el-option>
+          <el-option
+            :key="index"
+            v-for="(item, index) in wordType"
+            :label="item"
+            :value="item"
+          ></el-option>
         </el-select>
         <el-select
           v-model="form.showable"
@@ -164,6 +168,7 @@
         currentPage: 1,
         total: 0,
         tableData: [],
+        wordType: ['中国风', '日式', '可爱'],
       }
     },
     components: {
