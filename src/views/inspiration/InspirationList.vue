@@ -38,7 +38,7 @@
         <template slot-scope="scope">
           <el-button
             type="success"
-            @click="checkItem(scope.row)"
+            @click="checkLikedUsers(scope.row)"
             icon="el-icon-user"
             circle
             title="查看点赞用户"
@@ -107,7 +107,7 @@
 <script>
   import mixin from '@/mixin/mixin'
   import EditInspiration from './EditInspiration'
-  import LikedUsersDetails from './LikedUsersDetails'
+  import LikedUsersDetails from '../LikedUsersDetails'
   export default {
     name: 'InspirationList',
     mixins: [mixin],
@@ -183,7 +183,7 @@
           this.total = res.data.data.total
         }
       },
-      checkItem(item) {
+      checkLikedUsers(item) {
         this.likedUsers = item.likedUsers
         this.likedUserDialogVisible = true
       },

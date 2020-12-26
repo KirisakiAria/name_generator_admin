@@ -35,7 +35,7 @@
           <el-option
             :label="item"
             :value="item"
-            v-for="(item, index) in 9"
+            v-for="(item, index) in 10"
             :key="index"
           ></el-option>
         </el-select>
@@ -81,6 +81,13 @@
       <el-table-column prop="word" label="词语"></el-table-column>
       <el-table-column fixed="right" label="操作">
         <template slot-scope="scope">
+          <el-button
+            type="success"
+            @click="checkLikedUsers(scope.row)"
+            icon="el-icon-user"
+            circle
+            title="查看点赞用户"
+          ></el-button>
           <el-button
             type="primary"
             @click="editItem(scope.row)"
@@ -142,12 +149,22 @@
     >
       <WordOutputFile :classifyList="classifyList" @close="closeOutputDialog" />
     </el-dialog>
+    <el-dialog
+      title="点赞用户"
+      v-if="likedUserDialogVisible"
+      :visible.sync="likedUserDialogVisible"
+      :close-on-click-modal="false"
+      width="60%"
+    >
+      <LikedUsersDetails :likedUsers="likedUsers" />
+    </el-dialog>
   </section>
 </template>
 <script>
   import mixin from '@/mixin/mixin'
   import EditWord from './EditWord'
   import WordOutputFile from './WordOutputFile'
+  import LikedUsersDetails from '../LikedUsersDetails'
   export default {
     name: 'WordList',
     mixins: [mixin],
@@ -164,16 +181,19 @@
           searchContent: '',
           showable: 'all',
         },
+        likedUsers: [],
         pageSize: 15,
         currentPage: 1,
         total: 0,
         tableData: [],
         wordType: ['中国风', '日式', '可爱'],
+        likedUserDialogVisible: false,
       }
     },
     components: {
       EditWord,
       WordOutputFile,
+      LikedUsersDetails,
     },
     methods: {
       add() {
@@ -298,6 +318,10 @@
           })
           this.getData()
         }
+      },
+      checkLikedUsers(item) {
+        this.likedUsers = item.likedUsers
+        this.likedUserDialogVisible = true
       },
     },
     created() {
