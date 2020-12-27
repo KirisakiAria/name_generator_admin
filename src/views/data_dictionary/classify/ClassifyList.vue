@@ -152,7 +152,7 @@
         }
         const res = await this.$get(this.API.classify, {
           params: {
-            searchContent: this.form.searchContent,
+            ...this.form,
             pageSize: this.pageSize,
             currentPage: this.currentPage - 1,
           },

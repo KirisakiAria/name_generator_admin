@@ -157,7 +157,7 @@
         }
         const res = await this.$get(this.API.paymentMethod, {
           params: {
-            searchContent: this.form.searchContent,
+            ...this.form,
             pageSize: this.pageSize,
             currentPage: this.currentPage - 1,
           },

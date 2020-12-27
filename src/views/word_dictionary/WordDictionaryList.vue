@@ -7,6 +7,14 @@
           v-model="form.explanation"
           placeholder="请输入搜索词义"
         ></el-input>
+        <el-select v-model="form.length">
+          <el-option
+            :key="item"
+            v-for="item in 10"
+            :value="item"
+            :label="item"
+          ></el-option>
+        </el-select>
         <el-button type="primary" icon="el-icon-search" @click="getData(true)">
           搜索
         </el-button>
@@ -104,7 +112,7 @@
         form: {
           word: '',
           explanation: '',
-          date: '',
+          length: 2,
         },
         pageSize: 15,
         currentPage: 1,
@@ -156,8 +164,7 @@
         }
         const res = await this.$get(this.API.wordDictionary, {
           params: {
-            word: this.form.word,
-            explanation: this.form.explanation,
+            ...this.form,
             pageSize: this.pageSize,
             currentPage: this.currentPage - 1,
           },

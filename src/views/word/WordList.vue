@@ -237,10 +237,7 @@
         }
         const res = await this.$get(this.API.word, {
           params: {
-            type: this.form.type,
-            length: this.form.length,
-            showable: this.form.showable,
-            searchContent: this.form.searchContent,
+            ...this.form,
             pageSize: this.pageSize,
             currentPage: this.currentPage - 1,
           },

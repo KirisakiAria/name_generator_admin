@@ -139,7 +139,7 @@
         }
         const res = await this.$get(this.API.feedback, {
           params: {
-            searchContent: this.form.searchContent,
+            ...this.form,
             pageSize: this.pageSize,
             currentPage: this.currentPage - 1,
           },

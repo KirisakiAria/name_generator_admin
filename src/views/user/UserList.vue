@@ -178,7 +178,7 @@
         }
         const res = await this.$get(this.API.user, {
           params: {
-            searchContent: this.form.searchContent,
+            ...this.form,
             pageSize: this.pageSize,
             currentPage: this.currentPage - 1,
             sort: this.sort,
