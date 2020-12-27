@@ -7,7 +7,7 @@
           v-model="form.explanation"
           placeholder="请输入搜索词义"
         ></el-input>
-        <el-select v-model="form.length">
+        <el-select v-model="form.length" @change="getData(true)">
           <el-option
             :key="item"
             v-for="item in 10"
