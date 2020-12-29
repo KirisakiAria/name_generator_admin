@@ -24,6 +24,7 @@
     >
       <el-table-column type="selection" width="55"></el-table-column>
       <el-table-column prop="planId" label="id"></el-table-column>
+      <el-table-column prop="huaweiPlanId" label="华为id"></el-table-column>
       <el-table-column prop="title" label="标题"></el-table-column>
       <el-table-column prop="originalPrice" label="原价"></el-table-column>
       <el-table-column prop="currentPrice" label="现价"></el-table-column>

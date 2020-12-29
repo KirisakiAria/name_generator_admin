@@ -1,8 +1,11 @@
 <template>
   <section class="edit-page">
-    <el-form ref="form" :model="form" :rules="rules" label-width="60px">
+    <el-form ref="form" :model="form" :rules="rules" label-width="80px">
       <el-form-item label="id" prop="planId">
         <el-input v-model="form.planId"></el-input>
+      </el-form-item>
+      <el-form-item label="华为id" prop="huaweiPlanId">
+        <el-input v-model="form.huaweiPlanId"></el-input>
       </el-form-item>
       <el-form-item label="标题" prop="title">
         <el-input v-model="form.title"></el-input>
@@ -37,6 +40,12 @@
             {
               required: true,
               message: '请填写id',
+            },
+          ],
+          huaweiPlanId: [
+            {
+              required: true,
+              message: '请填写华为id',
             },
           ],
           title: [
