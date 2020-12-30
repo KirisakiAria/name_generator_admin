@@ -53,7 +53,7 @@
       </el-table-column>
       <el-table-column label="支付方式">
         <template slot-scope="scope">
-          {{ scope.row.paymentMethod == 1 ? '支付宝' : '微信' }}
+          {{ transferPaymentMethodName(scope.row.paymentMethod) }}
         </template>
       </el-table-column>
       <el-table-column prop="status" label="状态">
@@ -109,6 +109,7 @@
     >
       <EditOrder
         :selectedItem="selectedItem"
+        :paymentMethodList="paymentMethodList"
         @success="getData"
         @close="closeEditDialog"
       />
@@ -135,6 +136,7 @@
         currentPage: 1,
         total: 0,
         tableData: [],
+        paymentMethodList: [],
         moment: moment,
         pickerOptions: {
           shortcuts: [
@@ -173,6 +175,22 @@
       EditOrder,
     },
     methods: {
+      transferPaymentMethodName(value) {
+        const item = this.paymentMethodList.find(e => e.paymentId == value)
+        return item.name
+      },
+      async getPaymentMethodData() {
+        const res = await this.$get(this.API.paymentMethod, {
+          params: {
+            ...this.form,
+            pageSize: this.pageSize,
+            currentPage: this.currentPage - 1,
+          },
+        })
+        if (res.data.code == '1000') {
+          this.paymentMethodList = res.data.data.list
+        }
+      },
       add() {
         this.selectedItem = null
         this.editDialogVisible = true
@@ -234,6 +252,7 @@
       if (this.$route.query.tel) {
         this.form.searchContent = this.$route.query.tel
       }
+      this.getPaymentMethodData()
       this.getData()
     },
   }

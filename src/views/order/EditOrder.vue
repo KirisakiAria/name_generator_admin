@@ -25,8 +25,12 @@
       </el-form-item>
       <el-form-item label="支付方式" prop="paymentMethod">
         <el-select v-model="form.paymentMethod" placeholder="请选择支付方式">
-          <el-option label="支付宝" value="1"></el-option>
-          <el-option label="微信" value="2"></el-option>
+          <el-option
+            :key="index"
+            v-for="(item, index) in paymentMethodList"
+            :label="item.name"
+            :value="item.paymentId"
+          ></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="支付方式" prop="status">
@@ -57,6 +61,7 @@
           paymentMethod: '',
           status: '',
         },
+
         pickerOptions: {
           disabledDate(time) {
             return time.getTime() > Date.now()
@@ -129,6 +134,10 @@
     props: {
       selectedItem: {
         type: Object,
+        default: null,
+      },
+      paymentMethodList: {
+        type: Array,
         default: null,
       },
     },
