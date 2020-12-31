@@ -61,7 +61,6 @@
           paymentMethod: '',
           status: '',
         },
-
         pickerOptions: {
           disabledDate(time) {
             return time.getTime() > Date.now()
