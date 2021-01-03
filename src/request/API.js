@@ -8,6 +8,7 @@ export default {
   system: `${prefix}/system`,
   login: `${prefix}/admin/login`,
   user: `${prefix}/user`,
+  refund: `${prefix}/user/refund`,
   upload: `${prefix}/upload`,
   word: `${prefix}/word`,
   deleteWord: `${prefix}/word/delete`,

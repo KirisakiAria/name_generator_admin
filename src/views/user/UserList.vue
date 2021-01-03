@@ -82,6 +82,23 @@
               slot="reference"
             ></el-button>
           </el-popconfirm>
+          <el-popconfirm
+            class="pop-confirm"
+            confirmButtonText="好的"
+            cancelButtonText="不用了"
+            icon="el-icon-info"
+            iconColor="red"
+            title="确定发起退款（华为）吗？"
+            @confirm="refund(scope.row)"
+          >
+            <el-button
+              type="danger"
+              icon="el-icon-money"
+              circle
+              title="发起退款（华为）"
+              slot="reference"
+            ></el-button>
+          </el-popconfirm>
         </template>
       </el-table-column>
     </el-table>
@@ -187,6 +204,18 @@
         if (res.data.code == '1000') {
           this.tableData = res.data.data.list
           this.total = res.data.data.total
+        }
+      },
+      async refund(item) {
+        const res = await this.$post(this.API.refund, {
+          tel: item.tel,
+        })
+        if (res.data.code == '1000') {
+          this.$message({
+            showClose: true,
+            message: res.data.message,
+            type: 'success',
+          })
         }
       },
       checkOrder(item) {
