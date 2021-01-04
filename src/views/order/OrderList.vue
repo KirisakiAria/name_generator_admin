@@ -177,7 +177,11 @@
     methods: {
       transferPaymentMethodName(value) {
         const item = this.paymentMethodList.find(e => e.paymentId == value)
-        return item.name
+        if (item) {
+          return item.name
+        } else {
+          return '华为支付'
+        }
       },
       async getPaymentMethodData() {
         const res = await this.$get(this.API.paymentMethod, {

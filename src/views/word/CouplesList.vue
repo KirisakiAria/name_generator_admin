@@ -80,6 +80,13 @@
         <template slot-scope="scope">
           <el-button
             type="success"
+            @click="checkLikedUsers(scope.row)"
+            icon="el-icon-user"
+            circle
+            title="查看点赞用户"
+          ></el-button>
+          <el-button
+            type="success"
             @click="addToWordSingle(scope.row)"
             circle
             title="添加到词语列表"
@@ -146,12 +153,22 @@
     >
       <CouplesOutputFile @close="closeOutputDialog" />
     </el-dialog>
+    <el-dialog
+      title="点赞用户"
+      v-if="likedUserDialogVisible"
+      :visible.sync="likedUserDialogVisible"
+      :close-on-click-modal="false"
+      width="60%"
+    >
+      <LikedUsersDetails :likedUsers="likedUsers" />
+    </el-dialog>
   </section>
 </template>
 <script>
   import mixin from '@/mixin/mixin'
   import EditCouples from './EditCouples'
   import CouplesOutputFile from './CouplesOutputFile'
+  import LikedUsersDetails from '../LikedUsersDetails'
   export default {
     name: 'CouplesList',
     mixins: [mixin],
@@ -159,6 +176,7 @@
       return {
         outputDialogVisible: false,
         editDialogVisible: false,
+        likedUserDialogVisible: false,
         selectedItem: null,
         checkedItems: [],
         form: {
@@ -171,11 +189,13 @@
         currentPage: 1,
         total: 0,
         tableData: [],
+        likedUsers: [],
       }
     },
     components: {
       EditCouples,
       CouplesOutputFile,
+      LikedUsersDetails,
     },
     methods: {
       addToWordBatch() {
@@ -284,6 +304,10 @@
           })
           this.getData()
         }
+      },
+      checkLikedUsers(item) {
+        this.likedUsers = item.likedUsers
+        this.likedUserDialogVisible = true
       },
     },
     created() {
