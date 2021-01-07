@@ -10,7 +10,7 @@
           v-for="(item, index) in routeList"
           :key="index"
         >
-          <button @click="navigate(item.path)">
+          <button @click="navigate(item.name)">
             <i :class="`iconfont icon-${item.meta.icon}`"></i>
             <span class="name">{{ item.meta.title }}</span>
           </button>
@@ -35,9 +35,9 @@
       }),
     },
     methods: {
-      navigate(path) {
-        if (!this.$route.path.includes(path)) {
-          this.$router.push(path)
+      navigate(name) {
+        if (!this.$route.name.includes(name)) {
+          this.$router.push({ name })
         }
       },
     },
