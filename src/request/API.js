@@ -39,4 +39,6 @@ export default {
   deletePlan: `${prefix}/plan/delete`,
   order: `${prefix}/order`,
   deleteOrder: `${prefix}/order/delete`,
+  key: `${prefix}/key`,
+  deleteKey: `${prefix}/key/delete`,
 }
