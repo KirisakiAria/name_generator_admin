@@ -4,6 +4,16 @@
       <el-form-item label="激活码" prop="code">
         <el-input v-model="form.code"></el-input>
       </el-form-item>
+      <el-form-item label="激活期限" prop="planId">
+        <el-select v-model="form.planId" placeholder="请选择激活码是否已被激活">
+          <el-option
+            v-for="(item, index) in planList"
+            :key="index"
+            :label="item.title"
+            :value="item.planId"
+          ></el-option>
+        </el-select>
+      </el-form-item>
       <el-form-item label="手机号" prop="userTel">
         <el-input v-model="form.userTel"></el-input>
       </el-form-item>
@@ -41,6 +51,7 @@
       return {
         form: {
           code: '',
+          planId: '',
           userTel: '',
           activated: '',
           activatedTime: '',
@@ -81,6 +92,12 @@
               message: '请填写激活码',
             },
           ],
+          planId: [
+            {
+              required: true,
+              message: '请选择期限',
+            },
+          ],
           userTel: [
             {
               required: true,
@@ -94,6 +111,10 @@
       selectedItem: {
         type: Object,
         default: null,
+      },
+      planList: {
+        type: Array,
+        default: () => [],
       },
     },
     methods: {

@@ -43,6 +43,11 @@
     >
       <el-table-column type="selection" width="55"></el-table-column>
       <el-table-column prop="code" label="激活码"></el-table-column>
+      <el-table-column label="激活期限">
+        <template slot-scope="scope">
+          {{ planList.find(e => e.planId === scope.row.planId).title }}
+        </template>
+      </el-table-column>
       <el-table-column label="是否激活">
         <template slot-scope="scope">
           {{ scope.row.activated ? '已激活' : '未激活' }}
@@ -99,7 +104,7 @@
     >
       <EditKey
         :selectedItem="selectedItem"
-        :paymentMethodList="paymentMethodList"
+        :planList="planList"
         @success="getData"
         @close="closeEditDialog"
       />
@@ -126,8 +131,8 @@
         currentPage: 1,
         total: 0,
         tableData: [],
-        paymentMethodList: [],
         moment: moment,
+        planList: [],
         pickerOptions: {
           shortcuts: [
             {
@@ -165,6 +170,12 @@
       EditKey,
     },
     methods: {
+      async getPlanData(search = false) {
+        const res = await this.$get(this.API.plan)
+        if (res.data.code == '1000') {
+          this.planList = res.data.data.list
+        }
+      },
       add() {
         this.selectedItem = null
         this.editDialogVisible = true
@@ -226,6 +237,7 @@
       if (this.$route.query.tel) {
         this.form.searchContent = this.$route.query.tel
       }
+      this.getPlanData()
       this.getData()
     },
   }

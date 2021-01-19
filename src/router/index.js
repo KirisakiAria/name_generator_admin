@@ -86,7 +86,7 @@ const routes = [
         name: 'KeyList',
         meta: {
           id: 8,
-          title: '订单管理',
+          title: '代码管理',
           icon: 'key',
         },
       },
