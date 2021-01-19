@@ -21,21 +21,19 @@
 
     ::-webkit-scrollbar {
       /*滚动条整体样式*/
-      width: 8px; /*高宽分别对应横竖滚动条的尺寸*/
-      height: 1px;
+      width: 6px; /*高宽分别对应横竖滚动条的尺寸*/
     }
 
     ::-webkit-scrollbar-thumb {
       /*滚动条里面小方块*/
-      border-radius: 10px;
-      background-color: #fdcb6e;
+      border-radius: 20px;
+      background-color: #95afc0;
     }
 
     ::-webkit-scrollbar-track {
       /*滚动条里面轨道*/
       box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
       background: #f2f2f2;
-      border-radius: 10px;
     }
 
     .content {

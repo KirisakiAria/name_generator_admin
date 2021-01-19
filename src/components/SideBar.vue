@@ -50,10 +50,12 @@
     height: 100vh;
     position: relative;
     padding: 0 15px;
+    padding-bottom: 30px;
     flex-shrink: 0;
     color: #fff;
     background-image: url('../assets/img/bg.png');
     background-size: cover;
+    overflow: auto;
 
     .toggle-btn {
       position: absolute;

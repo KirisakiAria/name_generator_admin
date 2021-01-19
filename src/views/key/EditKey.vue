@@ -14,7 +14,7 @@
           ></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="手机号" prop="userTel">
+      <el-form-item label="手机号">
         <el-input v-model="form.userTel"></el-input>
       </el-form-item>
       <el-form-item label="激活时间" prop="activatedTime">
@@ -53,7 +53,7 @@
           code: '',
           planId: '',
           userTel: '',
-          activated: '',
+          activated: false,
           activatedTime: '',
         },
         pickerOptions: {
@@ -96,12 +96,6 @@
             {
               required: true,
               message: '请选择期限',
-            },
-          ],
-          userTel: [
-            {
-              required: true,
-              message: '请填写用户手机号',
             },
           ],
         },
