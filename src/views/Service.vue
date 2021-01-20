@@ -34,6 +34,11 @@
           <Editor v-model="form.vip" :apiKey="apiKey" :init="editorOptions" />
         </section>
       </el-tab-pane>
+      <el-tab-pane label="激活码条例" name="key">
+        <section class="editor-wrapper">
+          <Editor v-model="form.key" :apiKey="apiKey" :init="editorOptions" />
+        </section>
+      </el-tab-pane>
     </el-tabs>
     <el-button @click="save" class="save-btn" type="success">保存</el-button>
   </section>
@@ -54,6 +59,7 @@
           usage: '',
           update: '',
           vip: '',
+          key: '',
         },
         activeName: 'privacyPolicy',
         editorOptions: {
