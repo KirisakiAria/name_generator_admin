@@ -70,7 +70,7 @@
       close() {
         this.$emit('close')
       },
-      createAHtml(name, href) {
+      createElementA(name, href) {
         var a = document.createElement('a')
         a.download = name
         a.href = this.serverUrl + href
@@ -81,7 +81,7 @@
       async output() {
         const res = await this.$post(this.API.wordOutput, this.form)
         if (res.data.code == '1000') {
-          this.createAHtml(
+          this.createElementA(
             `${this.form.type}-${this.form.classify}-${this.form.showable}-${this.form.length}`,
             res.data.downloadUrl,
           )

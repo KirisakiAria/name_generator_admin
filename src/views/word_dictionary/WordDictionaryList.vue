@@ -15,6 +15,18 @@
             :label="item"
           ></el-option>
         </el-select>
+        <el-select
+          v-model="form.type"
+          placeholder="请选择类型"
+          @change="getData(true)"
+        >
+          <el-option
+            :key="index"
+            v-for="(item, index) in wordType"
+            :label="item"
+            :value="item"
+          ></el-option>
+        </el-select>
         <el-button type="primary" icon="el-icon-search" @click="getData(true)">
           搜索
         </el-button>
@@ -41,6 +53,7 @@
     >
       <el-table-column type="selection" width="55"></el-table-column>
       <el-table-column prop="word" label="词语" width="200"></el-table-column>
+      <el-table-column prop="type" label="类型" width="200"></el-table-column>
       <el-table-column prop="length" label="字数" width="150"></el-table-column>
       <el-table-column prop="explanation" label="解释"></el-table-column>
       <el-table-column fixed="right" label="操作" width="250">
@@ -113,7 +126,9 @@
           word: '',
           explanation: '',
           length: 2,
+          type: '中国风',
         },
+        wordType: ['中国风', '日式'],
         pageSize: 15,
         currentPage: 1,
         total: 0,

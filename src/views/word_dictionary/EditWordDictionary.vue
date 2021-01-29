@@ -1,6 +1,16 @@
 <template>
   <section class="edit-page" @keyup.enter="save">
     <el-form ref="form" :model="form" :rules="rules" label-width="60px">
+      <el-form-item label="类型" prop="type">
+        <el-select v-model="form.type">
+          <el-option
+            :key="index"
+            v-for="(item, index) in wordType"
+            :label="item"
+            :value="item"
+          ></el-option>
+        </el-select>
+      </el-form-item>
       <el-form-item label="词语" prop="word">
         <el-input v-model="form.word"></el-input>
       </el-form-item>
@@ -53,6 +63,7 @@
     data() {
       return {
         form: {
+          type: '日式',
           word: '',
           oldword: '',
           pinyin: '',
@@ -62,6 +73,12 @@
           more: '',
         },
         rules: {
+          type: [
+            {
+              required: true,
+              message: '请选择类型',
+            },
+          ],
           word: [
             {
               required: true,
@@ -76,6 +93,7 @@
           ],
         },
         fileList: [],
+        wordType: ['中国风', '日式'],
       }
     },
     props: {
