@@ -26,8 +26,18 @@ const routes = [
         name: 'WordList',
         meta: {
           id: 2,
-          title: '词语列表',
+          title: '网名列表',
           icon: 'list',
+        },
+      },
+      {
+        path: '/surname',
+        component: () => import('@/views/surname/SurnameList'),
+        name: 'SurnameList',
+        meta: {
+          id: 3,
+          title: '姓氏列表',
+          icon: 'surname',
         },
       },
       {
@@ -35,7 +45,7 @@ const routes = [
         component: () => import('@/views/word/CouplesList'),
         name: 'CouplesList',
         meta: {
-          id: 3,
+          id: 4,
           title: '情侣词语',
           icon: 'couples',
         },
@@ -45,7 +55,7 @@ const routes = [
         component: () => import('@/views/word_dictionary/WordDictionaryList'),
         name: 'WordDictionary',
         meta: {
-          id: 4,
+          id: 5,
           title: '词典管理',
           icon: 'word-dictionary',
         },
@@ -55,7 +65,7 @@ const routes = [
         component: () => import('@/views/inspiration/InspirationList'),
         name: 'InspirationList',
         meta: {
-          id: 5,
+          id: 6,
           title: '灵感管理',
           icon: 'inspiration',
         },
@@ -65,7 +75,7 @@ const routes = [
         component: () => import('@/views/user/UserList'),
         name: 'UserList',
         meta: {
-          id: 6,
+          id: 7,
           title: '用户管理',
           icon: 'user',
         },
@@ -75,7 +85,7 @@ const routes = [
         component: () => import('@/views/order/OrderList'),
         name: 'OrderList',
         meta: {
-          id: 7,
+          id: 8,
           title: '订单管理',
           icon: 'order',
         },
@@ -85,7 +95,7 @@ const routes = [
         component: () => import('@/views/key/KeyList'),
         name: 'KeyList',
         meta: {
-          id: 8,
+          id: 9,
           title: '代码管理',
           icon: 'key',
         },
@@ -95,7 +105,7 @@ const routes = [
         component: () => import('@/views/plan/PlanList'),
         name: 'PlanList',
         meta: {
-          id: 9,
+          id: 10,
           title: '订阅管理',
           icon: 'price',
         },
@@ -105,7 +115,7 @@ const routes = [
         component: () => import('@/views/notification/NotificationList'),
         name: 'Notification',
         meta: {
-          id: 10,
+          id: 11,
           title: '通知信息',
           icon: 'notification',
         },
@@ -115,7 +125,7 @@ const routes = [
         component: () => import('@/views/Application'),
         name: 'Application',
         meta: {
-          id: 11,
+          id: 12,
           title: 'APP信息',
           icon: 'app',
         },
@@ -125,7 +135,7 @@ const routes = [
         component: () => import('@/views/Service'),
         name: 'Service',
         meta: {
-          id: 12,
+          id: 13,
           title: '服务信息',
           icon: 'service',
         },
@@ -135,7 +145,7 @@ const routes = [
         component: () => import('@/views/error/ErrorList'),
         name: 'Error',
         meta: {
-          id: 13,
+          id: 14,
           title: '报错管理',
           icon: 'error',
         },
@@ -145,7 +155,7 @@ const routes = [
         component: () => import('@/views/feedback/FeedbackList'),
         name: 'Feedback',
         meta: {
-          id: 14,
+          id: 15,
           title: '反馈管理',
           icon: 'feedback',
         },
@@ -155,7 +165,7 @@ const routes = [
         component: () => import('@/views/data_dictionary/DataDictionary'),
         name: 'Dictionary',
         meta: {
-          id: 15,
+          id: 16,
           title: '数据字典',
           icon: 'data-dictionary',
         },
