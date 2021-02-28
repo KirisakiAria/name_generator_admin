@@ -93,7 +93,6 @@
           ],
         },
         fileList: [],
-        wordType: ['中国风', '日式'],
       }
     },
     props: {

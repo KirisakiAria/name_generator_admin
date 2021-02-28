@@ -6,6 +6,7 @@ const mixin = {
       API: API,
       editDialogVisible: false,
       DetailsDialogVisible: false,
+      wordType: ['中国风', '日式', '可爱', '英文'],
     }
   },
   beforeRouteEnter(to, from, next) {

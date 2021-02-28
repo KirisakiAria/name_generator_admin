@@ -128,7 +128,6 @@
           length: 2,
           type: '中国风',
         },
-        wordType: ['中国风', '日式'],
         pageSize: 15,
         currentPage: 1,
         total: 0,

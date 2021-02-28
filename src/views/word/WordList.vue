@@ -186,7 +186,6 @@
         currentPage: 1,
         total: 0,
         tableData: [],
-        wordType: ['中国风', '日式', '可爱'],
         likedUsers: [],
       }
     },

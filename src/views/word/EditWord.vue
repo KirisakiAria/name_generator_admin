@@ -70,7 +70,7 @@
           classify: '默认',
           showable: true,
         },
-        wordType: ['中国风', '日式', '可爱'],
+
         rules: {
           type: [
             {
