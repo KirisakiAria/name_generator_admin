@@ -31,16 +31,6 @@ const routes = [
         },
       },
       {
-        path: '/surname',
-        component: () => import('@/views/surname/SurnameList'),
-        name: 'SurnameList',
-        meta: {
-          id: 3,
-          title: '姓氏列表',
-          icon: 'surname',
-        },
-      },
-      {
         path: '/couples',
         component: () => import('@/views/word/CouplesList'),
         name: 'CouplesList',

@@ -17,10 +17,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-surname:before {
-  content: '\e62d';
-}
-
 .icon-key:before {
   content: '\e602';
 }
