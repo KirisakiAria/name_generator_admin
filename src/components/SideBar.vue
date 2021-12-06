@@ -79,6 +79,7 @@
         padding: 15px;
         width: 100%;
         text-align: left;
+        color: #fff;
         span {
           margin-left: 20px;
         }

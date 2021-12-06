@@ -35,7 +35,7 @@
           <el-option
             :label="item"
             :value="item"
-            v-for="(item, index) in 10"
+            v-for="(item, index) in 30"
             :key="index"
           ></el-option>
         </el-select>
