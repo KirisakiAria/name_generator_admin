@@ -37,7 +37,11 @@ const mixin = {
       }
     },
     serverUrl() {
-      return 'https://api.bianzizai.com'
+      if (process.env.NODE_ENV === 'development') {
+        return 'http://localhost:2077'
+      } else {
+        return 'https://api.bianzizai.com'
+      }
     },
   },
   methods: {

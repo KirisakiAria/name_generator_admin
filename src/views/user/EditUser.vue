@@ -69,7 +69,7 @@
     data() {
       return {
         form: {
-          avatar: '',
+          avatar: '/avatar/avatar.png',
           tel: '',
           username: '',
           password: '',
