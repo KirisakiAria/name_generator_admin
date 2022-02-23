@@ -74,11 +74,11 @@
           username: '',
           password: '',
           vip: '',
-          vipStartTime: 0,
-          vipEndTime: 0,
+          vipStartTime: '',
+          vipEndTime: '',
         },
-        vipStartTime: 0,
-        vipEndTime: 0,
+        vipStartTime: '',
+        vipEndTime: '',
         permanent: false,
         rules: {
           tel: [
