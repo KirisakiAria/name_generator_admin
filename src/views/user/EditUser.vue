@@ -75,11 +75,11 @@
           username: '彼岸自在',
           password: cryptoRandomString({ length: 10 }),
           vip: false,
-          vipStartTime: 0,
-          vipEndTime: 0,
+          vipStartTime: '',
+          vipEndTime: '',
         },
-        vipStartTime: 0,
-        vipEndTime: 0,
+        vipStartTime: '',
+        vipEndTime: '',
         permanent: false,
         rules: {
           tel: [
