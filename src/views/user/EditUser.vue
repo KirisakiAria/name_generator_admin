@@ -62,6 +62,7 @@
   </section>
 </template>
 <script>
+  import cryptoRandomString from 'crypto-random-string'
   import mixin from '@/mixin/mixin'
   export default {
     name: 'EditUser',
@@ -71,9 +72,9 @@
         form: {
           avatar: '/avatar/avatar.png',
           tel: '',
-          username: '',
-          password: '',
-          vip: '',
+          username: '彼岸自在',
+          password: cryptoRandomString({ length: 10 }),
+          vip: false,
           vipStartTime: 0,
           vipEndTime: 0,
         },
