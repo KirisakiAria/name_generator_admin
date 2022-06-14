@@ -58,6 +58,11 @@
       <el-form-item>
         <el-button class="save" type="primary" @click="save">保存</el-button>
       </el-form-item>
+      <el-form-item>
+        <el-button class="save" type="primary" @click="simulation">
+          模拟VIP支付成功
+        </el-button>
+      </el-form-item>
     </el-form>
   </section>
 </template>
@@ -160,6 +165,20 @@
             return false
           }
         })
+      },
+      async simulation() {
+        const res = await this.$post(this.API.simulation, {
+          tel: this.form.tel,
+          planId: '2',
+        })
+        if (res.data.code == '1000') {
+          this.$message({
+            showClose: true,
+            message: res.data.message,
+            type: 'success',
+          })
+          this.$emit('close')
+        }
       },
     },
     created() {

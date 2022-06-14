@@ -9,6 +9,7 @@ export default {
   login: `${prefix}/admin/login`,
   user: `${prefix}/user`,
   refund: `${prefix}/user/refund`,
+  simulation: `${prefix}/user/pay/simulation`,
   upload: `${prefix}/upload`,
   word: `${prefix}/word`,
   deleteWord: `${prefix}/word/delete`,
